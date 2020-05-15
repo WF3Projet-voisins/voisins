@@ -16,3 +16,5 @@
 - Sélectionner en `base` develop et en `compare` feature/maFeature
 - Demander à un autre membre de se rendre sur la pull request pour faire une revue de code et valider la feature
 - Une fois fait, on peut cliquer sur "Merge" depuis la pull request
+
+*Ne jamais faire de `git merge` ou de `git push` directement sur develop*
