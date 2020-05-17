@@ -47,16 +47,22 @@ commentaireAdd:
     controller: App\Controller\ServiceController::addCommentaireAction
  
 commentaireGet:
-    path: /user/service/{id(service)}
+    path: /user/service/{id}
     controller: App\Controller\ServiceController::getCommentaireAction
  
 commentaireUpdate:
-    path: /user/service/{id(service}
+    path: /user/service/{id}
     controller: App\Controller\ServiceController::updateCommentaireAction
  
 commentaireDelete:
-    path: /user/service/{id(service)}
+    path: /user/service/{id}
     controller: App\Controller\ServiceController::deleteCommentaireAction
+
+
+
+getServiceByType:
+    path: /user/serviceByType/{id}
+    controller: App\Controller\ServiceController::getServiceByType    
  
  
 
