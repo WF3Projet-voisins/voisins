@@ -1,3 +1,99 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+home:
+    path: /
+    controller: App\Controller\DefaultController::indexAction
+
+
+
+
+userAdd :
+    path: /inscription
+    controller: App\Controller\UserController::addUserAction
+
+userGet:
+    path: user/user/{id}
+    controller: App\Controller\UserController::getUserAction
+
+userUpdate:
+    path: user/user/{id}
+    controller: App\Controller\UserController::updateUserAction
+
+userDelete:
+    path: user/user/{id}
+    controller: App\Controller\UserController::deleteUserAction
+
+
+
+
+serviceAdd:
+    path: /user/service
+    controller: App\Controller\ServiceController::addServiceAction
+
+serviceGet:
+    path: /user/service/{id}
+    controller: App\Controller\ServiceController::getServiceAction
+
+serviceUpdate:
+  path: /user/service/{id}
+  controller: App\Controller\ServiceController::updateServiceAction
+
+serviceDelete:
+  path: /user/service/{id}
+  controller: App\Controller\ServiceController::deleteServiceAction
+
+
+
+commentaireAdd:
+    path: /user/service
+    controller: App\Controller\ServiceController::addCommentaireAction
+ 
+commentaireGet:
+    path: /user/service/{id}
+    controller: App\Controller\ServiceController::getCommentaireAction
+ 
+commentaireUpdate:
+    path: /user/service/{id}
+    controller: App\Controller\ServiceController::updateCommentaireAction
+ 
+commentaireDelete:
+    path: /user/service/{id}
+    controller: App\Controller\ServiceController::deleteCommentaireAction
+
+
+
+getServiceByType:
+    path: /user/serviceByType/{id}
+    controller: App\Controller\ServiceController::getServiceByType    
+ 
+ 
+
+
+mailboxAdd:
+    path: /user/mailbox
+    controller: App\Controller\MailboxController::addMailboxAction
+      
+mailboxGet:
+    path: /user/mailbox/{id}
+    controller: App\Controller\MailboxController::getMailboxAction
+      
+mailboxUpdate:
+    path: /user/mailbox/{id}
+    controller: App\Controller\MailboxController::updateMailboxAction
+      
+mailboxDelete:
+    path: /user/mailbox/{id}
+    controller: App\Controller\MailboxController::deleteMailboxAction
+
+
+
+    
+contactAdd:
+    path: /contact
+    controller: App\Controller\ContactController::addContactAction
+      
+contactGet:
+    path: /admin/contact/{id}
+    controller: App\Controller\ContactController::getContactAction
+      
+contactDelete:
+    path: /admin/contact/{id}
+    controller: App\Controller\ContactController::deleteContactAction
