@@ -35,20 +35,14 @@ class Category
     private $subCategories;
 
     /**
-     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="category")
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="category_affinity")
      */
     private $users;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Service::class, mappedBy="category")
-     */
-    private $services;
 
     public function __construct()
     {
         $this->subCategories = new ArrayCollection();
         $this->users = new ArrayCollection();
-        $this->services = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -123,7 +117,7 @@ class Category
     {
         if (!$this->users->contains($user)) {
             $this->users[] = $user;
-            $user->addCategory($this);
+            $user->addCategoryAffinity($this);
         }
 
         return $this;
@@ -133,38 +127,7 @@ class Category
     {
         if ($this->users->contains($user)) {
             $this->users->removeElement($user);
-            $user->removeCategory($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Service[]
-     */
-    public function getServices(): Collection
-    {
-        return $this->services;
-    }
-
-    public function addService(Service $service): self
-    {
-        if (!$this->services->contains($service)) {
-            $this->services[] = $service;
-            $service->setCategory($this);
-        }
-
-        return $this;
-    }
-
-    public function removeService(Service $service): self
-    {
-        if ($this->services->contains($service)) {
-            $this->services->removeElement($service);
-            // set the owning side to null (unless already changed)
-            if ($service->getCategory() === $this) {
-                $service->setCategory(null);
-            }
+            $user->removeCategoryAffinity($this);
         }
 
         return $this;

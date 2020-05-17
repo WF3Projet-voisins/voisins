@@ -35,12 +35,12 @@ class SubCategory
     private $category;
 
     /**
-     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="sub_category")
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="sub_cat_affinity")
      */
     private $users;
 
     /**
-     * @ORM\OneToMany(targetEntity=Service::class, mappedBy="sub_cat")
+     * @ORM\OneToMany(targetEntity=Service::class, mappedBy="sub_category")
      */
     private $services;
 
@@ -103,7 +103,7 @@ class SubCategory
     {
         if (!$this->users->contains($user)) {
             $this->users[] = $user;
-            $user->addSubCategory($this);
+            $user->addSubCatAffinity($this);
         }
 
         return $this;
@@ -113,7 +113,7 @@ class SubCategory
     {
         if ($this->users->contains($user)) {
             $this->users->removeElement($user);
-            $user->removeSubCategory($this);
+            $user->removeSubCatAffinity($this);
         }
 
         return $this;
@@ -131,7 +131,7 @@ class SubCategory
     {
         if (!$this->services->contains($service)) {
             $this->services[] = $service;
-            $service->setSubCat($this);
+            $service->setSubCategory($this);
         }
 
         return $this;
@@ -142,8 +142,8 @@ class SubCategory
         if ($this->services->contains($service)) {
             $this->services->removeElement($service);
             // set the owning side to null (unless already changed)
-            if ($service->getSubCat() === $this) {
-                $service->setSubCat(null);
+            if ($service->getSubCategory() === $this) {
+                $service->setSubCategory(null);
             }
         }
 
