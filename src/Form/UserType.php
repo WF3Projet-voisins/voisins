@@ -2,30 +2,23 @@
 
 namespace App\Form;
 
-<<<<<<< HEAD
 use App\Entity\SubCategory;
 use App\Entity\Category;
-=======
->>>>>>> develop
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-<<<<<<< HEAD
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-=======
->>>>>>> develop
 
 class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-<<<<<<< HEAD
 
        
 
@@ -85,23 +78,6 @@ class UserType extends AbstractType
 
 
 
-=======
-        $builder
-            ->add('email')
-            ->add('roles')
-            ->add('password')
-            ->add('lastname')
-            ->add('firstname')
-            ->add('city')
-            ->add('postalCode')
-            ->add('image')
-            ->add('time_gauge')
-            ->add('total_time_service_given')
-            ->add('rank')
-            ->add('category')
-            ->add('sub_category')
-        ;
->>>>>>> develop
     }
 
     public function configureOptions(OptionsResolver $resolver)
