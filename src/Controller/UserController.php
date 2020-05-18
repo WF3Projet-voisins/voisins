@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\User;
+use App\Repository\UserRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class UserController extends AbstractController
 {
@@ -17,10 +20,11 @@ class UserController extends AbstractController
         ]);
     }
 
-    public function getUserAction()
+    public function getUserAction(Request $request, UserRepository $userRepository, $id)
     {
+        $user = $userRepository->find($id);
         return $this->render('user/profileUser.html.twig', [
-            'controller_name' => 'UserController',
+            'user' => $user
         ]);
     }
 
