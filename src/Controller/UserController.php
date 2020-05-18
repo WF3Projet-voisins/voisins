@@ -9,11 +9,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use App\Service\FormsManager;
 
+
+
 class UserController extends AbstractController
 {
     public function addUserAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
-
+        
         $form = null;
         // 1) build the form
         $user = new User();
@@ -38,7 +40,7 @@ class UserController extends AbstractController
                 $entityManager->persist($user);
                 $entityManager->flush();
                 $this->addFlash('info',"user : ".$user->getName()." well added");
-                return $this->redirectToRoute('/inscription');
+                return $this->redirectToRoute('user/formInscription.html.twig');
             }
 
         }
