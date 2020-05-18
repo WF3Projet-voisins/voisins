@@ -6,6 +6,6 @@ index:
     path: /
     controller: App\Controller\PageAccueilController::index
 
-index:
+qui_sommes_nous:
     path: /qui-sommes-nous
     controller: App\Controller\QuiSommesNousController::index
