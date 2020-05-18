@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\RankRepository;
+use App\Repository\RankingRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=RankRepository::class)
+ * @ORM\Entity(repositoryClass=RankingRepository::class)
  */
-class Rank
+class Ranking
 {
     /**
      * @ORM\Id()
@@ -35,7 +35,7 @@ class Rank
     private $logo;
 
     /**
-     * @ORM\OneToMany(targetEntity=User::class, mappedBy="rank")
+     * @ORM\OneToMany(targetEntity=User::class, mappedBy="ranking")
      */
     private $users;
 
@@ -97,7 +97,7 @@ class Rank
     {
         if (!$this->users->contains($user)) {
             $this->users[] = $user;
-            $user->setRank($this);
+            $user->setRanking($this);
         }
 
         return $this;
@@ -108,8 +108,8 @@ class Rank
         if ($this->users->contains($user)) {
             $this->users->removeElement($user);
             // set the owning side to null (unless already changed)
-            if ($user->getRank() === $this) {
-                $user->setRank(null);
+            if ($user->getRanking() === $this) {
+                $user->setRanking(null);
             }
         }
 

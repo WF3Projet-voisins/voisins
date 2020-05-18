@@ -54,17 +54,17 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="integer")
      */
-    private $postalCode;
+    private $postal_code;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $image;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Rank::class, inversedBy="users")
+     * @ORM\ManyToOne(targetEntity=Ranking::class, inversedBy="users")
      */
-    private $rank;
+    private $ranking;
 
     /**
      * @ORM\Column(type="integer")
@@ -79,12 +79,12 @@ class User implements UserInterface
     /**
      * @ORM\ManyToMany(targetEntity=Category::class, inversedBy="users")
      */
-    private $category;
+    private $category_affinity;
 
     /**
      * @ORM\ManyToMany(targetEntity=SubCategory::class, inversedBy="users")
      */
-    private $sub_category;
+    private $sub_cat_affinity;
 
     /**
      * @ORM\OneToMany(targetEntity=Contact::class, mappedBy="user")
@@ -116,8 +116,8 @@ class User implements UserInterface
 
     public function __construct()
     {
-        $this->category = new ArrayCollection();
-        $this->sub_category = new ArrayCollection();
+        $this->category_affinity = new ArrayCollection();
+        $this->sub_cat_affinity = new ArrayCollection();
         $this->contacts = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->mailboxes = new ArrayCollection();
@@ -240,12 +240,12 @@ class User implements UserInterface
 
     public function getPostalCode(): ?int
     {
-        return $this->postalCode;
+        return $this->postal_code;
     }
 
-    public function setPostalCode(int $postalCode): self
+    public function setPostalCode(int $postal_code): self
     {
-        $this->postalCode = $postalCode;
+        $this->postal_code = $postal_code;
 
         return $this;
     }
@@ -255,21 +255,21 @@ class User implements UserInterface
         return $this->image;
     }
 
-    public function setImage(?string $image): self
+    public function setImage(string $image): self
     {
         $this->image = $image;
 
         return $this;
     }
 
-    public function getRank(): ?Rank
+    public function getRanking(): ?Ranking
     {
-        return $this->rank;
+        return $this->ranking;
     }
 
-    public function setRank(?Rank $rank): self
+    public function setRanking(?Ranking $ranking): self
     {
-        $this->rank = $rank;
+        $this->ranking = $ranking;
 
         return $this;
     }
@@ -301,24 +301,24 @@ class User implements UserInterface
     /**
      * @return Collection|Category[]
      */
-    public function getCategory(): Collection
+    public function getCategoryAffinity(): Collection
     {
-        return $this->category;
+        return $this->category_affinity;
     }
 
-    public function addCategory(Category $category): self
+    public function addCategoryAffinity(Category $categoryAffinity): self
     {
-        if (!$this->category->contains($category)) {
-            $this->category[] = $category;
+        if (!$this->category_affinity->contains($categoryAffinity)) {
+            $this->category_affinity[] = $categoryAffinity;
         }
 
         return $this;
     }
 
-    public function removeCategory(Category $category): self
+    public function removeCategoryAffinity(Category $categoryAffinity): self
     {
-        if ($this->category->contains($category)) {
-            $this->category->removeElement($category);
+        if ($this->category_affinity->contains($categoryAffinity)) {
+            $this->category_affinity->removeElement($categoryAffinity);
         }
 
         return $this;
@@ -327,24 +327,24 @@ class User implements UserInterface
     /**
      * @return Collection|SubCategory[]
      */
-    public function getSubCategory(): Collection
+    public function getSubCatAffinity(): Collection
     {
-        return $this->sub_category;
+        return $this->sub_cat_affinity;
     }
 
-    public function addSubCategory(SubCategory $subCategory): self
+    public function addSubCatAffinity(SubCategory $subCatAffinity): self
     {
-        if (!$this->sub_category->contains($subCategory)) {
-            $this->sub_category[] = $subCategory;
+        if (!$this->sub_cat_affinity->contains($subCatAffinity)) {
+            $this->sub_cat_affinity[] = $subCatAffinity;
         }
 
         return $this;
     }
 
-    public function removeSubCategory(SubCategory $subCategory): self
+    public function removeSubCatAffinity(SubCategory $subCatAffinity): self
     {
-        if ($this->sub_category->contains($subCategory)) {
-            $this->sub_category->removeElement($subCategory);
+        if ($this->sub_cat_affinity->contains($subCatAffinity)) {
+            $this->sub_cat_affinity->removeElement($subCatAffinity);
         }
 
         return $this;

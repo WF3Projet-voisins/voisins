@@ -8,15 +8,23 @@
 /public/bundles/
 /var/
 /vendor/
-
-###< docker-compose ###
-/docker-compose.yml
-
-
 ###< symfony/framework-bundle ###
+
+
+###> docker-compose ###
+/docker-compose.yml
+###< docker-compose ###
+
+
 
 ###> symfony/phpunit-bridge ###
 .phpunit
 .phpunit.result.cache
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
+
+
+
+###> symfony.loc ###
+/symfony.lock
+###< symfony.loc ###
