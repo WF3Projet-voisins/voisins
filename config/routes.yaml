@@ -5,3 +5,7 @@
 index:
     path: /
     controller: App\Controller\PageAccueilController::index
+
+index:
+    path: /qui-sommes-nous
+    controller: App\Controller\QuiSommesNousController::index
