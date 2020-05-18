@@ -15,13 +15,11 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
+
 class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-
-       
-
         $builder
             ->add('firstname', TextType::class, [
                 'label_attr'=>['class'=> 'red-bg', 'style'=> 'color : black'],
@@ -41,19 +39,21 @@ class UserType extends AbstractType
                 'label_attr'=>['class'=> 'red-bg', 'style'=> 'color : black'],
                 'attr' => ['placeholder' => 'Code postal', 'type' => 'number']
             ])
-            ->add('lastname', TextType::class, [
+            ->add('city', TextType::class, [
                 'label_attr'=>['class'=> 'red-bg', 'style'=> 'color : black'],
                 'attr' => ['placeholder' => 'Ville']
             ])
-            ->add('category', EntityType::class, [
+            
+            ->add('category_affinity', EntityType::class, [
                 'class' => Category::class,
                 'multiple'=>true,
                 'expanded'=>true,
                 'label_attr'=>['class'=> 'red-bg', 'style'=> 'color : black'],
-                'choice_label' => 'Categorie',
+                'choice_label' => 'Affinite',
                 'attr'=>['class'=>'row m-4 d-flex justify-content-around','style'=>'color : black']
                 ])
-            ->add('sub_category', EntityType::class, [
+                
+            ->add('sub_cat_affinity', EntityType::class, [
                 'class' => SubCategory::class,
                 'multiple'=>true,
                 'expanded'=>true,
@@ -65,7 +65,7 @@ class UserType extends AbstractType
                 'label_attr'=>['class'=> 'red-bg', 'style'=> 'color : black'],
                 'attr' => ['placeholder' => 'Email', 'type' => 'email']
             ])
-            ->add('Password', RepeatedType::class, array(
+            ->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
                 'first_options'  => array('label' => 'Password'),
                 'second_options' => array('label' => 'Repeat Password'),
