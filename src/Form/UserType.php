@@ -12,35 +12,15 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 
-        /*
-        $builder
-             ->add('lastname')
-            ->add('firstname')
-            ->add('email')
-            ->add('password')
-            ->add('image')
-            ->add('postalCode')
-            ->add('city')
-            ->add('category')
-
-            ->add('sub_category')
-
-
-
-
-            ->add('roles')
-            ->add('time_gauge')
-            ->add('total_time_service_given')
-            ->add('rank')
-           
-        ;
-        */
+       
 
         $builder
             ->add('firstname', TextType::class, [
@@ -81,16 +61,15 @@ class UserType extends AbstractType
                 'choice_label' => 'Sous categorie',
                 'attr'=>['class'=>'row m-4 d-flex justify-content-around','style'=>'color : black']
                 ])
-
             ->add('email', TextType::class, [
                 'label_attr'=>['class'=> 'red-bg', 'style'=> 'color : black'],
                 'attr' => ['placeholder' => 'Email', 'type' => 'email']
             ])
-            ->add('password', TextType::class, [
-                'label_attr'=>['class'=> 'red-bg', 'style'=> 'color : black'],
-                'attr' => ['placeholder' => 'Mot de passe', 'type' => 'password']
-            ])
-
+            ->add('Password', RepeatedType::class, array(
+                'type' => PasswordType::class,
+                'first_options'  => array('label' => 'Password'),
+                'second_options' => array('label' => 'Repeat Password'),
+            ))
 
             ->add('save', SubmitType::class);
         ;

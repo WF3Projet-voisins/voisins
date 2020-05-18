@@ -106,6 +106,14 @@ class User implements UserInterface
      */
     private $services;
 
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
+
+
+
     public function __construct()
     {
         $this->category = new ArrayCollection();
@@ -465,4 +473,17 @@ class User implements UserInterface
 
         return $this;
     }
+
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword($password)
+    {
+        $this->plainPassword = $password;
+    }
+
+
+
 }
