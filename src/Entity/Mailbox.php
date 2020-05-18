@@ -28,7 +28,7 @@ class Mailbox
     private $user_for;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $message_title;
 
@@ -76,7 +76,7 @@ class Mailbox
         return $this->message_title;
     }
 
-    public function setMessageTitle(?string $message_title): self
+    public function setMessageTitle(string $message_title): self
     {
         $this->message_title = $message_title;
 

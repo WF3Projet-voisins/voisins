@@ -60,14 +60,9 @@ class Service
     private $image;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="services")
-     */
-    private $category;
-
-    /**
      * @ORM\ManyToOne(targetEntity=SubCategory::class, inversedBy="services")
      */
-    private $sub_cat;
+    private $sub_category;
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="service")
@@ -180,26 +175,14 @@ class Service
         return $this;
     }
 
-    public function getCategory(): ?Category
+    public function getSubCategory(): ?SubCategory
     {
-        return $this->category;
+        return $this->sub_category;
     }
 
-    public function setCategory(?Category $category): self
+    public function setSubCategory(?SubCategory $sub_category): self
     {
-        $this->category = $category;
-
-        return $this;
-    }
-
-    public function getSubCat(): ?SubCategory
-    {
-        return $this->sub_cat;
-    }
-
-    public function setSubCat(?SubCategory $sub_cat): self
-    {
-        $this->sub_cat = $sub_cat;
+        $this->sub_category = $sub_category;
 
         return $this;
     }
