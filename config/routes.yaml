@@ -3,14 +3,12 @@ home:
     controller: App\Controller\HomeController::indexAction
 
 
-
-
 userAdd :
     path: /inscription
     controller: App\Controller\UserController::addUserAction
 
-userGet:
-    path: user/user/{id}
+userProfile:
+    path: user/profile/{id}
     controller: App\Controller\UserController::getUserAction
 
 userUpdate:
