@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block body %}
+
+<div class="container-fluid d-flex justify-content-around">
+
+    <div class="container col-3 d-flex align-items-center justify-content-center" style="height: 100vh;">
+
+
+        {{ form_start(form) }}
+
+        {{ form_row(form.image) }}
+        {{ form_row(form.firstname) }}
+        {{ form_row(form.lastname) }}
+        {{ form_row(form.postalCode) }}
+        {{ form_row(form.city) }}
+        {{ form_row(form.category_affinity) }}
+        {{ form_row(form.sub_cat_affinity) }}
+
+
+
+    </div>
+    <div class="container col-3 d-flex flex-column justify-content-center" style="height: 100vh;">
+
+
+    
+
+    
+        {{ form_row(form.email) }}
+        {{ form_row(form.plainPassword.first) }}
+        {{ form_row(form.plainPassword.second) }}
+
+        
+        {{ form_end(form) }}
+
+
+
+
+    </div>
+
+
+
+
+</div>
+   
+
+
+
+
+
+
+{% endblock %}
