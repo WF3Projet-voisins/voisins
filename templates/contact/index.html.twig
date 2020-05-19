@@ -8,11 +8,18 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<div class="container d-flex align-items-center justify-content-center" style="height: 90vh;">
+    
 
-    This friendly message is coming from:
-    <ul>
-    </ul>
-</div>
+
+{{ form_start(form) }}
+
+        {{ form_row(form.name) }}
+        {{ form_row(form.mail) }}
+        {{ form_row(form.message) }}
+       
+          
+{{ form_end(form) }}
+
+
 {% endblock %}
