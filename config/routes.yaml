@@ -12,11 +12,11 @@ userProfile:
     controller: App\Controller\UserController::getUserAction
 
 userUpdate:
-    path: user/user/{id}
+    path: user/profile/update/{id}
     controller: App\Controller\UserController::updateUserAction
 
 userDelete:
-    path: user/user/{id}
+    path: user/profile/delete/{id}
     controller: App\Controller\UserController::deleteUserAction
 
 
