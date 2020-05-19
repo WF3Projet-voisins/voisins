@@ -11,11 +11,11 @@ use App\Service\FormsManager;
 
 
 
+
 class UserController extends AbstractController
 {
     public function addUserAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
-        
         $form = null;
         // 1) build the form
         $user = new User();
@@ -24,7 +24,9 @@ class UserController extends AbstractController
         // 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-
+            $user->setTimeGauge('0');
+            $user->setTotalTimeServiceGiven('0');
+            $user->setRoles(['ROLE_USER']);
             $file = $form->get('image')->getData();
             $user = $form->getData();
             if($file) {
@@ -39,8 +41,12 @@ class UserController extends AbstractController
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($user);
                 $entityManager->flush();
-                $this->addFlash('info',"user : ".$user->getName()." well added");
-                return $this->redirectToRoute('user/formInscription.html.twig');
+                $this->addFlash('info',"user : ".$user->getFirstname()." well added");
+                //return $this->redirectToRoute('user/index.html.twig');
+                return $this->render('user/index.html.twig', [
+                    'controller_name' => $user->getFirstname()
+                ]);
+
             }
 
         }
