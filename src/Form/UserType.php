@@ -50,7 +50,7 @@ class UserType extends AbstractType
                 'multiple'=>true,
                 'expanded'=>true,
                 'label_attr'=>['class'=> 'red-bg', 'style'=> 'color : black'],
-                'choice_label' => 'Affinite',
+                'choice_label' => 'name',
                 'attr'=>['class'=>'row m-4 d-flex justify-content-around','style'=>'color : black']
                 ])
                 
@@ -59,7 +59,7 @@ class UserType extends AbstractType
                 'multiple'=>true,
                 'expanded'=>true,
                 'label_attr'=>['class'=> 'red-bg', 'style'=> 'color : black'],
-                'choice_label' => 'Sous categorie',
+                'choice_label' => 'name',
                 'attr'=>['class'=>'row m-4 d-flex justify-content-around','style'=>'color : black']
                 ])
             ->add('email', TextType::class, [
