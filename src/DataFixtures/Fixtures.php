@@ -2,6 +2,8 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Service;
+use App\Entity\Duration;
 use App\Entity\User;
 use App\Entity\Ranking;
 use App\Entity\Category;
@@ -92,6 +94,8 @@ class SubCategoryFixtures extends Fixture
         ->setLogo("https://toppng.com/uploads/preview/babys-room-icon-baby-icon-11553449311dwd4ky7lpi.png");
         $manager->persist($rankNewbie);
 
+
+
         // séparation entre Ranking et User
         $user = new User();
         $user->setEmail('root@root.fr')
@@ -107,11 +111,49 @@ class SubCategoryFixtures extends Fixture
             ->addCategoryAffinity($catJardinage)
             ->addSubCatAffinity($subCatJardinage)
             ->setRanking($rankNewbie);
+
+        
             
 
         $manager->persist($user);
 
-        // séparation entre User et 
+        // séparation entre User et duration
+
+
+        $duration_30 = new Duration();
+         $duration_30->setDuration('30');
+        $manager->persist($duration_30);
+
+        $duration_60 = new Duration();
+        $duration_60->setDuration('60');
+       $manager->persist($duration_60);
+
+       $duration_90 = new Duration();
+       $duration_90->setDuration('90');
+      $manager->persist($duration_90);
+
+      $manager->persist($duration_30);
+      $manager->persist($duration_60);
+      $manager->persist($duration_90);
+
+
+
+
+
+        // séparation entre Duration et services
+
+
+                $service = new Service();
+                $service->setName('Maçon')
+               ->setDescription('Construit tout ce que vous voulez')
+               ->setCreatedAt(new \DateTime())
+               ->setStatus('Ouvrier')
+               ->setImage('https://cdn.pixabay.com/photo/2017/06/07/10/47/elephant-2380009_960_720.jpg')
+                ->setDuration($duration_60)
+                ->setUser('8');
+               
+                $manager->persist($service);
+
 
         $manager->flush();
     }
