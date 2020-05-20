@@ -20,8 +20,10 @@ class ServiceController extends AbstractController
 {
     public function addServiceAction()
     {
-        return $this->render('service/pageService.html.twig', [
-            'controller_name' => 'ServiceController',
+
+        /* Ajout d'un service par un user */
+        return $this->render('user/addService.html.twig', [
+            
         ]);
     }
 

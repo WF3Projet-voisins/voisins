@@ -23,49 +23,38 @@ class UserType extends AbstractType
     {
         $builder
             ->add('firstname', TextType::class, [
-                'label_attr'=>['class'=> 'red-bg', 'style'=> 'color : black'],
-                'attr' => ['placeholder' => 'Prenom']
+                'attr' => ['placeholder' => 'Nom']
             ])
             ->add('lastname', TextType::class, [
-                'label_attr'=>['class'=> 'red-bg', 'style'=> 'color : black'],
                 'attr' => ['placeholder' => 'Nom']
             ])
             ->add('image',FileType::class, [
                 'mapped'=>false,
                 'required' =>false,
-                'label_attr'=>['class'=> 'red-bg', 'style'=> 'color : black'],
                 'attr' => ['placeholder' => 'image']
             ])
-            ->add('postalCode', NumberType::class, [
-                'label_attr'=>['class'=> 'red-bg', 'style'=> 'color : black','type' => 'number'],
+            ->add('postalCode', NumberType::class, [    
                 'attr' => ['placeholder' => 'Code postal', 'type' => 'number']
             ])
-            ->add('city', TextType::class, [
-                'label_attr'=>['class'=> 'red-bg', 'style'=> 'color : black'],
+            ->add('city', TextType::class, [               
                 'attr' => ['placeholder' => 'Ville']
             ])
-
-  
             
             ->add('category_affinity', EntityType::class, [
                 'class' => Category::class,
                 'multiple'=>true,
                 'expanded'=>true,
-                'label_attr'=>['class'=> 'red-bg', 'style'=> 'color : black'],
                 'choice_label' => 'name',
-                'attr'=>['class'=>'row m-4 d-flex justify-content-around','style'=>'color : black']
                 ])
                 
             ->add('sub_cat_affinity', EntityType::class, [
                 'class' => SubCategory::class,
                 'multiple'=>true,
                 'expanded'=>true,
-                'label_attr'=>['class'=> 'red-bg', 'style'=> 'color : black'],
-                'choice_label' => 'name',
-                'attr'=>['class'=>'row m-4 d-flex justify-content-around','style'=>'color : black']
+                'choice_label' => 'name'
                 ])
+                
             ->add('email', TextType::class, [
-                'label_attr'=>['class'=> 'red-bg', 'style'=> 'color : black'],
                 'attr' => ['placeholder' => 'Email', 'type' => 'email']
             ])
             ->add('plainPassword', RepeatedType::class, array(
