@@ -7,6 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\UserRepository;
 use App\Form\ContactType;
 use App\Entity\Contact;
+use App\Entity\Service;
 use App\Repository\ServiceRepository;
 use DateTimeInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,18 +28,15 @@ class ServiceController extends AbstractController
 
 
 
-
-
-
     public function getServiceAction(Request $request, ServiceRepository $serviceRepository){
         
         $services = $serviceRepository->findAll();
 
-        dump($services);
-        
+            
+            //je redirige vers la route de mon choix 
         return $this->render('service/pageService.html.twig', [
 
-            'controller_name' => 'ServiceController', 'services' => $services
+            'controller_name' => 'ServiceController', 'services' => $services,   
         ]);
 
     }

@@ -30,7 +30,7 @@ class DurationFixtures extends Fixture
 
 
 
-        $manager->flush();
+        
 
 
 
