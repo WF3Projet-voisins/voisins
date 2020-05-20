@@ -7,9 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ServiceController extends AbstractController
 {
-    /**
-     * @Route("/service", name="service")
-     */
+    
     public function addServiceAction()
     {
         return $this->render('service/pageService.html.twig', [
