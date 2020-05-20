@@ -35,17 +35,17 @@
        <div id="formUpdate">
         {{ form_start(formUser) }}
         
-        {{ form_label(formUser.lastname, null,  {'label_attr' : {'class' : 'text-golden pr-3'}}) }}
-        {{ form_widget(formUser.lastname , { 'attr': { 'class' : 'bg-light rounded shadow p-2'}}) }}
+        {{ form_label(formUser.lastname, null,  {'label_attr' : {'class' : 'formUpdate text-golden pr-3'}}) }}
+        {{ form_widget(formUser.lastname , { 'attr': { 'class' : 'formUpdate bg-light rounded shadow p-2'}}) }}
 
-        {{ form_label(formUser.firstname, null,  {'label_attr' : {'class' : 'w-2/8 text-golden pr-3'}}) }}
-        {{ form_widget(formUser.firstname , { 'attr': { 'class' : 'w-full bg-light rounded shadow'}}) }}
+        {{ form_label(formUser.firstname, null,  {'label_attr' : {'class' : 'formUpdate w-2/8 text-golden pr-3'}}) }}
+        {{ form_widget(formUser.firstname , { 'attr': { 'class' : ' formUpdate w-full bg-light rounded shadow'}}) }}
 
-        {{ form_label(formUser.city, null,  {'label_attr' : {'class' : 'text-golden pr-3'}}) }}
-        {{ form_widget(formUser.city , { 'attr': { 'class' : 'bg-light rounded shadow p-2'}}) }}
+        {{ form_label(formUser.city, null,  {'label_attr' : {'class' : 'formUpdate text-golden pr-3'}}) }}
+        {{ form_widget(formUser.city , { 'attr': { 'class' : 'formUpdate bg-light rounded shadow p-2'}}) }}
 
-        {{ form_label(formUser.postalCode, null,  {'label_attr' : {'class' : 'text-golden pr-3'}}) }}
-        {{ form_widget(formUser.postalCode , { 'attr': { 'class' : 'bg-light rounded shadow p-2'}}) }}
+        {{ form_label(formUser.postalCode, null,  {'label_attr' : {'class' : 'formUpdate text-golden pr-3'}}) }}
+        {{ form_widget(formUser.postalCode , { 'attr': { 'class' : ' formUpdate bg-light rounded shadow p-2'}}) }}
 {# 
         {{ form_label(formUser.categoryAffinity, null,  {'label_attr' : {'class' : 'text-golden pr-3'}}) }}
         {{ form_widget(formUser.categoryAffinity , { 'attr': { 'class' : 'bg-light rounded shadow p-2'}}) }}

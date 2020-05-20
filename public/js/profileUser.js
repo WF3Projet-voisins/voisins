@@ -1,4 +1,4 @@
-const $ = require('jquery');
+
 
 $('document').ready(function(){
 
@@ -11,7 +11,7 @@ $('document').ready(function(){
 
  */
 $("#formUpdateUser").click(function(){
-    $("#formUpdate").toggle();
+    $(".formUpdate").toggle();
 });
 
 
