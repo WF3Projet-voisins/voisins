@@ -39,9 +39,9 @@ serviceAdd:
 
     
 # page qui envoi vers tous les services    
-servicesGet:
-    path: /services
-    controller: App\Controller\ServiceController::getServicesAction
+serviceGet:
+    path: /service
+    controller: App\Controller\ServiceController::getServiceAction
 
 
 

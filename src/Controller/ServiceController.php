@@ -25,7 +25,7 @@ class ServiceController extends AbstractController
         ]);
     }
 
-    public function getServicesAction(Request $request, ServiceRepository $serviceRepository){
+    public function getServiceAction(Request $request, ServiceRepository $serviceRepository){
         
         $services = $serviceRepository->findAll();
 
