@@ -33,10 +33,7 @@ class ContactType extends AbstractType
             ->add('message', TextareaType::class, [
                 'label_attr'=>['class'=> 'red-bg', 'style'=> 'color : black'],
                 'attr' => ['placeholder' => 'message']
-                    ])
-            
-
-
+                ])
             ->add('save', SubmitType::class)
         ;
     }
