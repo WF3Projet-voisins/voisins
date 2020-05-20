@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\TypeService;
 use App\Entity\Service;
 use App\Entity\Duration;
 use App\Entity\User;
@@ -13,11 +14,9 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-
-
-class SubCategoryFixtures extends Fixture
+class AppFixtures extends Fixture
 {
-    private $passwordEncoder;
+  private $passwordEncoder;
 
     public function __construct(UserPasswordEncoderInterface $passwordEncoder)
     {
@@ -50,7 +49,6 @@ class SubCategoryFixtures extends Fixture
         $catMecanique->setName("Mécanique")
             ->setImage("https://img2.freepng.fr/20180516/xkw/kisspng-mechanical-engineering-car-mechanics-design-engine-5afc650f09ae93.9112691115264903830397.jpg");
         $manager->persist($catMecanique);
-
 
 
         // séparation entre category et subcategory
@@ -95,54 +93,56 @@ class SubCategoryFixtures extends Fixture
         $manager->persist($rankNewbie);
 
 
+                    // séparation entre User et duration
 
-        // séparation entre Ranking et User
-        $user = new User();
-        $user->setEmail('root@root.fr')
-            ->setRoles(['ROLE_USER'])
-            ->setPassword($this->passwordEncoder->encodePassword($user, 'root'))
-            ->setLastname('Dupont')
-            ->setFirstname('Root')
-            ->setCity('Strasbourg')
-            ->setPostalCode('67000')
-            ->setImage('https://cdn.pixabay.com/photo/2017/06/07/10/47/elephant-2380009_960_720.jpg')
-            ->setTimeGauge('0')
-            ->setTotalTimeServiceGiven('0')
-            ->addCategoryAffinity($catJardinage)
-            ->addSubCatAffinity($subCatJardinage)
-            ->setRanking($rankNewbie);
+
+                        $duration_30 = new Duration();
+                        $duration_30->setDuration('30');
+                        $manager->persist($duration_30);
+
+                        $duration_60 = new Duration();
+                        $duration_60->setDuration('60');
+                        $manager->persist($duration_60);
+
+                        $duration_90 = new Duration();
+                        $duration_90->setDuration('90');
+                        $manager->persist($duration_90);
+
+                        $manager->persist($duration_30);
+                        $manager->persist($duration_60);
+                        $manager->persist($duration_90);
+
+
+       
+                    // séparation entre Ranking et User
+                    $user = new User();
+                    $user->setEmail('root@root.fr')
+                    ->setRoles(['ROLE_USER'])
+                    ->setPassword($this->passwordEncoder->encodePassword($user, 'root'))
+                    ->setLastname('Dupont')
+                    ->setFirstname('Root')
+                    ->setCity('Strasbourg')
+                    ->setPostalCode('67000')
+                    ->setImage('https://cdn.pixabay.com/photo/2017/06/07/10/47/elephant-2380009_960_720.jpg')
+                    ->setTimeGauge('0')
+                    ->setTotalTimeServiceGiven('0')
+                    ->addCategoryAffinity($catJardinage)
+                    ->addSubCatAffinity($subCatJardinage)
+                    ->setRanking($rankNewbie);
+
+                    $manager->persist($user);
 
         
+            // séparation entre Duration et Typeservices
+
+                $typeService = new TypeService();
+                $typeService->setName('blabla');
+                $manager->persist($typeService);
             
 
-        $manager->persist($user);
+                // séparation entre Typeservices et services
 
-        // séparation entre User et duration
-
-
-        $duration_30 = new Duration();
-         $duration_30->setDuration('30');
-        $manager->persist($duration_30);
-
-        $duration_60 = new Duration();
-        $duration_60->setDuration('60');
-       $manager->persist($duration_60);
-
-       $duration_90 = new Duration();
-       $duration_90->setDuration('90');
-      $manager->persist($duration_90);
-
-      $manager->persist($duration_30);
-      $manager->persist($duration_60);
-      $manager->persist($duration_90);
-
-
-
-
-
-        // séparation entre Duration et services
-
-
+            
                 $service = new Service();
                 $service->setName('Maçon')
                ->setDescription('Construit tout ce que vous voulez')
@@ -150,8 +150,27 @@ class SubCategoryFixtures extends Fixture
                ->setStatus('Ouvrier')
                ->setImage('https://cdn.pixabay.com/photo/2017/06/07/10/47/elephant-2380009_960_720.jpg')
                 ->setDuration($duration_60)
-                ->setUser('8');
-               
+                ->setUser($user)
+                ->setTypeService($typeService)
+                ->setSubCategory($subCatPlomberie);
+        
+               ;
+            
+                $manager->persist($service);
+
+                $service = new Service();
+                $service->setName('Developpeur')
+               ->setDescription('Construit tout ce que vous voulez')
+               ->setCreatedAt(new \DateTime())
+               ->setStatus('Ouvrier')
+               ->setImage('https://cdn.pixabay.com/photo/2017/06/07/10/47/elephant-2380009_960_720.jpg')
+                ->setDuration($duration_60)
+                ->setUser($user)
+                ->setTypeService($typeService)
+                ->setSubCategory($subCatPlomberie);
+        
+               ;
+            
                 $manager->persist($service);
 
 

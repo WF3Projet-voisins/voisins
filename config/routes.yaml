@@ -36,9 +36,15 @@ serviceAdd:
     path: user/service/{id}
     controller: App\Controller\ServiceController::addServiceAction
 
-serviceGet:
-    path: /service
-    controller: App\Controller\ServiceController::getServiceAction
+
+    
+# page qui envoi vers tous les services    
+servicesGet:
+    path: /services
+    controller: App\Controller\ServiceController::getServicesAction
+
+
+
 
 serviceUpdate:
   path: /user/service/{id}
