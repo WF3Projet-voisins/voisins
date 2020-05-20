@@ -44,6 +44,8 @@ class UserType extends AbstractType
                 'label_attr'=>['class'=> 'red-bg', 'style'=> 'color : black'],
                 'attr' => ['placeholder' => 'Ville']
             ])
+
+  
             
             ->add('category_affinity', EntityType::class, [
                 'class' => Category::class,

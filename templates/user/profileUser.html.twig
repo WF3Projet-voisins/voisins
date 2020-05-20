@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+  <link rel="stylesheet"
+    href="{{ asset('/css/profileUser.css') }}"
+    integrity=""
+    crossorigin="anonymous" />
+{% endblock %}
+{% block body %}
+<div class="container-fluid"> 
+  <div class="">
+    <h1>
+      Bienvenue {{ user.firstname }}
+    </h1>
+  </div>
+  <div class="blockMessagerieRanking">
+    <p class="col-2">
+      Messagerie
+    </p>
+    <div class="col-8">
+      <div>
+      Mes informations : Nom : {{ user.lastname }}
+      Prénom : {{ user.firstname }}
+      mail : {{ user.email }}
+      Ville : {{ user.city }}
+      Code Postal : {{ user.postalCode }}
+      Catégories :{% for category in user.categoryAffinity %}
+        {{ category.name }}
+      {% endfor %}Sous catégories :{% for subCat in user.subCatAffinity %}
+        {{ subCat.name }}
+      {% endfor %}
+        <button type="button" id="formUpdateUser" class="btn btn-danger">
+          Changer mes informations
+        </button>
+
+
+  
+        <div id="">
+          {{ form_start(formUser) }}
+        
+          {{ form_label(formUser.lastname, null,  {'label_attr' : {'class' : 'formUpdate text-golden pr-3'}}) }}
+          {{ form_widget(formUser.lastname , { 'attr': { 'class' : 'formUpdate bg-light rounded shadow p-2'}}) }}
+
+          {{ form_label(formUser.firstname, null,  {'label_attr' : {'class' : 'formUpdate w-2/8 text-golden pr-3'}}) }}
+          {{ form_widget(formUser.firstname , { 'attr': { 'class' : ' formUpdate w-full bg-light rounded shadow'}}) }}
+
+          {{ form_label(formUser.city, null,  {'label_attr' : {'class' : 'formUpdate text-golden pr-3'}}) }}
+          {{ form_widget(formUser.city , { 'attr': { 'class' : 'formUpdate bg-light rounded shadow p-2'}}) }}
+
+          {{ form_label(formUser.postalCode, null,  {'label_attr' : {'class' : 'formUpdate text-golden pr-3'}}) }}
+          {{ form_widget(formUser.postalCode , { 'attr': { 'class' : ' formUpdate bg-light rounded shadow p-2'}}) }}
+ 
+          {#{{ form_label(formUser.categoryAffinity, null,  {'label_attr' : {'class' : 'text-golden pr-3'}}) }}
+          {{ form_widget(formUser.categoryAffinity , { 'attr': { 'class' : 'bg-light rounded shadow p-2'}}) }}
+
+          {{ form_label(formUser.subCatAffinity, null,  {'label_attr' : {'class' : 'text-golden pr-3'}}) }}
+          {{ form_widget(formUser.subCatAffinity , { 'attr': { 'class' : 'bg-light rounded shadow p-2'}}) }} #}
+
+          {{ form_label(formUser.email, null,  {'label_attr' : {'class' : 'formUpdate text-golden pr-3'}}) }}
+          {{ form_widget(formUser.email , { 'attr': { 'class' : ' formUpdate bg-light rounded shadow p-2'}}) }}
+
+          {{ form_label(formUser.plainPassword, null,  {'label_attr' : {'class' : 'formUpdate text-golden pr-3'}}) }}
+          {{ form_widget(formUser.plainPassword , { 'attr': { 'class' : ' formUpdate bg-light rounded shadow p-2'}}) }}
+
+          {{ form_widget(formUser.image , { 'attr': { 'class' : 'formUpdate hidden image-input' }}) }}
+
+          {{ form_end(formUser) }}
+        </div> 
+    
+      </div>
+      <div class="container">
+        <div class="gauge-a"></div>
+        <div class="gauge-b"></div>
+        <div class="gauge-c"></div>
+        <div class="gauge-data">
+          <h1 id="percent">
+            {{ user.timeGauge }} heures
+          </h1>
+        </div>
+      </div>
+
+    </div>
+    <div>
+      <p class="col-2"> Rank 
+        {{ user.ranking.name }}
+      </p>
+    </div>
+  </div>
+  <div>
+    <img src="{{ user.image }}" alt="" style="width:150px" />
+  </div>
+
+  
+</div>
+
+{% endblock %}
+{% block javascripts %}
+  <script src="{{ asset('/js/profileUser.js') }}"></script>
+{% endblock %}
