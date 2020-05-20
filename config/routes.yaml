@@ -31,14 +31,14 @@ userDelete:
     path: user/profile/delete/{id}
     controller: App\Controller\UserController::deleteUserAction
 
-
+#Ajout d'un service par un user
 serviceAdd:
-    path: user/service/{id}
+    path: user/addService
     controller: App\Controller\ServiceController::addServiceAction
 
 serviceGet:
     path: /service
-    controller: App\Controller\ServiceController::getServiceAction
+    controller: App\Controller\ServiceController::getServiceAction 
 
 serviceUpdate:
   path: /user/service/{id}
