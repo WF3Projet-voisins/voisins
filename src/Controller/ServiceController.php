@@ -4,12 +4,20 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\UserRepository;
+use App\Form\ContactType;
+use App\Entity\Contact;
+use App\Repository\ServiceRepository;
+use DateTimeInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
+use Symfony\Component\Validator\Constraints\DateTime;
+
+
 
 class ServiceController extends AbstractController
 {
-    /**
-     * @Route("/service", name="service")
-     */
+
     public function addServiceAction()
     {
         return $this->render('service/pageService.html.twig', [
@@ -17,12 +25,29 @@ class ServiceController extends AbstractController
         ]);
     }
 
-    public function getServiceAction()
-    {
+
+
+
+
+
+    public function getServiceAction(Request $request, ServiceRepository $serviceRepository){
+        
+        $services = $serviceRepository->findAll();
+
+        dump($services);
+        
         return $this->render('service/pageService.html.twig', [
-            'controller_name' => 'ServiceController',
+
+            'controller_name' => 'ServiceController', 'services' => $services
         ]);
+
     }
+    
+
+
+
+
+
 
     public function updateServiceAction()
     {

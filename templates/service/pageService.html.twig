@@ -11,8 +11,29 @@
 <div class="example-wrapper">
     <h1>Hello {{ controller_name }}! ✅</h1>
 
+
+
+    {# the contents of this variable are displayed on the web page #}
+
+ 
+
+    {{ dump(services) }}
+    {{ "now"|date("m/d/Y") }}
+   
+    {% for service in services %}
     This friendly message is coming from:
     <ul>
+        <li>{{ service.name  }}</li>
+        <li>{{ service.description  }}</li>
+        <li>{{ service.status }}</li>
+        <li><img src="{{ service.image  }}" alt=""></li>
     </ul>
+
+   
+       
+  
+    {% endfor %}
+
+  
 </div>
 {% endblock %}

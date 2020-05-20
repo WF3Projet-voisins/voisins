@@ -16,7 +16,6 @@ home:
 
 
 
-
 userAdd :
     path: /inscription
     controller: App\Controller\UserController::addUserAction
@@ -34,14 +33,12 @@ userDelete:
     controller: App\Controller\UserController::deleteUserAction
 
 
-
-
 serviceAdd:
-    path: /user/service
+    path: user/service/{id}
     controller: App\Controller\ServiceController::addServiceAction
 
 serviceGet:
-    path: /user/service/{id}
+    path: /service
     controller: App\Controller\ServiceController::getServiceAction
 
 serviceUpdate:
