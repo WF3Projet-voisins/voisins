@@ -1,14 +1,18 @@
 <?php
-
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Form\UserType;
 use App\Entity\User;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use App\Service\FormsManager;
+use App\Entity\Category;
+use App\Entity\SubCategory;
+use App\Form\UserType;
+use App\Repository\CategoryRepository;
+use App\Repository\SubCategoryRepository;
 
+use App\Service\FormsManager;
+use App\Repository\UserRepository;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 
 
@@ -29,7 +33,7 @@ class UserController extends AbstractController
             $user->setRoles(['ROLE_USER']);
             $file = $form->get('image')->getData();
             $user = $form->getData();
-            if($file) {
+            if ($file) {
                 $newFilename = FormsManager::handleFileUpload($file, $this->getParameter('uploads'));
                 $user->setImage($newFilename);
 
@@ -41,14 +45,12 @@ class UserController extends AbstractController
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($user);
                 $entityManager->flush();
-                $this->addFlash('info',"user : ".$user->getFirstname()." well added");
+                $this->addFlash('info', "user : " . $user->getFirstname() . " well added");
                 //return $this->redirectToRoute('user/index.html.twig');
                 return $this->render('user/index.html.twig', [
                     'controller_name' => $user->getFirstname()
                 ]);
-
             }
-
         }
 
         return $this->render(
@@ -57,20 +59,36 @@ class UserController extends AbstractController
         );
     }
 
-    public function getUserAction()
+    public function getUserAction(Request $request, UserRepository $userRepository, $id, CategoryRepository $categoryRepository)
     {
-        return $this->render('user/index.html.twig', [
-            'controller_name' => 'UserController',
-        ]);
+        $user = $userRepository->find($id);
+
+        $formUser = $this->createForm('App\Form\UserType', $user);
+        $formUser->handleRequest($request);
+
+        if ($formUser->isSubmitted()) {
+            $user = $formUser->getData();
+            $file = $formUser->get('image')->getData();
+            if ($file) {
+                $newFileName = FormsManager::handleFileUpload($file, $this->getParameter('uploads'));
+                $user->setImage($newFileName);
+            }
+
+            $manager = $this->getDoctrine()->getManager();
+
+            $manager->persist($user);
+            $manager->flush();
+            return $this->redirectToRoute('userProfile');
+        }
+        return $this->render('user/profileUser.html.twig', ["user" => $user, "formUser" => $formUser->createView()]);
     }
 
-    public function updateUserAction()
+    public function updateUserAction(UserRepository $userRepository, $id, Request $request)
     {
-        /* update des infos user */
-        return $this->render('user/profileUser.html.twig', [
-            'controller_name' => 'UserController',
-        ]);
+        
     }
+
+    
     public function deleteUserAction()
     {
         /* Si user veut delete son profil */

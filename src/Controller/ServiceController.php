@@ -18,7 +18,6 @@ use Symfony\Component\Validator\Constraints\DateTime;
 
 class ServiceController extends AbstractController
 {
-
     public function addServiceAction()
     {
         return $this->render('service/pageService.html.twig', [
