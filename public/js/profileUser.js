@@ -14,6 +14,15 @@ $("#formUpdateUser").click(function(){
     $(".formUpdate").toggle();
 });
 
+$("#formCategorieUser").click(function(){
+    $(".formUpdate2").toggle();
+});
+
+
+$("#formSubCategorieUser").click(function(){
+    $(".formUpdate3").toggle();
+});
+
 
 
 });

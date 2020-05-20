@@ -59,9 +59,11 @@ class UserController extends AbstractController
         );
     }
 
-    public function getUserAction(Request $request, UserRepository $userRepository, $id, CategoryRepository $categoryRepository)
+    public function getUserAction(Request $request, UserRepository $userRepository, $id, CategoryRepository $categoryRepository, SubCategoryRepository $subCategoryRepository)
     {
         $user = $userRepository->find($id);
+        $categories = $categoryRepository->findAll();
+        $subCategories = $subCategoryRepository->findAll();
 
         $formUser = $this->createForm('App\Form\UserType', $user);
         $formUser->handleRequest($request);
@@ -78,9 +80,9 @@ class UserController extends AbstractController
 
             $manager->persist($user);
             $manager->flush();
-            return $this->redirectToRoute('userProfile');
+            return $this->redirectToRoute('userProfile', ['id'=>$id]);
         }
-        return $this->render('user/profileUser.html.twig', ["user" => $user, "formUser" => $formUser->createView()]);
+        return $this->render('user/profileUser.html.twig', ["user" => $user, "categories" => $categories, "subCategories"=> $subCategories, "formUser" => $formUser->createView()]);
     }
 
     public function updateUserAction(UserRepository $userRepository, $id, Request $request)
