@@ -1,3 +1,15 @@
+index:
+    path: /
+    controller: App\Controller\AccueilController::index
+
+apropos:
+    path: /apropos
+    controller: App\Controller\AproposController::index
+
+faqs:
+    path: /faqs
+    controller: App\Controller\FaqsController::index
+
 home:
     path: /
     controller: App\Controller\HomeController::indexAction
