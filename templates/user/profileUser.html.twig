@@ -28,9 +28,6 @@
           Changer mes informations
           </button>
 
-
-  
-          
           <form name="user" method="POST" enctype="multipart/form-data">
         
             {{ form_label(formUser.lastname, null,  {'label_attr' : {'class' : 'formUpdate text-golden pr-3'}}) }}
@@ -60,56 +57,9 @@
         </div>
       </div>
 
-        Mes Catégories :
-        {% for category in user.categoryAffinity %}
-          {{ category.name }}
-        {% endfor %}
-
-        <button type="button" id="formCategorieUser" class="btn btn-danger">
-          Ajouter une catégorie
-        </button>
-
-      <div class="formUpdate2">
-        <form name="userCat" method="POST" enctype="multipart/form-data">
-      
-          {% for category in categories %}
-          <input class="formUpdate2" type="checkbox"> {{category.name}}
-          {% endfor %}
-          <input type="submit">
-        </form>
-      </div>
-       
-      {# <form name="userCat" method="POST" enctype="multipart/form-data">   (class="formUpdate2" )
-        
-      </form> #}
-      
-      Mes Sous catégories :
-      {% for subCat in user.subCatAffinity %}
-        {{ subCat.name }}
-      {% endfor %}
-
-      <button type="button" id="formSubCategorieUser" class="btn btn-danger">
-        Ajouter une sous-catégorie
-      </button>
-      
-      
-      
-      <div class="formUpdate3">
-        <form name="userSubCat" method="POST" enctype="multipart/form-data">
-          {% for subCategory in subCategories %}
-          <input class="formUpdate3" type="checkbox"> {{subCategory.name}}
-          {% endfor %}
-          <input type="submit">
-        </form>
-      </div>
-
-
-
-
-         
-    
+  
      
-      {# <div class="container">
+       <div class="container">
         <div class="gauge-a"></div>
         <div class="gauge-b"></div>
         <div class="gauge-c"></div>
@@ -118,7 +68,7 @@
             {{ user.timeGauge }} heures
           </h1>
         </div>
-      </div> #}
+      </div> 
 
     </div>
     <div>
