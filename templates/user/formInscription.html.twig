@@ -4,9 +4,34 @@
 
 {% block body %}
 
+
+
+
+
+<div class="container">
+    <button class="btn btn-primary" id="button">rechercher</button>
+        <input type="number" id="inputValue">
+        <div id="container">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Nom</th>
+                    <th scope="col">CodePostal</th>
+                    <th scope="col">Population</th>
+                </tr>
+                </thead>
+                <tbody id="tableBody">
+                </tbody>
+            </table>
+        </div>
+</div>
+
+
+
 <div class="container-fluid d-flex justify-content-around">
 
     <div class="container col-3 d-flex align-items-center justify-content-center" style="height: 100vh;">
+
 
 
         {{ form_start(form) }}
@@ -35,20 +60,20 @@
         
         {{ form_end(form) }}
 
-
-
-
     </div>
-
-
 
 
 </div>
    
 
 
+{% endblock %}
 
-
-
+{% block javascripts %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  
+  
+    <script src="{{ asset('/js/formInscription.js') }}"></script>
+  
 
 {% endblock %}

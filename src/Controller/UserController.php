@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 
+use Symfony\Component\HttpClient\HttpClient;
 use App\Entity\User;
 use App\Entity\Category;
 use App\Entity\SubCategory;
@@ -20,6 +21,23 @@ class UserController extends AbstractController
 {
     public function addUserAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
+
+        //$codePostal = "0";
+        $client = HttpClient::create();
+        $response = $client->request('GET', 'https://geo.api.gouv.fr/communes?');
+        
+        $statusCode = $response->getStatusCode();
+        // $statusCode = 200
+        $contentType = $response->getHeaders()['content-type'][0];
+        // $contentType = 'application/json'
+        $content = $response->getContent();
+        // $content = '{"id":521583, "name":"symfony-docs", ...}'
+        $content = $response->toArray();
+        // $content = ['id' => 521583, 'name' => 'symfony-docs', ...]
+       
+
+
+
         $form = null;
         // 1) build the form
         $user = new User();
@@ -48,14 +66,14 @@ class UserController extends AbstractController
                 $this->addFlash('info', "user : " . $user->getFirstname() . " well added");
                 //return $this->redirectToRoute('user/index.html.twig');
                 return $this->render('user/index.html.twig', [
-                    'controller_name' => $user->getFirstname()
+                    'controller_name' => $user->getFirstname(), 
                 ]);
             }
         }
 
         return $this->render(
             'user/formInscription.html.twig',
-            array('form' => $form->createView())
+            ['form' => $form->createView() , 'content' => $content]
         );
     }
 

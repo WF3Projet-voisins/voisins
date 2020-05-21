@@ -9,33 +9,13 @@
 </style>
 
 <div class="example-wrapper">
-   
-
-      <button class="btn btn-primary" id="button">rechercher</button>
-        <input type="number" id="inputValue">
-        <div id="container">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">Nom</th>
-                    <th scope="col">CodePostal</th>
-                    <th scope="col">Population</th>
-                </tr>
-                </thead>
-                <tbody id="tableBody">
-                </tbody>
-            </table>
-        </div>
-
-
-
+    
     {# the contents of this variable are displayed on the web page #}
     <label>Filtre Status du service / Type de service</label>
     <input id="myChoice" type="text">
 
-      
       {% for service in services %}
-  
+   
         <div class="card mb-3" id="cardService">
             <img src="{{ service.image  }}" class="card-img-top" alt="...">
             <div class="card-body">
