@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use Symfony\Component\HttpClient\HttpClient;
@@ -37,21 +38,22 @@ class UserController extends AbstractController
             if ($file) {
                 $newFilename = FormsManager::handleFileUpload($file, $this->getParameter('uploads'));
                 $user->setImage($newFilename);
-
-                // 3) Encode the password (you could also do this via Doctrine listener)
-                $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
-                $user->setPassword($password);
-
-                // 4) save the User!
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($user);
-                $entityManager->flush();
-                $this->addFlash('info', "user : " . $user->getFirstname() . " well added");
-                //return $this->redirectToRoute('user/index.html.twig');
-                return $this->render('user/index.html.twig', [
-                    'controller_name' => $user->getFirstname(), 
-                ]);
+            } else {
+                $user->setImage('https://cdn.pixabay.com/photo/2020/05/03/13/09/puppy-5124947_960_720.jpg');
             }
+            // 3) Encode the password (you could also do this via Doctrine listener)
+            $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
+            $user->setPassword($password);
+
+            // 4) save the User!
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+            $this->addFlash('info', "user : " . $user->getFirstname() . " well added");
+            //return $this->redirectToRoute('user/index.html.twig');
+            return $this->render('user/index.html.twig', [
+                'controller_name' => $user->getFirstname()
+            ]);
         }
 
         return $this->render(
@@ -81,17 +83,16 @@ class UserController extends AbstractController
 
             $manager->persist($user);
             $manager->flush();
-            return $this->redirectToRoute('userProfile', ['id'=>$id]);
+            return $this->redirectToRoute('userProfile', ['id' => $id]);
         }
-        return $this->render('user/profileUser.html.twig', ["user" => $user, "categories" => $categories, "subCategories"=> $subCategories, "formUser" => $formUser->createView()]);
+        return $this->render('user/profileUser.html.twig', ["user" => $user, "categories" => $categories, "subCategories" => $subCategories, "formUser" => $formUser->createView()]);
     }
 
     public function updateUserAction(UserRepository $userRepository, $id, Request $request)
     {
-        
     }
 
-    
+
     public function deleteUserAction()
     {
         /* Si user veut delete son profil */
