@@ -14,6 +14,7 @@ use App\Service\FormsManager;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 
@@ -49,11 +50,20 @@ class UserController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-            $this->addFlash('info', "user : " . $user->getFirstname() . " well added");
-            //return $this->redirectToRoute('user/index.html.twig');
-            return $this->render('user/index.html.twig', [
-                'controller_name' => $user->getFirstname()
-            ]);
+            
+            $token = new UsernamePasswordToken(
+                $user,
+                $password,
+                'main',
+                $user->getRoles()
+
+            );
+
+            $this->get('security.token_storage')->setToken($token);
+            $this->get('session')->set('_security_main', serialize($token));
+
+            return $this->redirectToRoute('chooseTypeServices', ['id'=> $user->getId()]);
+            
         }
 
         return $this->render(

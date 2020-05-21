@@ -36,6 +36,7 @@ serviceAdd:
     path: user/{id}/addService
     controller: App\Controller\ServiceController::addServiceAction
 
+    
 
     
 # page qui envoi vers tous les services    
@@ -113,5 +114,5 @@ contactDelete:
     controller: App\Controller\ContactController::deleteContactAction
 
 chooseTypeServices:
-    path: /choose/type
+    path: /choose/type/{id}
     controller: App\Controller\ChooseTypeServicesController::chooseTypeServicesAction
