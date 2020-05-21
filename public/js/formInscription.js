@@ -1,9 +1,9 @@
 
 $(document).ready(function(){
     // $("button").click(function(){
-        $("#inputValue").on("keyup", function() {
+        $("#user_postalCode").on("keyup", function() {
             $('#tableBody').html('');
-                const codePostal = $('#inputValue').val();
+                const codePostal = $('#user_postalCode').val();
                 $.get('https://geo.api.gouv.fr/communes?codePostal='+codePostal, function(datas){
 
 

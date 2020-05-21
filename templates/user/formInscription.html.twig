@@ -9,8 +9,8 @@
 
 
 <div class="container">
-    <button class="btn btn-primary" id="button">rechercher</button>
-        <input type="number" id="inputValue">
+   
+   
         <div id="container">
             <table class="table">
                 <thead>
@@ -35,11 +35,11 @@
 
 
         {{ form_start(form) }}
-
         {{ form_row(form.image) }}
         {{ form_row(form.firstname) }}
         {{ form_row(form.lastname) }}
-        {{ form_row(form.postalCode) }}
+        {{ form_label(form.postalCode, 'Code Postal') }}
+        {{ form_widget(form.postalCode, {'attr': {'class': 'choixId'}}) }}
         {{ form_row(form.city) }}
         {{ form_row(form.category_affinity) }}
         {{ form_row(form.sub_cat_affinity) }}
@@ -56,6 +56,8 @@
         {{ form_row(form.email) }}
         {{ form_row(form.plainPassword.first) }}
         {{ form_row(form.plainPassword.second) }}
+
+        
 
         
         {{ form_end(form) }}

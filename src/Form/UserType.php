@@ -34,7 +34,8 @@ class UserType extends AbstractType
                 'attr' => ['placeholder' => 'image']
             ])
             ->add('postalCode', NumberType::class, [    
-                'attr' => ['placeholder' => 'Code postal', 'type' => 'number']
+                'attr' => ['placeholder' => 'Code postal', 'type' => 'number'],
+               
             ])
             ->add('city', TextType::class, [               
                 'attr' => ['placeholder' => 'Ville']
