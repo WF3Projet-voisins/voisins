@@ -3,9 +3,9 @@
 {% block title %}{% endblock %}
 
 
-{% block body %}
-{% include 'composants/navbarAccueil.html.twig' %}
 
+{% block body %}
+    {% include 'composants/navbarAccueil.html.twig' %}
     <!-- Full Carousel -->
     <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
@@ -121,6 +121,6 @@
             </div>
         </div>        
     </div>        
-{% include 'composants/footer.html.twig' %}
-
+    {% include 'composants/footer.html.twig' %}
 {% endblock %}
+
