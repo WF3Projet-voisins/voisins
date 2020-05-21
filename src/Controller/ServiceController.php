@@ -2,46 +2,67 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
-use App\Repository\UserRepository;
-use App\Form\ContactType;
-use App\Entity\Contact;
+
+
 use App\Entity\Service;
+
+use App\Form\ServiceType;
+use App\Service\FormsManager;
+use App\Repository\UserRepository;
 use App\Repository\ServiceRepository;
-use DateTimeInterface;
+use App\Repository\CategoryRepository;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Form\Extension\Core\Type\TimeType;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
 
 
 
 class ServiceController extends AbstractController
 {
-    public function addServiceAction()
+    public function addServiceAction(Request $request, ServiceRepository $serviceRepository, CategoryRepository $categoryRepository)
+    {
+        
+        /* Ajout d'un service par un user */
+        $service = new Service();
+        $formService = $this->createForm(ServiceType::class, $service);
+        $formService->handleRequest($request);
+
+        if ($formService->isSubmitted() && $formService->isValid())  {
+            $service = $formService->getData();
+            $file = $formService->get('image')->getData();
+            if ($file) {
+                $newFileName = FormsManager::handleFileUpload($file, $this->getParameter('uploads'));
+                $service->setImage($newFileName);
+            }
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($service);
+            $manager->flush();
+            return $this->redirectToRoute('index');
+        }
+        
+
+
+        return $this->render('user/addService.html.twig', ["formService" => $formService->createView()]);
+    }
+
+
+
+    public function getServiceAction(Request $request, ServiceRepository $serviceRepository)
     {
 
-        /* Ajout d'un service par un user */
-        return $this->render('user/addService.html.twig', [
-            
-        ]);
-    }
-
-
-
-    public function getServiceAction(Request $request, ServiceRepository $serviceRepository){
-        
         $services = $serviceRepository->findAll();
 
-            
-            //je redirige vers la route de mon choix 
+
+        //je redirige vers la route de mon choix 
         return $this->render('service/pageService.html.twig', [
 
-            'controller_name' => 'ServiceController', 'services' => $services,   
+            'controller_name' => 'ServiceController', 'services' => $services,
         ]);
-
     }
-    
+
 
 
 
@@ -101,6 +122,4 @@ class ServiceController extends AbstractController
             'controller_name' => 'ServiceController',
         ]);
     }
-
-
 }

@@ -28,32 +28,32 @@ class UserType extends AbstractType
             ->add('lastname', TextType::class, [
                 'attr' => ['placeholder' => 'Nom']
             ])
-            ->add('image',FileType::class, [
-                'mapped'=>false,
-                'required' =>false,
+            ->add('image', FileType::class, [
+                'mapped' => false,
+                'required' => false,
                 'attr' => ['placeholder' => 'image']
             ])
-            ->add('postalCode', NumberType::class, [    
+            ->add('postalCode', NumberType::class, [
                 'attr' => ['placeholder' => 'Code postal', 'type' => 'number']
             ])
-            ->add('city', TextType::class, [               
+            ->add('city', TextType::class, [
                 'attr' => ['placeholder' => 'Ville']
             ])
-            
+
             ->add('category_affinity', EntityType::class, [
                 'class' => Category::class,
-                'multiple'=>true,
-                'expanded'=>true,
+                'multiple' => true,
+                'expanded' => true,
                 'choice_label' => 'name',
-                ])
-                
+            ])
+
             ->add('sub_cat_affinity', EntityType::class, [
                 'class' => SubCategory::class,
-                'multiple'=>true,
-                'expanded'=>true,
+                'multiple' => true,
+                'expanded' => true,
                 'choice_label' => 'name'
-                ])
-                
+            ])
+
             ->add('email', TextType::class, [
                 'attr' => ['placeholder' => 'Email', 'type' => 'email']
             ])
@@ -62,8 +62,7 @@ class UserType extends AbstractType
                 'first_options'  => array('label' => 'Password'),
                 'second_options' => array('label' => 'Repeat Password'),
             ))
-            ->add('save', SubmitType::class);
-        ;
+            ->add('save', SubmitType::class);;
     }
 
     public function configureOptions(OptionsResolver $resolver)
