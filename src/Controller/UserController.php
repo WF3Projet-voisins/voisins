@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Symfony\Component\HttpClient\HttpClient;
 use App\Entity\User;
 use App\Entity\Category;
 use App\Entity\SubCategory;
@@ -57,7 +58,7 @@ class UserController extends AbstractController
 
         return $this->render(
             'user/formInscription.html.twig',
-            array('form' => $form->createView())
+            ['form' => $form->createView()]
         );
     }
 
