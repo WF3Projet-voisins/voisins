@@ -26,7 +26,7 @@ class ServiceType extends AbstractType
             ->add('description')
             ->add('status')
             ->add('image', FileType::class, ['mapped' => false, 'required' => false])
-            ->add('duration', EntityType::class, ['class' => Duration::class, 'multiple' => false, 'expanded' => true, 'choice_label' => 'duration']) /* FK */
+            ->add('duration', EntityType::class, ['class' => Duration::class, 'multiple' => false, 'expanded' => true, 'choice_label' => 'duration'])
             ->add('type_service', EntityType::class, ['class' => TypeService::class, 'multiple' => false, 'expanded' => false, 'choice_label' => 'name'])
             ->add('sub_category', EntityType::class, ['class' => SubCategory::class, 'multiple' => false, 'expanded' => false, 'choice_label' => 'name', 'group_by' => 'category.name'])
             ->add('save', SubmitType::class);;

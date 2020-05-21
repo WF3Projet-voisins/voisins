@@ -22,21 +22,26 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ServiceController extends AbstractController
 {
-    public function addServiceAction(Request $request, ServiceRepository $serviceRepository, CategoryRepository $categoryRepository)
+    public function addServiceAction(Request $request, ServiceRepository $serviceRepository, CategoryRepository $categoryRepository, UserRepository $userRepository, $id)
     {
         
         /* Ajout d'un service par un user */
+        $user = $userRepository->find($id);
         $service = new Service();
         $formService = $this->createForm(ServiceType::class, $service);
         $formService->handleRequest($request);
 
-        if ($formService->isSubmitted() && $formService->isValid())  {
+        if ($formService->isSubmitted())  {
             $service = $formService->getData();
             $file = $formService->get('image')->getData();
             if ($file) {
                 $newFileName = FormsManager::handleFileUpload($file, $this->getParameter('uploads'));
                 $service->setImage($newFileName);
             }
+            $service->setCreatedAt(new \DateTime());
+            $service->setStatus('En cours');
+            $service->setUser($user);
+
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($service);
             $manager->flush();
