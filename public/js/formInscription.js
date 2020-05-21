@@ -1,6 +1,33 @@
 
+
+
+
+
+
+
 $(document).ready(function(){
-    // $("button").click(function(){
+
+    $("a").click(function(){
+
+        $('#user_city').html(function(){
+
+            $("input:text").val("Glenn Quagmire");
+
+        })
+        
+
+      });
+
+
+
+
+
+
+     $("a").click(function(){
+            $('#user_city').html("#user_city");
+       });
+
+
         $("#user_postalCode").on("keyup", function() {
             $('#tableBody').html('');
                 const codePostal = $('#user_postalCode').val();
@@ -10,18 +37,19 @@ $(document).ready(function(){
                     for(const commune of datas){
                         const row = document.createElement('tr');
                         const tdNom = document.createElement('td');
-                        $(tdNom).text(commune.nom);
-                        const tdCode = document.createElement('td');
-                        $(tdCode).text(commune.codesPostaux[0]);
-                        const tdPopulation = document.createElement('td');
-                        $(tdPopulation).text(commune.population);
+                        const aNom = document.createElement('a');
+                        $(aNom).text(commune.nom);
+                        $(aNom).attr("id", "nomCommune");
+                       // const tdCode = document.createElement('td');
+                       // $(tdCode).text(commune.codesPostaux[0]);
+                       // $(tdCode).attr("id", "codePostal");
+                       tdNom.append(aNom);
                         row.append(tdNom);
-                        row.append(tdCode);
-                        row.append(tdPopulation);
+                       // row.append(tdCode);
                         $("#tableBody").append(row);
                     }
                 });
 
         });
-  //  });
+ 
 });

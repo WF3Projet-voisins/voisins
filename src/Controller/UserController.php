@@ -21,8 +21,6 @@ class UserController extends AbstractController
 {
     public function addUserAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
-
-
         $form = null;
         // 1) build the form
         $user = new User();
