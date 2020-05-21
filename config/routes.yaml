@@ -33,7 +33,7 @@ userDelete:
 
 #Ajout d'un service par un user
 serviceAdd:
-    path: user/addService
+    path: user/{id}/addService
     controller: App\Controller\ServiceController::addServiceAction
 
 serviceGet:
