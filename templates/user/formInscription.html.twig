@@ -1,75 +1,93 @@
 {% extends 'base.html.twig' %}
+{% block stylesheets %}
+
+
+
+{% endblock %}
 
 
 
 {% block body %}
 
-
-
-
-
-
-
+{{ dump(ranking) }}
 
 <div class="container-fluid d-flex justify-content-around">
-
-    <div class="container col-3 d-flex align-items-center justify-content-center" style="height: 100vh;">
-
-
-
-        {{ form_start(form) }}
-        {{ form_row(form.image) }}
-        {{ form_row(form.firstname) }}
-        {{ form_row(form.lastname) }}
-        {{ form_label(form.postalCode, 'Code Postal') }}
-        {{ form_widget(form.postalCode, {'attr': {'class': 'choixId'}}) }}
-        {{ form_row(form.city) }}
-        {{ form_row(form.category_affinity) }}
-        {{ form_row(form.sub_cat_affinity) }}
-
-
-
-    </div>
-
-
-    <div class="container col-3 d-flex align-items-center justify-content-center" style="height: 100vh;">
-   
-   
-        
-            <table class="table">
-                <thead>
-                        <a  id="tableBody"></a>
-                </thead>
-              
-            </table>
-    </div>
-
-
-
-
-
-
-
-
-
-    <div class="container col-3 d-flex flex-column justify-content-center" style="height: 100vh;">
-
-
+        <div class="container col-3"></div>
     
-
     
-        {{ form_row(form.email) }}
-        {{ form_row(form.plainPassword.first) }}
-        {{ form_row(form.plainPassword.second) }}
+    
+        <div class="container col-6 d-flex flex-column justify-content-center" style="height: 90vh;">
 
-        
-
-        
-        {{ form_end(form) }}
-
-    </div>
-
-
+            <form name="form" method="POST" enctype="multipart/form-data">
+                
+                        <div class="mt-4">
+                    {{ form_label(form.image, 'Image') }}
+                    {{ form_widget(form.image , { 'attr': { 'class' : ' bg-light rounded shadow p-2'}}) }}
+                        </div>
+                    <div class="mt-4">
+                        {{ form_label(form.firstname, 'Firtsname') }}
+                        {{ form_widget(form.firstname , { 'attr': { 'class' : ' bg-light rounded shadow p-2'}}) }}
+                    </div>
+                        <div class="mt-4">
+                            {{ form_label(form.lastname, 'Lastname') }}
+                            {{ form_widget(form.lastname , { 'attr': { 'class' : ' bg-light rounded shadow p-2'}}) }}
+                        </div>
+                        
+                
+                
+                        <div class="mt-4">
+                            {{ form_label(form.postalCode, 'Code postal') }}
+                            {{ form_widget(form.postalCode , { 'attr': { 'class' : ' bg-light rounded shadow p-2'}}) }}
+                        </div>
+                    
+                
+                        <div class="mt-4">
+                            {{ form_label(form.city, 'City') }}  
+                            {{ form_widget(form.city, {'attr': {'class': 'choixId'}}) }}
+                        </div>
+                        
+                        <div class="mt-4">
+                            {{ form_label(form.email, 'Email') }}
+                            {{ form_widget(form.email , { 'attr': { 'class' : ' bg-light rounded shadow p-2'}}) }}
+                            </div>
+                        
+                            <div class="mt-4">
+                                {{ form_label(form.plainPassword.first, 'First Password') }}
+                                {{ form_widget(form.plainPassword.first , { 'attr': { 'class' : ' bg-light rounded shadow p-2'}}) }}
+                            </div>
+                    
+                            <div class="mt-4">
+                                {{ form_label(form.plainPassword.second, 'Second Password') }}
+                                {{ form_widget(form.plainPassword.second , { 'attr': { 'class' : ' bg-light rounded shadow p-2'}}) }}
+                            </div>
+                        
+                            <div class="mt-4">
+                                {{ form_widget(form.save, {'attr': {'class' : ' btn btn-danger' }}) }} 
+                            </div>   
+    
+            </form>
+    
+        </div>
+    
+    
+        <div class="container col-3 d-flex align-items-center justify-content-center" style="height: 90vh;">
+       
+       
+           
+                <table class="table">
+                    <thead>
+                            <a  id="tableBody"></a>
+                    </thead>
+                </table>
+            
+             
+        </div>
+    
+    
+    
+    
+    
+    
 </div>
    
 

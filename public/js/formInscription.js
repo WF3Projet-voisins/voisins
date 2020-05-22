@@ -1,10 +1,4 @@
 
-
-
-
-
-
-
 $(document).ready(function(){
 
     $("a").click(function(){
@@ -14,27 +8,21 @@ $(document).ready(function(){
             $("input:text").val("Glenn Quagmire");
 
         })
-        
-
+    
       });
-
-
-
-
-
 
      $("a").click(function(){
             $('#user_city').html("#user_city");
        });
 
-
         $("#user_postalCode").on("keyup", function() {
-            $('#tableBody').html('');
+            $('tableBody').html('');
                 const codePostal = $('#user_postalCode').val();
                 $.get('https://geo.api.gouv.fr/communes?codePostal='+codePostal, function(datas){
 
-
                     for(const commune of datas){
+
+                
                         const row = document.createElement('tr');
                         const tdNom = document.createElement('td');
                         const aNom = document.createElement('a');
@@ -53,3 +41,10 @@ $(document).ready(function(){
         });
  
 });
+
+
+
+
+
+
+
