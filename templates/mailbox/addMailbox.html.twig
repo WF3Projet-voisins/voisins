@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row mt-5">            
+            <div class="col-10 text-left">
+                <h6 class="mb-0"><strong>{{ user.Lastname|e }}&nbsp;{{ user.Firstname|e }}</strong></h6>
+                <strong class="text-black-50">{{ user.Email|e }}</strong>
+            </div>
+            <div class="col-2 text-right" width="150px">
+                <img src="{{user.image}}" class="rounded-circle" width="100px" height="100px" alt="">
+            </div>
+        </div>
+        <div class="row mt-0">
+            <div class="col text-center">
+                <h2><i class="fas fa-envelope-open-text"></i>&nbsp;<strong>MAILBOX</strong></h2>
+                Messagerie interne 
+            </div>        
+        </div>
+
+
+        <hr>
+        <div class="row mt-2">
+            <div class="col text-left">
+                <a href="/user/mailbox/" class="btn btn-success mb-1"><i class="fas fa-reply"></i> Returner</a> 
+            </div>
+        </div>
+    </div>
+    <br><br><br>
+
+{% endblock %}

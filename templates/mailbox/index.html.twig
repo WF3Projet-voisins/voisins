@@ -1,18 +1,77 @@
+  
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MailboxController!{% endblock %}
+{% block title %}{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <div class="container">
+        <div class="row mt-5">            
+            <div class="col-10 text-left">
+                <h6 class="mb-0"><strong>{{ user.Lastname|e }}&nbsp;{{ user.Firstname|e }}</strong></h6>
+                <strong class="text-black-50">{{ user.Email|e }}</strong>
+            </div>
+            <div class="col-2 text-right" width="150px">
+                <img src="{{user.image}}" class="rounded-circle" width="100px" height="100px" alt="">
+            </div>
+        </div>
+        <div class="row mt-0">
+            <div class="col text-center">
+                <h2><i class="fas fa-envelope-open-text"></i>&nbsp;<strong>MAILBOX</strong></h2>
+                Messagerie interne 
+            </div>        
+        </div>
+        <div class="row mt-2">
+            <div class="col text-right">
+                <a href="/user/mailbox/add/" class="btn btn-success mb-1"><i class="far fa-file" ></i> Ajouter</a> 
+            </div>
+        </div>
 
-    This friendly message is coming from:
-    <ul>
-    </ul>
-</div>
+        <div class="row">
+            <div class="col">           
+                <table class="table table-hover table-bordered">
+                    <thead class="thead-dark border">
+                        <tr>                            
+                            <th>Date</th>
+                            <th>Message</th>                        
+                            <th width="160px">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody> 
+                        <!-- pour la boucle d'affichage des messages -->
+                        {% for message in messages %}
+                            <!--- MessageriBox -->
+                            <tr>
+                                <td>{{ message.createdAt is empty ? "" : message.createdAt|date("d.m.Y", "Europe/Paris") }}</td>
+                                <td> 
+                                    <a href="/user/mailbox/view/{{message.Id}}">
+                                        <strong>{{ message.MessageTitle|e }}</strong>
+                                    </a>                                   
+                                    <p>{{ message.MessageBody|e }}</p>                                          
+                                </td>
+                                <td>                                           
+                                    <a href="/user/mailbox/update/{{message.Id}}" class="btn btn-primary mb-1"><i class="far fa-file-alt"></i></a>    
+                                    <a href="/user/mailbox/view/{{message.Id}}" class="btn btn-warning mb-1"><i class="far fa-edit"></i></a>    
+                                    <a href="/user/mailbox/delete/{{message.Id}}" class="btn btn-danger mb-1"><i class="far fa-trash-alt"></i></a>                                
+                                </td>
+                            </tr>                          
+                            <!--- end messageriBox-->           
+
+                        {% else %}
+                            <tr>
+                                <td></td>
+                                <td><em>actuellement aucune donnée à afficher</em></td>
+                                <td></td>
+                            </tr>
+                        {% endfor %}              
+                
+                    </tbody>
+                </table>    
+
+            </div> 
+        </div>       
+
+    </div>
+    <br><br><br>
+
 {% endblock %}
