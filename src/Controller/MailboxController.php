@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 class MailboxController extends AbstractController
 {
     
-    public function addMailboxAction()
+    public function index()
     {
         $id=63;
         // On appelle la donne user
@@ -28,9 +28,9 @@ class MailboxController extends AbstractController
     }
 
     /**
-     * @Route("/user/mailbox/add", name="addMailbox")
+     * @Route("/user/mailbox/add", name="addMailboxAction")
      */
-    public function addMailbox()
+    public function addMailboxAction()
     {
         $id=63;
         // On appelle la donne user
@@ -43,9 +43,9 @@ class MailboxController extends AbstractController
     }
 
     /**
-     * @Route("/user/mailbox/view/{id}", name="viewMailbox")
+     * @Route("/user/mailbox/view/{id}", name="viewMailboxAction")
      */
-    public function viewMailbox()
+    public function viewMailboxAction()
     {
         $id=63;
         // On appelle la donne user
@@ -58,9 +58,9 @@ class MailboxController extends AbstractController
     }
 
     /**
-     * @Route("/user/mailbox/update/{id}", name="updateMailbox")
+     * @Route("/user/mailbox/update/{id}", name="updateMailboxAction")
      */
-    public function updateMailbox()
+    public function updateMailboxAction()
     {
         $id=63;
         // On appelle la donne user
@@ -74,9 +74,9 @@ class MailboxController extends AbstractController
     }
 
     /**
-     * @Route("/user/mailbox/delete/{id}", name="deleteMailbox")
+     * @Route("/user/mailbox/delete/{id}", name="deleteMailboxAction")
      */
-    public function deleteMailbox()
+    public function deleteMailboxAction()
     {
         $id=63;
         // On appelle la donne user

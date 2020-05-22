@@ -87,19 +87,19 @@ mailbox:
 
 mailboxAdd:
     path: /user/mailbox/add
-    controller: App\Controller\MailboxController::addMailbox
+    controller: App\Controller\MailboxController::addMailboxAction
       
 mailboxView:
     path: /user/mailbox/view/{id}
-    controller: App\Controller\MailboxController::viewMailbox
+    controller: App\Controller\MailboxController::viewMailboxAction
       
 mailboxUpdate:
     path: /user/mailbox/update/{id}
-    controller: App\Controller\MailboxController::updateMailbox
+    controller: App\Controller\MailboxController::updateMailboxAction
       
 mailboxDelete:
     path: /user/mailbox/delete/{id}
-    controller: App\Controller\MailboxController::deleteMailbox
+    controller: App\Controller\MailboxController::deleteMailboxAction
 
 
 
