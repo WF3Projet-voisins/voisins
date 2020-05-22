@@ -44,7 +44,7 @@
 
             {{ form_label(formUser.email, null,  {'label_attr' : {'class' : ' text-golden pr-3'}}) }}
             {{ form_widget(formUser.email , { 'attr': { 'class' : '  bg-light rounded shadow p-2'}}) }}
-            
+
             {{ form_label(formUser.image, "Changer mon image",  {'label_attr' : {'class' : ' text-golden pr-3'}}) }}
             {{ form_widget(formUser.image , { 'attr': { 'class' : ' hidden image-input' }}) }}
 
@@ -52,7 +52,13 @@
 
             {{ form_widget(formUser.save, {'attr': {'class' : ' btn btn-danger' }}) }} 
           </form>
+        <div> 
+          <p>Mes heures de services données : </p>
+          <p>{{user.totalTimeServiceGiven}} heure(s)</p>
+          <p>Mon temps disponible à utiliser :</p>
+          <p>{{user.timeGauge}} heure(s)</p>
 
+        </div>
         </div>
       </div>
       <div>
