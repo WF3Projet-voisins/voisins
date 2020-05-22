@@ -27,7 +27,7 @@ class UserController extends AbstractController
     public function addUserAction(Request $request, UserPasswordEncoderInterface $passwordEncoder, RankingRepository $rankingRepository)
     {
                     
-        $ranking = $rankingRepository->find('1');
+        $ranking = $rankingRepository->find('15');
        // $ranking = new Ranking;
 
         $form = null;

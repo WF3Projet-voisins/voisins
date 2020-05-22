@@ -52,14 +52,11 @@
                             </div>
                         
                             <div class="mt-4">
-                                {{ form_label(form.plainPassword.first, 'First Password') }}
-                                {{ form_widget(form.plainPassword.first , { 'attr': { 'class' : ' bg-light rounded shadow p-2'}}) }}
+                                {{ form_label(form.plainPassword, 'Password') }}
+                                {{ form_widget(form.plainPassword , { 'attr': { 'class' : ' bg-light rounded shadow p-2'}}) }}
                             </div>
                     
-                            <div class="mt-4">
-                                {{ form_label(form.plainPassword.second, 'Second Password') }}
-                                {{ form_widget(form.plainPassword.second , { 'attr': { 'class' : ' bg-light rounded shadow p-2'}}) }}
-                            </div>
+                         
                         
                             <div class="mt-4">
                                 {{ form_widget(form.save, {'attr': {'class' : ' btn btn-danger' }}) }} 
