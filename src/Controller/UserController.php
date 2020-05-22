@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Component\HttpClient\HttpClient;
 use App\Entity\User;
 use App\Entity\Category;
+use App\Entity\Ranking;
 use App\Entity\SubCategory;
 use App\Form\UserType;
 use App\Repository\CategoryRepository;
@@ -12,6 +13,7 @@ use App\Repository\SubCategoryRepository;
 
 use App\Service\FormsManager;
 use App\Repository\UserRepository;
+use App\Repository\RankingRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
@@ -22,9 +24,12 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserController extends AbstractController
 {
-    public function addUserAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    public function addUserAction(Request $request, UserPasswordEncoderInterface $passwordEncoder, RankingRepository $rankingRepository)
     {
                     
+        $ranking = $rankingRepository->find('1');
+       // $ranking = new Ranking;
+
         $form = null;
         // 1) build the form
         $user = new User();
@@ -33,6 +38,7 @@ class UserController extends AbstractController
         // 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $user->setRanking($ranking);
             $user->setTimeGauge('0');
             $user->setTotalTimeServiceGiven('0');
             $user->setRoles(['ROLE_USER']);
@@ -70,7 +76,7 @@ class UserController extends AbstractController
 
         return $this->render(
             'user/formInscription.html.twig',
-            ['form' => $form->createView()]
+            ['form' => $form->createView(), 'ranking' => $ranking]
         );
     }
 
