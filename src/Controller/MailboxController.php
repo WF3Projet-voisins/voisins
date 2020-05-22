@@ -11,11 +11,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class MailboxController extends AbstractController
 {
-
-    /**
-     * @Route("/user/mailbox", name="mailbox")
-     */
-    public function index()
+    
+    public function addMailboxAction()
     {
         $id=63;
         // On appelle la donne user

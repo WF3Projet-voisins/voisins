@@ -9,10 +9,29 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    
+    {# the contents of this variable are displayed on the web page #}
+    <label>Filtre Status du service / Type de service</label>
+    <input id="myChoice" type="text">
 
-    This friendly message is coming from:
-    <ul>
-    </ul>
+      {% for service in services %}
+   
+        <div class="card mb-3" id="cardService">
+            <img src="{{ service.image  }}" class="card-img-top" alt="...">
+            <div class="card-body">
+            <h5 class="card-title">Titre du service : {{ service.name  }}</h5>
+                    <p>Nom : {{ service.user.firstname }} {{ service.user.lastname }}</p>
+                    <p>Description : {{ service.description  }}</p>
+                    <p id="serviceChoice">Status du service : {{ service.status }}</p>
+                    <p id="serviceChoice">Type du service : {{ service.typeService.name }}</p>
+                    <p>Durée du service proposé : {{ service.duration.duration }} minutes</p>
+                    <p>Date de creation : {{ service.createdAt|date("d/m/Y \\a\\ g:ia")}}</p>  
+            </div>
+        </div>
+      {% endfor %}
 </div>
+{% endblock %}
+
+{% block javascripts %}
+  <script src="{{ asset('/js/services.js') }}"></script>
 {% endblock %}

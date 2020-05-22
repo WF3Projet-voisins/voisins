@@ -23,47 +23,38 @@ class UserType extends AbstractType
     {
         $builder
             ->add('firstname', TextType::class, [
-                'label_attr'=>['class'=> 'red-bg', 'style'=> 'color : black'],
-                'attr' => ['placeholder' => 'Prenom']
-            ])
-            ->add('lastname', TextType::class, [
-                'label_attr'=>['class'=> 'red-bg', 'style'=> 'color : black'],
                 'attr' => ['placeholder' => 'Nom']
             ])
-            ->add('image',FileType::class, [
-                'mapped'=>false,
-                'required' =>false,
-                'label_attr'=>['class'=> 'red-bg', 'style'=> 'color : black'],
+            ->add('lastname', TextType::class, [
+                'attr' => ['placeholder' => 'Nom']
+            ])
+            ->add('image', FileType::class, [
+                'mapped' => false,
+                'required' => false,
                 'attr' => ['placeholder' => 'image']
             ])
             ->add('postalCode', NumberType::class, [
-                'label_attr'=>['class'=> 'red-bg', 'style'=> 'color : black','type' => 'number'],
                 'attr' => ['placeholder' => 'Code postal', 'type' => 'number']
             ])
             ->add('city', TextType::class, [
-                'label_attr'=>['class'=> 'red-bg', 'style'=> 'color : black'],
                 'attr' => ['placeholder' => 'Ville']
             ])
-            
+
             ->add('category_affinity', EntityType::class, [
                 'class' => Category::class,
-                'multiple'=>true,
-                'expanded'=>true,
-                'label_attr'=>['class'=> 'red-bg', 'style'=> 'color : black'],
+                'multiple' => true,
+                'expanded' => true,
                 'choice_label' => 'name',
-                'attr'=>['class'=>'row m-4 d-flex justify-content-around','style'=>'color : black']
-                ])
-                
+            ])
+
             ->add('sub_cat_affinity', EntityType::class, [
                 'class' => SubCategory::class,
-                'multiple'=>true,
-                'expanded'=>true,
-                'label_attr'=>['class'=> 'red-bg', 'style'=> 'color : black'],
-                'choice_label' => 'name',
-                'attr'=>['class'=>'row m-4 d-flex justify-content-around','style'=>'color : black']
-                ])
+                'multiple' => true,
+                'expanded' => true,
+                'choice_label' => 'name'
+            ])
+
             ->add('email', TextType::class, [
-                'label_attr'=>['class'=> 'red-bg', 'style'=> 'color : black'],
                 'attr' => ['placeholder' => 'Email', 'type' => 'email']
             ])
             ->add('plainPassword', RepeatedType::class, array(
@@ -71,8 +62,7 @@ class UserType extends AbstractType
                 'first_options'  => array('label' => 'Password'),
                 'second_options' => array('label' => 'Repeat Password'),
             ))
-            ->add('save', SubmitType::class);
-        ;
+            ->add('save', SubmitType::class);;
     }
 
     public function configureOptions(OptionsResolver $resolver)

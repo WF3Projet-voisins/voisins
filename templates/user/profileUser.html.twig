@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+  <link rel="stylesheet"
+    href="{{ asset('/css/profileUser.css') }}"
+    integrity=""
+    crossorigin="anonymous" />
+{% endblock %}
+{% block body %}
+  <div class="container-fluid">
+    <div class="">
+      <h1>
+        Bienvenue {{ user.firstname }}
+      </h1>
+    </div>
+    <div class="blockMessagerieRanking">
+      <p class="col-2">
+      Messagerie
+      </p>
+      <div class="col-8">
+        <div>
+        Mes informations : Nom : {{ user.lastname }}
+        Prénom : {{ user.firstname }}
+        mail : {{ user.email }}
+        Ville : {{ user.city }}
+        Code Postal : {{ user.postalCode }}
+      
+          <button type="button" id="formUpdateUser" class="btn btn-danger">
+          Changer mes informations
+          </button>
+
+          <form name="user" method="POST" enctype="multipart/form-data">
+        
+            {{ form_label(formUser.lastname, null,  {'label_attr' : {'class' : 'formUpdate text-golden pr-3'}}) }}
+            {{ form_widget(formUser.lastname , { 'attr': { 'class' : 'formUpdate bg-light rounded shadow p-2'}}) }}
+
+            {{ form_label(formUser.firstname, null,  {'label_attr' : {'class' : 'formUpdate w-2/8 text-golden pr-3'}}) }}
+            {{ form_widget(formUser.firstname , { 'attr': { 'class' : ' formUpdate w-full bg-light rounded shadow'}}) }}
+
+            {{ form_label(formUser.city, null,  {'label_attr' : {'class' : 'formUpdate text-golden pr-3'}}) }}
+            {{ form_widget(formUser.city , { 'attr': { 'class' : 'formUpdate bg-light rounded shadow p-2'}}) }}
+
+            {{ form_label(formUser.postalCode, null,  {'label_attr' : {'class' : 'formUpdate text-golden pr-3'}}) }}
+            {{ form_widget(formUser.postalCode , { 'attr': { 'class' : ' formUpdate bg-light rounded shadow p-2'}}) }}
+
+            {{ form_label(formUser.email, null,  {'label_attr' : {'class' : 'formUpdate text-golden pr-3'}}) }}
+            {{ form_widget(formUser.email , { 'attr': { 'class' : ' formUpdate bg-light rounded shadow p-2'}}) }}
+
+
+            <p class="formUpdate"> Sauvegarder mes informations : </p>
+            {{ form_label(formUser.plainPassword, null,  {'label_attr' :  {'class' : 'formUpdate text-golden pr-3'}}) }}
+            {{ form_widget(formUser.plainPassword , { 'attr': { 'class' : ' formUpdate bg-light rounded shadow p-2'}}) }} 
+
+
+            {{ form_widget(formUser.save, {'attr': {'class' : 'formUpdate btn btn-danger' }}) }} 
+          </form>
+
+        </div>
+      </div>
+      <div>
+      <a href=" {{ path('serviceAdd', {id: user.id}) }} " class="">Ajouter un service</a>
+      
+      </div>
+  
+     
+       <div class="container">
+        <div class="gauge-a"></div>
+        <div class="gauge-b"></div>
+        <div class="gauge-c"></div>
+        <div class="gauge-data">
+          <h1 id="percent">
+            {{ user.timeGauge }} heures
+          </h1>
+        </div>
+      </div> 
+
+    </div>
+    <div>
+      <p class="col-2"> Rank 
+        {{ user.ranking.name }}
+      </p>
+    </div>
+  
+    <div>
+      <img src="{{ user.image }}" alt="" style="width:150px" />
+    </div>
+  </div>
+{% endblock %}
+{% block javascripts %}
+  <script src="{{ asset('/js/profileUser.js') }}"></script>
+{% endblock %}

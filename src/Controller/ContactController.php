@@ -17,8 +17,6 @@ class ContactController extends AbstractController
     
     public function addContactAction(Request $request)
     {
-
-    
         $form = null;
         // 1) build the form
         $contact = new Contact();
@@ -28,14 +26,7 @@ class ContactController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
-
-
-
-                    
                 $contact->setCreatedAt(new \DateTime());
-
-
-
 
                 $contact = $form->getData();
                 // 4) save the Contact!

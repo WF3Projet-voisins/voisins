@@ -2,13 +2,20 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Form\UserType;
+use Symfony\Component\HttpClient\HttpClient;
 use App\Entity\User;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use App\Service\FormsManager;
+use App\Entity\Category;
+use App\Entity\SubCategory;
+use App\Form\UserType;
+use App\Repository\CategoryRepository;
+use App\Repository\SubCategoryRepository;
 
+use App\Service\FormsManager;
+use App\Repository\UserRepository;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 
 
@@ -29,48 +36,73 @@ class UserController extends AbstractController
             $user->setRoles(['ROLE_USER']);
             $file = $form->get('image')->getData();
             $user = $form->getData();
-            if($file) {
+            if ($file) {
                 $newFilename = FormsManager::handleFileUpload($file, $this->getParameter('uploads'));
                 $user->setImage($newFilename);
-
-                // 3) Encode the password (you could also do this via Doctrine listener)
-                $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
-                $user->setPassword($password);
-
-                // 4) save the User!
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($user);
-                $entityManager->flush();
-                $this->addFlash('info',"user : ".$user->getFirstname()." well added");
-                //return $this->redirectToRoute('user/index.html.twig');
-                return $this->render('user/index.html.twig', [
-                    'controller_name' => $user->getFirstname()
-                ]);
-
+            } else {
+                $user->setImage('https://cdn.pixabay.com/photo/2020/05/03/13/09/puppy-5124947_960_720.jpg');
             }
+            // 3) Encode the password (you could also do this via Doctrine listener)
+            $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
+            $user->setPassword($password);
 
+            // 4) save the User!
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+            
+            $token = new UsernamePasswordToken(
+                $user,
+                $password,
+                'main',
+                $user->getRoles()
+
+            );
+
+            $this->get('security.token_storage')->setToken($token);
+            $this->get('session')->set('_security_main', serialize($token));
+
+            return $this->redirectToRoute('chooseTypeServices', ['id'=> $user->getId()]);
+            
         }
 
         return $this->render(
             'user/formInscription.html.twig',
-            array('form' => $form->createView())
+            ['form' => $form->createView()]
         );
     }
 
-    public function getUserAction()
+    public function getUserAction(Request $request, UserRepository $userRepository, $id, CategoryRepository $categoryRepository, SubCategoryRepository $subCategoryRepository)
     {
-        return $this->render('user/index.html.twig', [
-            'controller_name' => 'UserController',
-        ]);
+        $user = $userRepository->find($id);
+        $categories = $categoryRepository->findAll();
+        $subCategories = $subCategoryRepository->findAll();
+
+        $formUser = $this->createForm('App\Form\UserType', $user);
+        $formUser->handleRequest($request);
+
+        if ($formUser->isSubmitted()) {
+            $user = $formUser->getData();
+            $file = $formUser->get('image')->getData();
+            if ($file) {
+                $newFileName = FormsManager::handleFileUpload($file, $this->getParameter('uploads'));
+                $user->setImage($newFileName);
+            }
+
+            $manager = $this->getDoctrine()->getManager();
+
+            $manager->persist($user);
+            $manager->flush();
+            return $this->redirectToRoute('userProfile', ['id' => $id]);
+        }
+        return $this->render('user/profileUser.html.twig', ["user" => $user, "categories" => $categories, "subCategories" => $subCategories, "formUser" => $formUser->createView()]);
     }
 
-    public function updateUserAction()
+    public function updateUserAction(UserRepository $userRepository, $id, Request $request)
     {
-        /* update des infos user */
-        return $this->render('user/profileUser.html.twig', [
-            'controller_name' => 'UserController',
-        ]);
     }
+
+
     public function deleteUserAction()
     {
         /* Si user veut delete son profil */

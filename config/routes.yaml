@@ -15,34 +15,37 @@ home:
     controller: App\Controller\HomeController::indexAction
 
 
-
-
 userAdd :
     path: /inscription
     controller: App\Controller\UserController::addUserAction
 
-userGet:
-    path: user/user/{id}
+userProfile:
+    path: user/profile/{id}
     controller: App\Controller\UserController::getUserAction
 
 userUpdate:
-    path: user/user/{id}
+    path: user/profile/update/{id}
     controller: App\Controller\UserController::updateUserAction
 
 userDelete:
-    path: user/user/{id}
+    path: user/profile/delete/{id}
     controller: App\Controller\UserController::deleteUserAction
 
-
-
-
+#Ajout d'un service par un user
 serviceAdd:
-    path: /user/service
+    path: user/{id}/addService
     controller: App\Controller\ServiceController::addServiceAction
 
+    
+
+    
+# page qui envoi vers tous les services    
 serviceGet:
-    path: /user/service/{id}
-    controller: App\Controller\ServiceController::getServiceAction
+    path: /service
+    controller: App\Controller\ServiceController::getServiceAction 
+
+
+
 
 serviceUpdate:
   path: /user/service/{id}
@@ -112,3 +115,7 @@ contactGet:
 contactDelete:
     path: /admin/contact/{id}
     controller: App\Controller\ContactController::deleteContactAction
+
+chooseTypeServices:
+    path: /choose/type/{id}
+    controller: App\Controller\ChooseTypeServicesController::chooseTypeServicesAction

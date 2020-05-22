@@ -30,3 +30,11 @@
 ###> symfony.loc ###
 /symfony.lock
 ###< symfony.loc ###
+
+###> yarn.lock ###
+/yarn.lock
+###< yarn.lock ###
+
+###> node_modules ###
+/node_modules
+###< node_modules.lock ###
