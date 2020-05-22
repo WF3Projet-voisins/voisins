@@ -10,7 +10,7 @@ class FormsManager
 {
     static function handleFileUpload($file,String $path) {
         $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-        $newFilename = uniqid().'.'.$file->guessExtension();
+        $newFilename = '/uploads/images/'.uniqid().'.'.$file->guessExtension();
         try {
             $file->move(
                 $path,

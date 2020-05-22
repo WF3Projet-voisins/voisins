@@ -47,9 +47,9 @@ serviceGet:
 
 
 
-serviceUpdate:
+servicePage:
   path: /user/service/{id}
-  controller: App\Controller\ServiceController::updateServiceAction
+  controller: App\Controller\ServiceController::getServicebyIdAction
 
 serviceDelete:
   path: /user/service/{id}

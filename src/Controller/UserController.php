@@ -24,10 +24,13 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserController extends AbstractController
 {
-    public function addUserAction(Request $request, UserPasswordEncoderInterface $passwordEncoder, RankingRepository $rankingRepository)
+    public function addUserAction(Request $request, UserPasswordEncoderInterface $passwordEncoder, RankingRepository $rankingRepository, CategoryRepository $categoryRepository, SubCategoryRepository $subCategoryRepository)
     {
-                    
-        $ranking = $rankingRepository->find('15');
+
+        $ranking = $rankingRepository->find('3');
+        $category = $categoryRepository->find('21');
+        $subCategory = $subCategoryRepository->find('21');
+
        // $ranking = new Ranking;
 
         $form = null;
@@ -37,11 +40,14 @@ class UserController extends AbstractController
 
         // 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             $user->setRanking($ranking);
             $user->setTimeGauge('0');
             $user->setTotalTimeServiceGiven('0');
             $user->setRoles(['ROLE_USER']);
+            $user->addCategoryAffinity($category);
+            $user->addSubCatAffinity($subCategory);
+
             $file = $form->get('image')->getData();
             $user = $form->getData();
             if ($file) {
@@ -88,8 +94,8 @@ class UserController extends AbstractController
 
         $formUser = $this->createForm('App\Form\UserType', $user);
         $formUser->handleRequest($request);
-
-        if ($formUser->isSubmitted()) {
+       
+        if ($formUser->isSubmitted() ) {
             $user = $formUser->getData();
             $file = $formUser->get('image')->getData();
             if ($file) {
@@ -99,10 +105,13 @@ class UserController extends AbstractController
 
             $manager = $this->getDoctrine()->getManager();
 
+
             $manager->persist($user);
             $manager->flush();
             return $this->redirectToRoute('userProfile', ['id' => $id]);
         }
+
+        
         return $this->render('user/profileUser.html.twig', ["user" => $user, "categories" => $categories, "subCategories" => $subCategories, "formUser" => $formUser->createView()]);
     }
 

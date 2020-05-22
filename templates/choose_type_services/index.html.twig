@@ -2,14 +2,43 @@
 
 {% block title %}Page choisir{% endblock %}
 
+{% block stylesheets %}
+
+<!-- import de la feuille de style -->
+  <link rel="stylesheet"
+    href="{{ asset('/css/chooseTypeServices.css') }}" />
+
+{% endblock %}
 {% block body %}
 
-<div class="container-fluid header mb-5">
+<!-- Section entête du site -->
+
+<div class="container-fluid header mb-5 mt-3">
     <div class="container">
-        <a href="#" class="logo display-4">Logo</a>
-        <a href="#" class="nomDuSite display-2">Nom du site</a>
+        <a href="{{path ("index")}}" class="logo"> <img src=" {{asset ("img/logo-monvoisin.png")}} " alt="logo" width="250px"> </a>
     </div>
 </div>
+
+<!-- Section texte explicatif des 2 boutons de la page -->
+
+<section class="txtInfo">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <p class="">
+                    Merci de vous être inscrit à Monvoisin. <br>
+                    A present faites votre choix...
+                </p>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+<!-- Section call-to-action  -->
+
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-6">

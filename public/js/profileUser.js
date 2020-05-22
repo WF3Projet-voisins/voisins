@@ -14,14 +14,11 @@ $("#formUpdateUser").click(function(){
     $(".formUpdate").toggle();
 });
 
-$("#formCategorieUser").click(function(){
-    $(".formUpdate2").toggle();
+$("#formUpdateImageUser").click(function(){
+    $(".formUpdateImage").toggle();
 });
 
 
-$("#formSubCategorieUser").click(function(){
-    $(".formUpdate3").toggle();
-});
 
 
 

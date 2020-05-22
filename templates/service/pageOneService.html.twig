@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+  <link rel="stylesheet"
+    href="{{ asset('/css/pageOneService.css') }}"
+    integrity=""
+    crossorigin="anonymous" />
+{% endblock %}
+{% block body %}
+  {% include 'composants/navBarUser.html.twig' %} 
+  <div class="container">
+    <div class="d-flex justify-content-center cardService">
+      <div class=" mb-3" id="cardService">
+        
+        <div class="card-body">
+        <img src="{{ service.image }}"
+          class="card-img-top"
+          style="width:400px" />
+          <div> 
+          <h5 class="card-title">
+            Intitulé du service : {{ service.name }}
+          </h5>
+          <p id="serviceChoice">
+            Type du service : {{ service.typeService.name }}
+          </p>
+          <p>
+            Nom : {{ service.user.firstname }} {{ service.user.lastname }}
+          </p>
+          <p>
+            Description : {{ service.description }}
+          </p>
+          <p id="serviceChoice">
+            Status du service : {{ service.status }}
+          </p>
+
+          <p>
+            Durée du service : {{ service.duration.duration }} minutes
+          </p>
+          <p>
+            Date de creation : {{ service.createdAt|date('d/m/Y \\a\\ g:ia') }}
+          </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

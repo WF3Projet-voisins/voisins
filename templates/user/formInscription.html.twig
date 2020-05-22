@@ -9,8 +9,6 @@
 
 {% block body %}
 
-{{ dump(ranking) }}
-
 <div class="container-fluid d-flex justify-content-around">
         <div class="container col-3"></div>
     
@@ -52,11 +50,14 @@
                             </div>
                         
                             <div class="mt-4">
-                                {{ form_label(form.plainPassword, 'Password') }}
-                                {{ form_widget(form.plainPassword , { 'attr': { 'class' : ' bg-light rounded shadow p-2'}}) }}
+                                {{ form_label(form.plainPassword.first, 'Password') }}
+                                {{ form_widget(form.plainPassword.first , { 'attr': { 'class' : ' bg-light rounded shadow p-2'}}) }}
                             </div>
                     
-                         
+                            <div class="mt-4">
+                                {{ form_label(form.plainPassword.second, 'Repeat Password') }}
+                                {{ form_widget(form.plainPassword.second , { 'attr': { 'class' : ' bg-light rounded shadow p-2'}}) }}
+                            </div>
                         
                             <div class="mt-4">
                                 {{ form_widget(form.save, {'attr': {'class' : ' btn btn-danger' }}) }} 
