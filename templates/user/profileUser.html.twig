@@ -6,7 +6,9 @@
     crossorigin="anonymous" />
 {% endblock %}
 {% block body %}
-  <div class="container-fluid">
+{% include 'composants/navBarUser.html.twig' %}
+
+  <div class="container-fluid userProfileDiv">
     <div class="">
       <h1>
         Bienvenue {{ user.firstname }}
@@ -90,8 +92,10 @@
 
           
     </div>
-    <a href="{{ path('contactAdd') }}">Contactez-nous</a>
+
   </div>
+    {% include 'composants/footer.html.twig' %}
+
 {% endblock %}
 {% block javascripts %}
   <script src="{{ asset('/js/profileUser.js') }}"></script>

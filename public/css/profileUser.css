@@ -1,4 +1,4 @@
-.container {
+/* .container {
   width: 400px;
   height: 200px;
   display: flex;
@@ -70,13 +70,13 @@
 
   transition: all 1.3s ease-in-out;
 }
-
+ */
+/* 
 .container:hover .gauge-c {
   transform: rotate(0.2turn);
-  /* rotate(0.1turn); pour faire monter la jauge */
-}
-
-.container:hover .gauge-data {
+   rotate(0.1turn); pour faire monter la jauge 
+} */
+/* .container:hover .gauge-data {
   color: rgba(255, 255, 255, 1);
 }
 
@@ -107,10 +107,12 @@
 
   margin-top:50px;
 }
+ */
 
 .blockMessagerieRanking{
   display: flex;
   justify-content: space-around;
+  margin-top: 5%;
 }
 
 .formUpdate{
@@ -121,5 +123,8 @@
 .formUpdateImage{
   
   display:none;
+}
+.userProfileDiv{
+  margin-bottom: 20%;
 }
 
