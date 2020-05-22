@@ -6,7 +6,9 @@
     crossorigin="anonymous" />
 {% endblock %}
 {% block body %}
-  <div class="container-fluid">
+{% include 'composants/navBarUser.html.twig' %}
+
+  <div class="container-fluid userProfileDiv">
     <div class="">
       <h1>
         Bienvenue {{ user.firstname }}
@@ -14,7 +16,7 @@
     </div>
     <div class="blockMessagerieRanking">
       <p class="col-2">
-      Messagerie
+       Messagerie
       </p>
       <div class="col-8">
         <div>
@@ -28,41 +30,45 @@
           Changer mes informations
           </button>
 
-          <form name="user" method="POST" enctype="multipart/form-data">
+          <form name="user" method="POST" enctype="multipart/form-data" class="formUpdate">
         
-            {{ form_label(formUser.lastname, null,  {'label_attr' : {'class' : 'formUpdate text-golden pr-3'}}) }}
-            {{ form_widget(formUser.lastname , { 'attr': { 'class' : 'formUpdate bg-light rounded shadow p-2'}}) }}
+            {{ form_label(formUser.lastname, null,  {'label_attr' : {'class' : ' text-golden pr-3'}}) }}
+            {{ form_widget(formUser.lastname , { 'attr': { 'class' : ' bg-light rounded shadow p-2'}}) }}
 
-            {{ form_label(formUser.firstname, null,  {'label_attr' : {'class' : 'formUpdate w-2/8 text-golden pr-3'}}) }}
-            {{ form_widget(formUser.firstname , { 'attr': { 'class' : ' formUpdate w-full bg-light rounded shadow'}}) }}
+            {{ form_label(formUser.firstname, null,  {'label_attr' : {'class' : ' w-2/8 text-golden pr-3'}}) }}
+            {{ form_widget(formUser.firstname , { 'attr': { 'class' : '  w-full bg-light rounded shadow'}}) }}
 
-            {{ form_label(formUser.city, null,  {'label_attr' : {'class' : 'formUpdate text-golden pr-3'}}) }}
-            {{ form_widget(formUser.city , { 'attr': { 'class' : 'formUpdate bg-light rounded shadow p-2'}}) }}
+            {{ form_label(formUser.city, null,  {'label_attr' : {'class' : ' text-golden pr-3'}}) }}
+            {{ form_widget(formUser.city , { 'attr': { 'class' : ' bg-light rounded shadow p-2'}}) }}
 
-            {{ form_label(formUser.postalCode, null,  {'label_attr' : {'class' : 'formUpdate text-golden pr-3'}}) }}
-            {{ form_widget(formUser.postalCode , { 'attr': { 'class' : ' formUpdate bg-light rounded shadow p-2'}}) }}
+            {{ form_label(formUser.postalCode, null,  {'label_attr' : {'class' : ' text-golden pr-3'}}) }}
+            {{ form_widget(formUser.postalCode , { 'attr': { 'class' : '  bg-light rounded shadow p-2'}}) }}
 
-            {{ form_label(formUser.email, null,  {'label_attr' : {'class' : 'formUpdate text-golden pr-3'}}) }}
-            {{ form_widget(formUser.email , { 'attr': { 'class' : ' formUpdate bg-light rounded shadow p-2'}}) }}
+            {{ form_label(formUser.email, null,  {'label_attr' : {'class' : ' text-golden pr-3'}}) }}
+            {{ form_widget(formUser.email , { 'attr': { 'class' : '  bg-light rounded shadow p-2'}}) }}
 
-
-            <p class="formUpdate"> Sauvegarder mes informations : </p>
-            {{ form_label(formUser.plainPassword, null,  {'label_attr' :  {'class' : 'formUpdate text-golden pr-3'}}) }}
-            {{ form_widget(formUser.plainPassword , { 'attr': { 'class' : ' formUpdate bg-light rounded shadow p-2'}}) }} 
+            {{ form_label(formUser.image, "Changer mon image",  {'label_attr' : {'class' : ' text-golden pr-3'}}) }}
+            {{ form_widget(formUser.image , { 'attr': { 'class' : ' hidden image-input' }}) }}
 
 
-            {{ form_widget(formUser.save, {'attr': {'class' : 'formUpdate btn btn-danger' }}) }} 
+
+            {{ form_widget(formUser.save, {'attr': {'class' : ' btn btn-danger' }}) }} 
           </form>
+        <div> 
+          <p>Mes heures de services données : </p>
+          <p>{{user.totalTimeServiceGiven}} heure(s)</p>
+          <p>Mon temps disponible à utiliser :</p>
+          <p>{{user.timeGauge}} heure(s)</p>
 
+        </div>
         </div>
       </div>
       <div>
-      <a href=" {{ path('serviceAdd', {id: user.id}) }} " class="">Ajouter un service</a>
-      
+        <a href=" {{ path('serviceAdd', {id: user.id}) }} " class="">Ajouter un service</a>
       </div>
   
      
-       <div class="container">
+       {# <div class="container">
         <div class="gauge-a"></div>
         <div class="gauge-b"></div>
         <div class="gauge-c"></div>
@@ -70,8 +76,8 @@
           <h1 id="percent">
             {{ user.timeGauge }} heures
           </h1>
-        </div>
-      </div> 
+        </div> #}
+      
 
     </div>
     <div>
@@ -80,11 +86,16 @@
       </p>
     </div>
   
-    <div>
+    <div class="userImage">
       <img src="{{ user.image }}" alt="" style="width:150px" />
+
+
+          
     </div>
-    <a href="{{ path('contactAdd') }}">Contactez-nous</a>
+
   </div>
+    {% include 'composants/footer.html.twig' %}
+
 {% endblock %}
 {% block javascripts %}
   <script src="{{ asset('/js/profileUser.js') }}"></script>

@@ -80,8 +80,8 @@ class UserController extends AbstractController
 
         $formUser = $this->createForm('App\Form\UserType', $user);
         $formUser->handleRequest($request);
-
-        if ($formUser->isSubmitted()) {
+       
+        if ($formUser->isSubmitted() ) {
             $user = $formUser->getData();
             $file = $formUser->get('image')->getData();
             if ($file) {
@@ -91,10 +91,13 @@ class UserController extends AbstractController
 
             $manager = $this->getDoctrine()->getManager();
 
+
             $manager->persist($user);
             $manager->flush();
             return $this->redirectToRoute('userProfile', ['id' => $id]);
         }
+
+        
         return $this->render('user/profileUser.html.twig', ["user" => $user, "categories" => $categories, "subCategories" => $subCategories, "formUser" => $formUser->createView()]);
     }
 
