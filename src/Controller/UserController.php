@@ -25,21 +25,6 @@ class UserController extends AbstractController
     public function addUserAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
                     
-            $codePostal = "67120";
-            $client = HttpClient::create();
-            $response = $client->request('GET', 'https://geo.api.gouv.fr/communes?codePostal='.$codePostal);
-
-            $statusCode = $response->getStatusCode();
-            // $statusCode = 200
-            $contentType = $response->getHeaders()['content-type'][0];
-            // $contentType = 'application/json'
-            $content = $response->getContent();
-            // $content = '{"id":521583, "name":"symfony-docs", ...}'
-            $content = $response->toArray();
-            // $content = ['id' => 521583, 'name' => 'symfony-docs', ...]
-
-
-
         $form = null;
         // 1) build the form
         $user = new User();
