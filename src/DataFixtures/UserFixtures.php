@@ -32,6 +32,20 @@ class UserFixtures extends Fixture
                ->setTotalTimeServiceGiven('0');
                
         $manager->persist($user);
+/*        $user = new User();
+        $user->setEmail('philippe.sanogo@gmail.com')
+               ->setRoles(['ROLE_USER'])
+               ->setPassword($this->passwordEncoder->encodePassword($user, 'user1'))
+               ->setLastname('SANOGO')
+               ->setFirstname('Phillipe')
+               ->setCity('Strasbourg')
+               ->setPostalCode('67000')
+               ->setImage('https://cours.wf3.fr/app/avatars/users/2806/2806-sanogo-phillipe.jpeg')
+               ->setTimeGauge('0')
+               ->setTotalTimeServiceGiven('0');
+               
+        $manager->persist($user);
+*/
         $manager->flush();
     }
 }

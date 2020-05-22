@@ -78,22 +78,25 @@ getServiceByType:
  
  
 
+mailbox:
+    path: /user/mailbox
+    controller: App\Controller\MailboxController::index
 
 mailboxAdd:
-    path: /user/mailbox
-    controller: App\Controller\MailboxController::addMailboxAction
+    path: /user/mailbox/add
+    controller: App\Controller\MailboxController::addMailbox
       
-mailboxGet:
-    path: /user/mailbox/{id}
-    controller: App\Controller\MailboxController::getMailboxAction
+mailboxView:
+    path: /user/mailbox/view/{id}
+    controller: App\Controller\MailboxController::viewMailbox
       
 mailboxUpdate:
-    path: /user/mailbox/{id}
-    controller: App\Controller\MailboxController::updateMailboxAction
+    path: /user/mailbox/update/{id}
+    controller: App\Controller\MailboxController::updateMailbox
       
 mailboxDelete:
-    path: /user/mailbox/{id}
-    controller: App\Controller\MailboxController::deleteMailboxAction
+    path: /user/mailbox/delete/{id}
+    controller: App\Controller\MailboxController::deleteMailbox
 
 
 
