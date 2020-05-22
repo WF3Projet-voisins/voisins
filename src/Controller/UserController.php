@@ -8,6 +8,7 @@ use App\Entity\Category;
 use App\Entity\Ranking;
 use App\Entity\SubCategory;
 use App\Form\UserType;
+use App\Entity\Invite;
 use App\Repository\CategoryRepository;
 use App\Repository\SubCategoryRepository;
 
@@ -24,14 +25,20 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserController extends AbstractController
 {
-    public function addUserAction(Request $request, UserPasswordEncoderInterface $passwordEncoder, RankingRepository $rankingRepository, CategoryRepository $categoryRepository, SubCategoryRepository $subCategoryRepository)
+    public function addUserAction(Request $request, UserPasswordEncoderInterface $passwordEncoder, RankingRepository $rankingRepository, CategoryRepository $categoryRepository, SubCategoryRepository $subCategoryRepository, UserRepository $userRepository)
     {
+       
+        $users = $userRepository->findAll();
 
-        $ranking = $rankingRepository->find('3');
-        $category = $categoryRepository->find('21');
-        $subCategory = $subCategoryRepository->find('21');
+       
 
-       // $ranking = new Ranking;
+
+    
+        $ranking = $rankingRepository->find('20');
+        $category = $categoryRepository->find('16');
+        $subCategory = $subCategoryRepository->find('16');
+        
+       
 
         $form = null;
         // 1) build the form
