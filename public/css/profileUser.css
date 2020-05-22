@@ -112,7 +112,7 @@
 .blockMessagerieRanking{
   display: flex;
   justify-content: space-around;
-  margin-top: 5%;
+  margin-top: 10px;
 }
 
 .formUpdate{
@@ -125,6 +125,7 @@
   display:none;
 }
 .userProfileDiv{
-  margin-bottom: 20%;
+  margin-bottom: 150px;
+  padding-top: 120px;
 }
 

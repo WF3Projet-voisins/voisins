@@ -69,6 +69,13 @@ class ServiceController extends AbstractController
     }
 
 
+    public function getServicebyIdAction(Request $request, ServiceRepository $serviceRepository, $id){
+        $service = $serviceRepository->find($id);
+        return $this->render('service/pageOneService.html.twig', ['service' => $service]);
+  
+    }
+
+
 
 
 
