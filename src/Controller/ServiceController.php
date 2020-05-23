@@ -9,6 +9,7 @@ use App\Entity\Service;
 use App\Form\ServiceType;
 use App\Service\FormsManager;
 use App\Repository\UserRepository;
+use App\Repository\CommentRepository;
 use App\Repository\ServiceRepository;
 use App\Repository\CategoryRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -73,10 +74,14 @@ class ServiceController extends AbstractController
     }
 
 
-    public function getServicebyIdAction(Request $request, ServiceRepository $serviceRepository, $id){
+    public function getServicebyIdAction(Request $request, ServiceRepository $serviceRepository, $id, UserRepository $userRepository, CommentRepository $commentRepository){
         $service = $serviceRepository->find($id);
-        return $this->render('service/pageOneService.html.twig', ['service' => $service]);
-  
+        $comments = $commentRepository->findAll();
+
+        $users = $userRepository->findAll();
+        foreach($users as $user){
+        return $this->render('service/pageOneService.html.twig', ['service' => $service, 'user' => $user]);
+        }
     }
 
 
