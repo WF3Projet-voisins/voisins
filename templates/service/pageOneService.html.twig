@@ -39,26 +39,44 @@
             </p>
           </div>
           <div>
-          <p>Commentaires</p>
-          <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Date</th>
-      <th scope="col">Message</th>
-      <th scope="col">Ecrit par</th>
-    </tr>
-  </thead>
-  <tbody>
-  {% for comment in comments %}
-    <tr>
-      <td>{{comment.createdAt|date("d/m/Y")}} à {{comment.createdAt|date("H:i:s")}} </td>
-      <td>{{comment.message}}</td>
-      <td>{{comment.userFrom.lastname}} {{comment.userFrom.firstname}}</td>
-    </tr>
-  {% endfor %}
-  </tbody>
-</table>
-    
+            <p>
+              Commentaires
+            </p>Espace commentaires :{% for comment in comments %}
+              <div class="container">
+                <div class="row">
+                  <div class="col-8">
+                    <div class="card card-white post">
+                      <div class="">
+                        <div class="float-left image"></div>
+                        <div class="">
+                          <div class=""></div>
+                        </div>
+                      </div>
+                      <div class="post-description">
+                        <p>
+                          {{ comment.message }}
+                        </p>
+                        <p class="text-muted time float-right"
+                          style="font-size:12px">
+                          écrit par <a href="#">
+                            {{ comment.userFrom.lastname }}
+                            {{ comment.userFrom.firstname }}
+                          </a> Le {{ comment.createdAt|date('d/m/Y') }} à {{ comment.createdAt|date('H:i:s') }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+
+
+            <form name="formComment" method="POST" enctype="multipart/form-data" class="formUpdate">
+             {{ form_label(formNewComment.message, null,  {'label_attr' : {'class' : ' text-golden pr-3'}}) }}
+            {{ form_widget(formNewComment.message , { 'attr': { 'class' : ' bg-light rounded shadow p-2'}}) }}
+            
+            {{ form_widget(formNewComment.save, {'attr': {'class' : ' btn btn-danger' }}) }} 
+            </form>
           </div>
         </div>
       </div>
