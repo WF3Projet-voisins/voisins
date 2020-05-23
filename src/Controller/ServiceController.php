@@ -4,8 +4,10 @@ namespace App\Controller;
 
 
 
-use App\Entity\Service;
+use App\Entity\Comment;
 
+use App\Entity\Service;
+use App\Form\CommentType;
 use App\Form\ServiceType;
 use App\Service\FormsManager;
 use App\Repository\UserRepository;
@@ -25,14 +27,14 @@ class ServiceController extends AbstractController
 {
     public function addServiceAction(Request $request, ServiceRepository $serviceRepository, CategoryRepository $categoryRepository, UserRepository $userRepository, $id)
     {
-        
+
         /* Ajout d'un service par un user */
         $user = $userRepository->find($id);
         $service = new Service();
         $formService = $this->createForm(ServiceType::class, $service);
         $formService->handleRequest($request);
 
-        if ($formService->isSubmitted())  {
+        if ($formService->isSubmitted()) {
             $service = $formService->getData();
             $file = $formService->get('image')->getData();
             if ($file) {
@@ -48,7 +50,7 @@ class ServiceController extends AbstractController
             $manager->flush();
             return $this->redirectToRoute('index');
         }
-        
+
 
 
         return $this->render('user/addService.html.twig', ["formService" => $formService->createView()]);
@@ -63,24 +65,29 @@ class ServiceController extends AbstractController
         $users = $userRepository->findAll();
 
         //je redirige vers la route de mon choix 
-        foreach($users as $user){
+        foreach ($users as $user) {
             return $this->render('service/pageService.html.twig', [
 
                 'controller_name' => 'ServiceController', 'services' => $services, 'user' => $user
             ]);
-
         }
-       
     }
 
 
-    public function getServicebyIdAction(Request $request, ServiceRepository $serviceRepository, $id, UserRepository $userRepository, CommentRepository $commentRepository){
+    public function getServicebyIdAction(Request $request, ServiceRepository $serviceRepository, $id, UserRepository $userRepository, CommentRepository $commentRepository)
+    {
         $service = $serviceRepository->find($id);
-        $comments = $commentRepository->findAll();
+
+        $comments = $commentRepository->findBy(['service' => $service]);
+        $newComment = new Comment();
+        $formNewComment = $this->createForm(CommentType::class, $newComment);
+        $formNewComment->handleRequest($request);
+
+
 
         $users = $userRepository->findAll();
-        foreach($users as $user){
-        return $this->render('service/pageOneService.html.twig', ['service' => $service, 'user' => $user]);
+        foreach ($users as $user) {
+            return $this->render('service/pageOneService.html.twig', ['service' => $service, 'user' => $user, 'comments' => $comments]);
         }
     }
 

@@ -6,38 +6,59 @@
     crossorigin="anonymous" />
 {% endblock %}
 {% block body %}
-  {% include 'composants/navBarUser.html.twig' %} 
+  {% include 'composants/navBarUser.html.twig' %}
   <div class="container">
     <div class="d-flex justify-content-center cardService">
-      <div class=" mb-3" id="cardService">
-        
+      <div class="mb-3" id="cardService">
         <div class="card-body">
-        <img src="{{ service.image }}"
-          class="card-img-top"
-          style="width:400px" />
-          <div> 
-          <h5 class="card-title">
-            Intitulé du service : {{ service.name }}
-          </h5>
-          <p id="serviceChoice">
-            Type du service : {{ service.typeService.name }}
-          </p>
-          <p>
-            Nom : {{ service.user.firstname }} {{ service.user.lastname }}
-          </p>
-          <p>
-            Description : {{ service.description }}
-          </p>
-          <p id="serviceChoice">
-            Status du service : {{ service.status }}
-          </p>
+          <img src="{{ service.image }}"
+            class="card-img-top"
+            style="width:400px" />
+          <div>
+            <h5 class="card-title">
+              Intitulé du service : {{ service.name }}
+            </h5>
+            <p id="serviceChoice">
+              Type du service : {{ service.typeService.name }}
+            </p>
+            <p>
+              Nom : {{ service.user.firstname }} {{ service.user.lastname }}
+            </p>
+            <p>
+              Description : {{ service.description }}
+            </p>
+            <p id="serviceChoice">
+              Status du service : {{ service.status }}
+            </p>
 
-          <p>
-            Durée du service : {{ service.duration.duration }} minutes
-          </p>
-          <p>
-            Date de creation : {{ service.createdAt|date('d/m/Y \\a\\ g:ia') }}
-          </p>
+            <p>
+              Durée du service : {{ service.duration.duration }} minutes
+            </p>
+            <p>
+              Date de creation : {{ service.createdAt|date('d/m/Y \\a\\ g:ia') }}
+            </p>
+          </div>
+          <div>
+          <p>Commentaires</p>
+          <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Date</th>
+      <th scope="col">Message</th>
+      <th scope="col">Ecrit par</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for comment in comments %}
+    <tr>
+      <td>{{comment.createdAt|date("d/m/Y")}} à {{comment.createdAt|date("H:i:s")}} </td>
+      <td>{{comment.message}}</td>
+      <td>{{comment.userFrom.lastname}} {{comment.userFrom.firstname}}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+    
           </div>
         </div>
       </div>
