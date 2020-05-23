@@ -39,70 +39,79 @@ class UserController extends AbstractController
 
       
     
-    
-        $ranking = $rankingRepository->find('1');
-        $category = $categoryRepository->find('1');
-        $subCategory = $subCategoryRepository->find('1');
+        $users = $userRepository->findAll();
+        $ranking = $rankingRepository->find('3');
+        $category = $categoryRepository->find('21');
+        $subCategory = $subCategoryRepository->find('21');
         
        
 
         $form = null;
         // 1) build the form
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user);
-      
+        $newUser = new User();
+        $form = $this->createForm(UserType::class, $newUser);
         // 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);
-
+       
         
         if ($form->isSubmitted()) {
+            foreach($users as $user){ 
+                if ($newUser->getEmail() === $user->getEmail() ){
+                    dump($newUser->getEmail());
+                    dump($user->getEmail());
 
-            $user->setRanking($ranking);
-            $user->setTimeGauge('0');
-            $user->setTotalTimeServiceGiven('0');
-            $user->setRoles(['ROLE_USER']);
-            $user->addCategoryAffinity($category);
-            $user->addSubCatAffinity($subCategory);
 
-            $file = $form->get('image')->getData();
-            $user = $form->getData();
-            if ($file) {
-                $newFilename = FormsManager::handleFileUpload($file, $this->getParameter('uploads'));
-                $user->setImage($newFilename);
-            } else {
-                $user->setImage('https://cdn.pixabay.com/photo/2020/05/03/13/09/puppy-5124947_960_720.jpg');
-            }
+                    $this->addFlash('danger', 'L\'adresse mail existe déjà!');
+                    return $this->redirectToRoute('userAdd');
+                } else { 
+                    $newUser->setRanking($ranking);
+                    $newUser->setTimeGauge('0');
+                    $newUser->setTotalTimeServiceGiven('0');
+                    $newUser->setRoles(['ROLE_USER']);
+                    $newUser->addCategoryAffinity($category);
+                    $newUser->addSubCatAffinity($subCategory);
+
+                    $file = $form->get('image')->getData();
+                    $newUser = $form->getData();
+                        if ($file) {
+                            $newFilename = FormsManager::handleFileUpload($file, $this->getParameter('uploads'));
+                            $newUser->setImage($newFilename);
+                        } else {
+                            $newUser->setImage('https://cdn.pixabay.com/photo/2020/05/03/13/09/puppy-5124947_960_720.jpg');
+                        }
             // 3) Encode the password (you could also do this via Doctrine listener)
-            $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
-            $user->setPassword($password);
+                    $password = $passwordEncoder->encodePassword($newUser, $newUser->getPlainPassword());
+                    $newUser->setPassword($password);
 
            
             // 4) save the User!
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
+                    $entityManager = $this->getDoctrine()->getManager();
+                    $entityManager->persist($newUser);
+                    $entityManager->flush();
 
 
         
 
 
-            $token = new UsernamePasswordToken(
-                $user,
-                $password,
-                'main',
-                $user->getRoles()
-            );
+                    $token = new UsernamePasswordToken(
+                    $newUser,
+                    $password,
+                    'main',
+                    $newUser->getRoles()
+                    );
 
-            $this->get('security.token_storage')->setToken($token);
-            $this->get('session')->set('_security_main', serialize($token));
+                    $this->get('security.token_storage')->setToken($token);
+                    $this->get('session')->set('_security_main', serialize($token));
 
-            return $this->redirectToRoute('chooseTypeServices', ['id'=> $user->getId()]);
-        
+                    return $this->redirectToRoute('chooseTypeServices', ['id'=> $newUser->getId()]);
+                
+                }
+            }
         }
 
         return $this->render(
             'user/formInscription.html.twig',
-            ['form' => $form->createView(), 'content' => $emails]
+            ['form' => $form->createView()]
         );
     }
 

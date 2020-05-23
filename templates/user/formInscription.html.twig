@@ -1,20 +1,13 @@
 {% extends 'base.html.twig' %}
-{% block stylesheets %}
-
-
-
-{% endblock %}
-
 
 
 {% block body %}
+{% include 'composants/navbarAccueil.html.twig' %}
 
 <div class="container-fluid d-flex justify-content-around">
         <div class="container col-3">
-
-            {{ dump(content) }}
+ <h1>Bienvenue sur la page d'inscription</h1>
         </div>
-    
     
     
         <div class="container col-6 d-flex flex-column justify-content-center" style="height: 90vh;">
@@ -67,6 +60,12 @@
                             </div>   
     
             </form>
+
+            {% for message in app.flashes('danger') %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+            {% endfor %}
     
         </div>
     
