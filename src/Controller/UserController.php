@@ -35,9 +35,7 @@ class UserController extends AbstractController
 
         $users = $userRepository->findAll();
         $ranking = $rankingRepository->findAll();
-        $category = $categoryRepository->findAll();
 
-        $subCategory = $subCategoryRepository->find('23');
 
         $form = null;
         // 1) build the form
