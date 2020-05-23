@@ -3,17 +3,13 @@
 {% block title %}Hello ContactController!{% endblock %}
 
 {% block body %}
-
-{% if app.user %}
-<div class="mb-3">
-
-        {% if app.user %}
+      {% if app.user %}
         {% include 'composants/navBarUser.html.twig' %}
       {% else %}
         {% include 'composants/navbarAccueil.html.twig' %}
       {% endif %}
 
-<div class="container d-flex align-items-center justify-content-center" style="height: 90vh;">
+<div class="container d-flex align-items-center justify-content-center" style="height: 70vh;">
     
 
 
@@ -26,5 +22,6 @@
           
 {{ form_end(form) }}
 
-
+</div>
+{% include 'composants/footer.html.twig' %}
 {% endblock %}
