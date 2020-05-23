@@ -45,57 +45,6 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-<<<<<<< HEAD
-            foreach($users as $user){ 
-                if ($newUser->getEmail() === $user->getEmail() ){
-                   
-                    $this->addFlash('danger', 'L\'adresse mail existe déjà!');
-                    return $this->redirectToRoute('userAdd');
-                }                
-                else {
-                    foreach($ranking as $rank){
-                        if ($rank->getName() === "Newbie" ){
-                        $newUser->setRanking($rank);
-                       }
-                    
-                    $newUser->setTimeGauge('0');
-                    $newUser->setTotalTimeServiceGiven('0');
-                    $newUser->setRoles(['ROLE_USER']);
-
-
-
-                    foreach($category as $cat){
-                        if ($cat->getName() === "Cuisine" ){
-                      $newUser->addCategoryAffinity($cat);
-                        }
-                    
-
-                   //git $newUser->addCategoryAffinity($category);
-
-
-                    $newUser->addSubCatAffinity($subCategory);
-
-                    $file = $form->get('image')->getData();
-                    $newUser = $form->getData();
-                        if ($file) {
-                            $newFilename = FormsManager::handleFileUpload($file, $this->getParameter('uploads'));
-                            $newUser->setImage($newFilename);
-                        } else {
-                            $newUser->setImage('https://cdn.pixabay.com/photo/2020/05/03/13/09/puppy-5124947_960_720.jpg');
-                        }
-            // 3) Encode the password (you could also do this via Doctrine listener)
-                    $password = $passwordEncoder->encodePassword($newUser, $newUser->getPlainPassword());
-                    $newUser->setPassword($password);
-
-           
-            // 4) save the User!
-                    $entityManager = $this->getDoctrine()->getManager();
-                    $entityManager->persist($newUser);
-                    $entityManager->flush();
-
-
-                    $token = new UsernamePasswordToken(
-=======
             $user = $userRepository->findOneBy(['email' => $newUser->getEmail()]);
 
             if ($user) {
@@ -133,7 +82,6 @@ class UserController extends AbstractController
 
 
                 $token = new UsernamePasswordToken(
->>>>>>> b50b285adce573e6ec474c7571cad84163efe5ac
                     $newUser,
                     $password,
                     'main',
