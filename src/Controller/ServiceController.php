@@ -55,17 +55,21 @@ class ServiceController extends AbstractController
 
 
 
-    public function getServiceAction(Request $request, ServiceRepository $serviceRepository)
+    public function getServiceAction(Request $request, ServiceRepository $serviceRepository, UserRepository $userRepository)
     {
 
         $services = $serviceRepository->findAll();
-
+        $users = $userRepository->findAll();
 
         //je redirige vers la route de mon choix 
-        return $this->render('service/pageService.html.twig', [
+        foreach($users as $user){
+            return $this->render('service/pageService.html.twig', [
 
-            'controller_name' => 'ServiceController', 'services' => $services,
-        ]);
+                'controller_name' => 'ServiceController', 'services' => $services, 'user' => $user
+            ]);
+
+        }
+       
     }
 
 
