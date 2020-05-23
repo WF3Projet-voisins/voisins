@@ -2,16 +2,28 @@
 
 
 {% block body %}
-{% include 'composants/navbarAccueil.html.twig' %}
+
+{{ dump(content)}}
+
+{% if app.user %}
+  {% include 'composants/navBarUser.html.twig' %}
+
+    <div class="container d-flex align-items-center justify-content-center" style="height: 90vh;">
+        <h1>Vous êtes déjà connecté</h1>
+    </div>
+</div>
+
+{% else %}
+  {% include 'composants/navbarAccueil.html.twig' %}
+
 
 <div class="container-fluid d-flex justify-content-around">
         <div class="container col-3">
  <h1>Bienvenue sur la page d'inscription</h1>
         </div>
-    
-    
-        <div class="container col-6 d-flex flex-column justify-content-center" style="height: 90vh;">
 
+        <div class="container col-6 d-flex flex-column justify-content-center" style="height: 90vh;">
+          
             <form name="form" method="POST" enctype="multipart/form-data">
                 
                         <div class="mt-4">
@@ -26,15 +38,10 @@
                             {{ form_label(form.lastname, 'Lastname') }}
                             {{ form_widget(form.lastname , { 'attr': { 'class' : ' bg-light rounded shadow p-2'}}) }}
                         </div>
-                        
-                
-                
                         <div class="mt-4">
                             {{ form_label(form.postalCode, 'Code postal') }}
                             {{ form_widget(form.postalCode , { 'attr': { 'class' : ' bg-light rounded shadow p-2'}}) }}
                         </div>
-                    
-                
                         <div class="mt-4">
                             {{ form_label(form.city, 'City') }}  
                             {{ form_widget(form.city, {'attr': {'class' : ' bg-light rounded shadow p-2'}}) }}
@@ -58,9 +65,7 @@
                             <div class="mt-4">
                                 {{ form_widget(form.save, {'attr': {'class' : ' btn btn-danger' }}) }} 
                             </div>   
-    
             </form>
-
             {% for message in app.flashes('danger') %}
             <div class="alert alert-danger">
                 {{ message }}
@@ -90,7 +95,7 @@
     
 </div>
    
-
+{% endif %}
 
 {% endblock %}
 

@@ -1,15 +1,7 @@
 
 $(document).ready(function(){
 
-    $("a").click(function(){
-
-        $('#user_city').html(function(){
-
-            $("input:text").val("Glenn Quagmire");
-
-        })
-    
-      });
+   
 
      $("a").click(function(){
             $('#user_city').html("#user_city");
