@@ -107,8 +107,9 @@ class UserController extends AbstractController
 
                     return $this->redirectToRoute('chooseTypeServices', ['id'=> $newUser->getId()]);
                 
-                }}}
+                }}
             }
+        }
         }
 
 
