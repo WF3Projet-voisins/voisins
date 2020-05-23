@@ -4,6 +4,8 @@
 
 {% block body %}
 
+{% include 'composants/navbarAccueil.html.twig' %}
+
 <div class="container d-flex align-items-center justify-content-center" style="height: 60vh;">
 
     <form method="post">
@@ -45,5 +47,6 @@
 
 </div>
 
+    {% include 'composants/footer.html.twig' %}
 
 {% endblock %}
