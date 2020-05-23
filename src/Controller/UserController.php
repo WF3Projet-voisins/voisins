@@ -58,7 +58,7 @@ class UserController extends AbstractController
                         if ($rank->getName() === "Newbie" ){
                         $newUser->setRanking($rank);
                        }
-                    }
+                    
                     $newUser->setTimeGauge('0');
                     $newUser->setTotalTimeServiceGiven('0');
                     $newUser->setRoles(['ROLE_USER']);
@@ -69,9 +69,9 @@ class UserController extends AbstractController
                         if ($cat->getName() === "Cuisine" ){
                       $newUser->addCategoryAffinity($cat);
                         }
-                    }
+                    
 
-                   // $newUser->addCategoryAffinity($category);
+                   //git $newUser->addCategoryAffinity($category);
 
 
                     $newUser->addSubCatAffinity($subCategory);
@@ -107,7 +107,7 @@ class UserController extends AbstractController
 
                     return $this->redirectToRoute('chooseTypeServices', ['id'=> $newUser->getId()]);
                 
-                }
+                }}}
             }
         }
 
