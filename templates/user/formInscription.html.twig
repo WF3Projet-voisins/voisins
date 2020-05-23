@@ -10,7 +10,10 @@
 {% block body %}
 
 <div class="container-fluid d-flex justify-content-around">
-        <div class="container col-3"></div>
+        <div class="container col-3">
+
+            {{ dump(content) }}
+        </div>
     
     
     
@@ -41,7 +44,7 @@
                 
                         <div class="mt-4">
                             {{ form_label(form.city, 'City') }}  
-                            {{ form_widget(form.city, {'attr': {'class': 'choixId'}}) }}
+                            {{ form_widget(form.city, {'attr': {'class' : ' bg-light rounded shadow p-2'}}) }}
                         </div>
                         
                         <div class="mt-4">

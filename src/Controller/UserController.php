@@ -11,7 +11,6 @@ use App\Form\UserType;
 use App\Entity\Invite;
 use App\Repository\CategoryRepository;
 use App\Repository\SubCategoryRepository;
-
 use App\Service\FormsManager;
 use App\Repository\UserRepository;
 use App\Repository\RankingRepository;
@@ -19,24 +18,31 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 
 
 
 class UserController extends AbstractController
 {
+    
+
+
+
+
     public function addUserAction(Request $request, UserPasswordEncoderInterface $passwordEncoder, RankingRepository $rankingRepository, CategoryRepository $categoryRepository, SubCategoryRepository $subCategoryRepository, UserRepository $userRepository)
     {
-       
-        $users = $userRepository->findAll();
+        
 
-       
-
-
+      
     
-        $ranking = $rankingRepository->find('20');
-        $category = $categoryRepository->find('16');
-        $subCategory = $subCategoryRepository->find('16');
+    
+        $ranking = $rankingRepository->find('1');
+        $category = $categoryRepository->find('1');
+        $subCategory = $subCategoryRepository->find('1');
         
        
 
@@ -44,10 +50,13 @@ class UserController extends AbstractController
         // 1) build the form
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
-
+      
         // 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);
+
+        
         if ($form->isSubmitted()) {
+
             $user->setRanking($ranking);
             $user->setTimeGauge('0');
             $user->setTotalTimeServiceGiven('0');
@@ -67,29 +76,33 @@ class UserController extends AbstractController
             $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);
 
+           
             // 4) save the User!
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-            
+
+
+        
+
+
             $token = new UsernamePasswordToken(
                 $user,
                 $password,
                 'main',
                 $user->getRoles()
-
             );
 
             $this->get('security.token_storage')->setToken($token);
             $this->get('session')->set('_security_main', serialize($token));
 
             return $this->redirectToRoute('chooseTypeServices', ['id'=> $user->getId()]);
-            
+        
         }
 
         return $this->render(
             'user/formInscription.html.twig',
-            ['form' => $form->createView(), 'ranking' => $ranking]
+            ['form' => $form->createView(), 'content' => $emails]
         );
     }
 
