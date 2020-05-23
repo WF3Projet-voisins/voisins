@@ -3,12 +3,13 @@
 {% block title %}Hello ContactController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+      {% if app.user %}
+        {% include 'composants/navBarUser.html.twig' %}
+      {% else %}
+        {% include 'composants/navbarAccueil.html.twig' %}
+      {% endif %}
 
-<div class="container d-flex align-items-center justify-content-center" style="height: 90vh;">
+<div class="container d-flex align-items-center justify-content-center" style="height: 70vh;">
     
 
 
@@ -21,5 +22,6 @@
           
 {{ form_end(form) }}
 
-
+</div>
+{% include 'composants/footer.html.twig' %}
 {% endblock %}

@@ -15,8 +15,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class ContactController extends AbstractController
 {
     
-    public function addContactAction(Request $request)
+    public function addContactAction(Request $request, UserRepository $userRepository)
     {
+        $users = $userRepository->findAll();
         $form = null;
         // 1) build the form
         $contact = new Contact();
@@ -35,31 +36,31 @@ class ContactController extends AbstractController
                 $entityManager->flush();
                 $this->addFlash('info',"contact : ".$contact->getName()." well added");
                 //return $this->redirectToRoute('user/index.html.twig');
-                return $this->render('home/index.html.twig', [
-                    'controller_name' => $contact->getName()
-                ]);
 
+                
+                    return $this->render('contact/index.html.twig', [
+        
+                        'controller_name' =>  $contact->getName()
+                    ]);
+
+                    }
+
+            
+
+        foreach($users as $user){
+            return $this->render(
+                'contact/index.html.twig',
+                array('form' => $form->createView(),'user' => $user)
+            );
         }
 
-       
-
-
-
-
-
-        return $this->render(
-            'contact/index.html.twig',
-            array('form' => $form->createView())
-        );
 
 
 
 
 
 
-
-
-    }
+        }
 
 
 

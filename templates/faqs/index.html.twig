@@ -5,6 +5,12 @@
 
 {% block body %}
 
+{% if app.user %}
+  {% include 'composants/navBarUser.html.twig' %}
+{% else %}
+  {% include 'composants/navbarAccueil.html.twig' %}
+{% endif %}
+
     <div class="container">
         <div class="row mt-5">
             <div class="col text-center">
@@ -167,5 +173,7 @@
         </div>      
         <!--- end appel à l'action │ link-->
     </div>
+  {% include 'composants/footer.html.twig' %}
+    
 
 {% endblock %}
