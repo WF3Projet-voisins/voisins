@@ -14,6 +14,7 @@ use App\Repository\UserRepository;
 use App\Repository\CommentRepository;
 use App\Repository\ServiceRepository;
 use App\Repository\CategoryRepository;
+use App\Repository\SubCategoryRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\DateTime;
@@ -47,7 +48,7 @@ class ServiceController extends AbstractController
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($service);
             $manager->flush();
-            return $this->redirectToRoute('serviceGet');
+            return $this->redirectToRoute('dashboardUserService',['id'=> $id]);
         }
 
 
@@ -104,13 +105,35 @@ class ServiceController extends AbstractController
     }
 
 
-    
+    public function dashboardServicesAction(UserInterface $user, UserRepository $userRepository){
 
-    public function getServiceByType()
-    {
-        /* pour afficher sur la page serviceS les services en fonction des types giveService/needService  */
-        return $this->render('service/services.html.twig', [
-            'controller_name' => 'ServiceController',
-        ]);
+
+        return $this->render('user/dashboardServiceUser.html.twig', ['user'=> $user, "servicesUser" => $user->getServices()]);
+    }
+
+    public function serviceModifyAction(UserInterface $user,Request $request,ServiceRepository $serviceRepository , UserRepository $userRepository, $id){
+
+        $service = $serviceRepository->find($id);
+        $formService = $this->createForm('App\Form\ServiceType', $service);
+        $formService->handleRequest($request);
+
+        if ($formService->isSubmitted()) {
+            $service = $formService->getData();
+            $file = $formService->get('image')->getData();
+            if ($file) {
+                $newFileName = FormsManager::handleFileUpload($file, $this->getParameter('uploads'));
+                $service->setImage($newFileName);
+            }
+
+            $manager = $this->getDoctrine()->getManager();
+
+
+            $manager->persist($service);
+            $manager->flush();
+            return $this->redirectToRoute('dashboardUserService', ['id' => $id]);
+        }
+
+        return $this->render('user/modifyServiceUser.html.twig', ['user'=> $user, "formService" => $formService->createView()]);
+
     }
 }
