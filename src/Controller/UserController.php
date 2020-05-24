@@ -5,71 +5,106 @@ namespace App\Controller;
 use Symfony\Component\HttpClient\HttpClient;
 use App\Entity\User;
 use App\Entity\Category;
+use App\Entity\Ranking;
 use App\Entity\SubCategory;
 use App\Form\UserType;
+use App\Entity\Invite;
 use App\Repository\CategoryRepository;
 use App\Repository\SubCategoryRepository;
-
 use App\Service\FormsManager;
 use App\Repository\UserRepository;
+use App\Repository\RankingRepository;
+use PhpParser\Node\Name;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Validator\Constraints as Assert;
+
+
 
 
 
 class UserController extends AbstractController
 {
-    public function addUserAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+
+    public function addUserAction(Request $request, UserPasswordEncoderInterface $passwordEncoder, RankingRepository $rankingRepository, CategoryRepository $categoryRepository, SubCategoryRepository $subCategoryRepository, UserRepository $userRepository)
     {
+
+        $users = $userRepository->findAll();
+        $ranking = $rankingRepository->findAll();
+
+
         $form = null;
         // 1) build the form
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user);
-
+        $newUser = new User();
+        $form = $this->createForm(UserType::class, $newUser);
         // 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $user->setTimeGauge('0');
-            $user->setTotalTimeServiceGiven('0');
-            $user->setRoles(['ROLE_USER']);
-            $file = $form->get('image')->getData();
-            $user = $form->getData();
-            if ($file) {
-                $newFilename = FormsManager::handleFileUpload($file, $this->getParameter('uploads'));
-                $user->setImage($newFilename);
+
+        if ($form->isSubmitted()) {
+            $user = $userRepository->findOneBy(['email' => $newUser->getEmail()]);
+
+            if ($user) {
+
+                dump($newUser->getEmail());
+                $this->addFlash('danger', 'L\'adresse mail existe déjà!');
+                  return $this->redirectToRoute('userAdd'); 
             } else {
-                $user->setImage('https://cdn.pixabay.com/photo/2020/05/03/13/09/puppy-5124947_960_720.jpg');
+                $newbie = $rankingRepository->findOneBy(['name' => 'Newbie']);
+                $newUser->setRanking($newbie);
+
+
+                $newUser->setTimeGauge('0');
+                $newUser->setTotalTimeServiceGiven('0');
+                $newUser->setRoles(['ROLE_USER']);
+
+
+                $file = $form->get('image')->getData();
+                $newUser = $form->getData();
+                if ($file) {
+                    $newFilename = FormsManager::handleFileUpload($file, $this->getParameter('uploads'));
+                    $newUser->setImage($newFilename);
+                } else {
+                    $newUser->setImage('https://cdn.pixabay.com/photo/2020/05/03/13/09/puppy-5124947_960_720.jpg');
+                }
+                // 3) Encode the password (you could also do this via Doctrine listener)
+                $password = $passwordEncoder->encodePassword($newUser, $newUser->getPlainPassword());
+                $newUser->setPassword($password);
+
+
+                // 4) save the User!
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($newUser);
+                $entityManager->flush();
+
+
+                $token = new UsernamePasswordToken(
+                    $newUser,
+                    $password,
+                    'main',
+                    $newUser->getRoles()
+                );
+
+                $this->get('security.token_storage')->setToken($token);
+                $this->get('session')->set('_security_main', serialize($token));
+
+                return $this->redirectToRoute('chooseTypeServices', ['id' => $newUser->getId()]);
             }
-            // 3) Encode the password (you could also do this via Doctrine listener)
-            $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
-            $user->setPassword($password);
-
-            // 4) save the User!
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
-            
-            $token = new UsernamePasswordToken(
-                $user,
-                $password,
-                'main',
-                $user->getRoles()
-
-            );
-
-            $this->get('security.token_storage')->setToken($token);
-            $this->get('session')->set('_security_main', serialize($token));
-
-            return $this->redirectToRoute('chooseTypeServices', ['id'=> $user->getId()]);
-            
         }
 
-        return $this->render(
-            'user/formInscription.html.twig',
-            ['form' => $form->createView()]
-        );
+
+
+
+
+        foreach ($users as $user) {
+            return $this->render(
+                'user/formInscription.html.twig',
+                array('form' => $form->createView(), 'user' => $user, 'content' => $ranking)
+            );
+        }
     }
 
     public function getUserAction(Request $request, UserRepository $userRepository, $id, CategoryRepository $categoryRepository, SubCategoryRepository $subCategoryRepository)
@@ -80,8 +115,8 @@ class UserController extends AbstractController
 
         $formUser = $this->createForm('App\Form\UserType', $user);
         $formUser->handleRequest($request);
-       
-        if ($formUser->isSubmitted() ) {
+
+        if ($formUser->isSubmitted()) {
             $user = $formUser->getData();
             $file = $formUser->get('image')->getData();
             if ($file) {
@@ -97,7 +132,7 @@ class UserController extends AbstractController
             return $this->redirectToRoute('userProfile', ['id' => $id]);
         }
 
-        
+
         return $this->render('user/profileUser.html.twig', ["user" => $user, "categories" => $categories, "subCategories" => $subCategories, "formUser" => $formUser->createView()]);
     }
 
