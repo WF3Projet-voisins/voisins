@@ -15,10 +15,10 @@
 
 {{ form_start(form) }}
 
-        {{ form_row(form.name) }}
-        {{ form_row(form.mail) }}
-        {{ form_row(form.message) }}
-       
+        <div>{{ form_row(form.name, {"attr": {"class": "text-dark"}, "label": "Nom"}) }}</div>
+        <div>{{ form_row(form.mail, {"attr": {"class": "text-dark"}, "label": "Email"}) }}</div>
+        <div>{{ form_row(form.message, {"attr": {"class": "text-dark"}, "label": "Message"}) }}</div>
+        <div>{{ form_row(form.envoyer, {"attr": {"class": "text-dark bg-warning btn btn-block"}}) }}</div>
           
 {{ form_end(form) }}
 

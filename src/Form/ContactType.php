@@ -34,7 +34,7 @@ class ContactType extends AbstractType
                 'label_attr'=>['class'=> 'red-bg', 'style'=> 'color : black'],
                 'attr' => ['placeholder' => 'message']
                 ])
-            ->add('save', SubmitType::class)
+            ->add('envoyer', SubmitType::class)
         ;
     }
 
