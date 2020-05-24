@@ -136,4 +136,14 @@ class ServiceController extends AbstractController
         return $this->render('user/modifyServiceUser.html.twig', ['user'=> $user, "formService" => $formService->createView()]);
 
     }
+
+
+    public function serviceDeleteAction(UserInterface $user,Request $request,ServiceRepository $serviceRepository , UserRepository $userRepository, $id){
+        $service = $serviceRepository->find($id);
+        $manager = $this->getDoctrine()->getManager();
+
+        $manager->remove($service);
+        $manager->flush();
+        return $this->redirectToRoute('dashboardUserService', ['id' => $id]);
+    }
 }

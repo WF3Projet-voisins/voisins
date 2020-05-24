@@ -58,7 +58,7 @@ serviceMod:
 
 serviceDelete:
   path: /user/service/delete/{id}
-  controller: App\Controller\ServiceController::deleteServiceAction
+  controller: App\Controller\ServiceController::serviceDeleteAction
 
 
 

@@ -73,7 +73,7 @@
             <a href="{{ path('serviceMod', {id: serviceUser.id}) }}">Modifier le service</a>
           </td>
           <td>
-            <a href="{# {{ path('serviceDelete')}} #}">Supprimer le service</a>
+            <a href=" {{ path('serviceDelete',{id: serviceUser.id})}}">Supprimer le service</a>
           </td>
         </tr>
       {% endfor %}
