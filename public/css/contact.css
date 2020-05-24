@@ -1,0 +1,25 @@
+.shadow {
+  box-shadow: 0px 0px 10px rgb(0, 0, 0, 0.5);
+}
+.customRowInput {
+  width: 100%;
+}
+
+.bg-button {
+  background: #DC3C45;
+  color: #ffffff;
+}
+
+.bg-form {
+  width: 70%;
+}
+
+.nousContacter {
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  font-size: 2rem;
+  background: #F8F9FA;
+  text-align: center;
+  box-shadow: 0px 0px 16px rgb(0, 0, 0, 0.1);
+
+}
