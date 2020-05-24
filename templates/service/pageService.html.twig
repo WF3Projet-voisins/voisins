@@ -4,11 +4,12 @@
   Hello ServiceController!
 {% endblock %}
 
+{% block stylesheets %}
+  <link rel="stylesheet" href="css/service.css">
+{% endblock %}
+
 {% block body %}
   
-
-
-
 
 {% if app.user %}
   {% include 'composants/navBarUser.html.twig' %}
@@ -17,22 +18,29 @@
 {% endif %}
 
 
-
   <div class="container" style="margin-top:100px">
     {# the contents of this variable are displayed on the web page #}
     <label>
-      Filtre Status du service / Type de service
+      Filtre par nom de service
     </label>
-    <input class="m-5" id="myChoice" type="text" />
 
 
-   
-    {% for service in services %}
+    <select class="form-control form-control-lg" id="myChoice">
+      {% for service in services %}
+      <option>{{ service.name }}</option>
+      {% endfor %}
+    </select>
+
+  
+    <div class="container" id="cardChoice">
+
+      {% for service in services %}
+
       <a href="{{ path('servicePage', {id: service.id}) }}">
-        <div class="card mb-3" id="cardService">
+        <div class="card mb-3"  name="{{ service.name }}">
           <img src="{{ service.image }}" class="card-img-top" alt="..." />
-          <div class="card-body">
-            <h5 class="card-title">
+          <div class="card-body" >
+            <h5 class="card-title" >
               Titre du service : {{ service.name }}
             </h5>
             <p>
@@ -41,10 +49,10 @@
             <p>
               Description : {{ service.description }}
             </p>
-            <p id="serviceChoice">
+            <p>
               Status du service : {{ service.status }}
             </p>
-            <p id="serviceChoice">
+            <p>
               Type du service : {{ service.typeService.name }}
             </p>
             <p>
@@ -57,9 +65,23 @@
         </div>
       </a>
     {% endfor %}
+
+
+
+
+
+
+
+
+    </div>
+    
+
+   
+
   </div>
 {% endblock %}
 
 {% block javascripts %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="{{ asset('/js/services.js') }}"></script>
 {% endblock %}
