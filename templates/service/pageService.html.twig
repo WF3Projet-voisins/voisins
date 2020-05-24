@@ -4,6 +4,10 @@
   Hello ServiceController!
 {% endblock %}
 
+{% block stylesheets %}
+  <link rel="stylesheet" href="css/service.css">
+{% endblock %}
+
 {% block body %}
   
 
@@ -20,20 +24,20 @@
 
   <div class="container" style="margin-top:100px">
     {# the contents of this variable are displayed on the web page #}
-    <label>
+    <label class="customLabel">
       Filtre Status du service / Type de service
     </label>
-    <input class="m-5" id="myChoice" type="text" />
+    <input class="m-5 customInput" id="myChoice" type="text" />
 
 
    
     {% for service in services %}
-      <a href="{{ path('servicePage', {id: service.id}) }}">
-        <div class="card mb-3" id="cardService">
+      <a href="{{ path('servicePage', {id: service.id}) }}" class="customLink">
+        <div class="card mb-3 customCard" id="cardService">
           <img src="{{ service.image }}" class="card-img-top" alt="..." />
           <div class="card-body">
             <h5 class="card-title">
-              Titre du service : {{ service.name }}
+              <span class="titreH5">Titre du service</span>  : {{ service.name }}
             </h5>
             <p>
               Nom : {{ service.user.firstname }} {{ service.user.lastname }}
