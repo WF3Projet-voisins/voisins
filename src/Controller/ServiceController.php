@@ -53,7 +53,7 @@ class ServiceController extends AbstractController
 
 
 
-        return $this->render('user/addService.html.twig', ["formService" => $formService->createView()]);
+        return $this->render('user/addService.html.twig', ["user"=>$user,"formService" => $formService->createView()]);
     }
 
 
