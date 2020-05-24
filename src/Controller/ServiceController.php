@@ -14,6 +14,7 @@ use App\Repository\UserRepository;
 use App\Repository\CommentRepository;
 use App\Repository\ServiceRepository;
 use App\Repository\CategoryRepository;
+use PhpParser\Node\Name;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\DateTime;
@@ -62,12 +63,17 @@ class ServiceController extends AbstractController
 
         $services = $serviceRepository->findAll();
         $users = $userRepository->findAll();
+        
 
+        $serviceUser =  $serviceRepository->findOneBy(['user' => '1']);
+
+        
         //je redirige vers la route de mon choix 
         foreach ($users as $user) {
+            
             return $this->render('service/pageService.html.twig', [
-
-                'controller_name' => 'ServiceController', 'services' => $services, 'user' => $user
+              
+                'controller_name' => 'ServiceController', 'services' => $services, 'user' => $user, 'serviceUser' => $serviceUser
             ]);
         }
     }

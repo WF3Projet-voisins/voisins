@@ -16,9 +16,19 @@
 
 {% if app.user %}
   {% include 'composants/navBarUser.html.twig' %}
+
+
+  {% if app.user.city is defined  and app.user.city == serviceUser.user.city%}
+    Services proposés à {{serviceUser.user.city}}
+  {% endif %} 
+  
 {% else %}
   {% include 'composants/navbarAccueil.html.twig' %}
+  {{dump(user)}}
 {% endif %}
+
+
+
 
 
 
@@ -32,6 +42,8 @@
 
    
     {% for service in services %}
+
+      {% if app.user.city is defined  and app.user.city == serviceUser.user.city%}
       <a href="{{ path('servicePage', {id: service.id}) }}" class="customLink">
         <div class="card mb-3 customCard" id="cardService">
           <img src="{{ service.image }}" class="card-img-top" alt="..." />
@@ -60,8 +72,12 @@
           </div>
         </div>
       </a>
+      {% endif %}
     {% endfor %}
   </div>
+
+
+
 {% endblock %}
 
 {% block javascripts %}
