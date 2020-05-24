@@ -1,0 +1,30 @@
+.customLabel {
+  color: #1fc3a6;
+}
+
+.customInput {
+  width: 30%;
+  border: 2px solid #1fc3a6;
+  border-radius: 5px;
+  padding: 1%;
+  box-sizing: border-box;
+}
+
+.customLink {
+  text-decoration: none;
+  color: #505050;
+}
+
+.customLink:hover {
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+}
+
+.titreH5 {
+  font-size: 1.7rem;
+  font-style: italic;
+}
+
+.customCard {
+  box-shadow: 0px 0px 15px rgb(0, 0, 0, 0.5);
+}
