@@ -3,6 +3,8 @@
 {% block title %}{% endblock %}
 
 {% block body %}
+{% include 'composants/navBarUser.html.twig' %}
+<div style="margin-top:150px" class="d-flex justify-content-center mb-4"></div>
 
     <div class="container">
         <div class="row mt-5">            
@@ -37,7 +39,7 @@
                 <br>                
                 <hr>
                 <div class="text-right">
-                    <a href="{{ path('mailbox') }}" class="btn btn-secondary mb-1"><i class="fas fa-reply"></i> Returner</a>                                     
+                    <a href="{{ path('mailbox') }}" class="btn btn-secondary mb-1"><i class="fas fa-reply"></i> Retourner</a>                                     
                 </div>
             </div>        
         </div>
@@ -45,5 +47,5 @@
     </div>
 
     <br><br><br>
-
+{% include 'composants/footer.html.twig' %}
 {% endblock %}

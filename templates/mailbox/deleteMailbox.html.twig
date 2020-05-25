@@ -3,6 +3,8 @@
 {% block title %}{% endblock %}
 
 {% block body %}
+{% include 'composants/navBarUser.html.twig' %}
+<div style="margin-top:150px" class="d-flex justify-content-center mb-4"></div>
 
     <div class="container">
         <div class="row mt-5">            
@@ -51,5 +53,5 @@
     </div>
 
     <br><br><br>
-
+{% include 'composants/footer.html.twig' %}
 {% endblock %}
