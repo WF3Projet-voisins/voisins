@@ -1,0 +1,8 @@
+.text-custom {
+  color: #9A9D9F;
+}
+
+.text-custom:hover {
+  color: #e2e2e2;
+  text-decoration: none;
+}
