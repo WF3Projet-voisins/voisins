@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+  <link rel="stylesheet"
+    href="{{ asset('/css/pageOneService.css') }}"
+    integrity=""
+    crossorigin="anonymous" />
+{% endblock %}
+{% block body %}
+  {% include 'composants/navBarUser.html.twig' %}
+  <div style="margin-top:150px" class="d-flex justify-content-center mb-4"><a href=" {{
+    path('serviceAdd',{id: user.id})}} " class="btn btn-danger">Ajouter un service</a>
+    </div>
+  
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">
+          Nom du service
+        </th>
+        <th scope="col">
+          Description
+        </th>
+        <th scope="col">
+          créé le
+        </th>
+        <th scope="col">
+          Durée du service
+        </th>
+        <th scope="col">
+          Catégorie du service
+        </th>
+        <th scope="col">
+          Sous-Catégorie du service
+        </th>
+        <th scope="col">
+          Status du service
+        </th>
+        <th scope="col">
+          Image du service
+        </th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for serviceUser in servicesUser %}
+        <tr>
+          <td>
+            {{ serviceUser.name }}
+          </td>
+          <td>
+            {{ serviceUser.description }}
+          </td>
+          <td>
+            {{ serviceUser.createdAt|date('d/m/Y') }}{{ serviceUser.createdAt|date('H:i:s') }}
+          </td>
+          <td>
+            {{ serviceUser.duration.duration }} minutes
+          </td>
+          <td>
+            {{ serviceUser.subcategory.category.name }}
+          </td>
+          <td>
+            {{ serviceUser.subcategory.name }}
+          </td>
+          <td>
+            {{ serviceUser.status }}
+          </td>
+          <td>
+            <img src="{{ serviceUser.image }}" alt="" style="width:150px" />
+          </td>
+          <td>
+            <a href="{{ path('serviceMod', {id: serviceUser.id}) }}">Modifier le service</a>
+          </td>
+          <td>
+            <a href=" {{ path('serviceDelete',{id: serviceUser.id})}}">Supprimer le service</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  {% include 'composants/footer.html.twig' %}
+{% endblock %}

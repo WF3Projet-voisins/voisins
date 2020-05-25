@@ -2,9 +2,11 @@
 {% block stylesheets %}
 {% endblock %}
 {% block body %}
-<div class="container">
-<p>Page ajout service</p>
+{% include 'composants/navBarUser.html.twig' %}
 
+<div style="margin-top:150px" class="d-flex justify-content-center mb-4">
+<h1 class="mr-4">Page ajout service</h1> 
+<div> 
 <form name="user" method="POST" enctype="multipart/form-data">
             {{ form_label(formService.type_service, 'Quel est le type de service') }}
             {{ form_widget(formService.type_service , { 'attr': { 'class' : ' bg-light rounded shadow p-2'}}) }}
@@ -20,9 +22,13 @@
 
             {{ form_label(formService.sub_category, 'Dans quelle rubrique s\'inscrit mon service :') }}
             {{ form_widget(formService.sub_category , { 'attr': { 'class' : ' bg-light rounded shadow p-2'}}) }}
+
+            {{ form_label(formService.image, "Ajouter une image",  {'label_attr' : {'class' : ' text-golden pr-3'}}) }}
+            {{ form_widget(formService.image , { 'attr': { 'class' : ' hidden image-input' }}) }}
             
             {{ form_widget(formService.save, {'attr': {'class' : ' btn btn-danger' }}) }} 
           </form>
-
+</div>
  </div>
+{% include 'composants/footer.html.twig' %}
 {% endblock %}

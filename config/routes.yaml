@@ -44,16 +44,21 @@ serviceGet:
     path: /service
     controller: App\Controller\ServiceController::getServiceAction 
 
-
-
-
 servicePage:
   path: /user/service/{id}
   controller: App\Controller\ServiceController::getServicebyIdAction
 
+dashboardUserService:
+    path: /user/service/dashboard/{id}
+    controller: App\Controller\ServiceController::dashboardServicesAction
+
+serviceMod:
+    path: /user/service/update/{id}
+    controller: App\Controller\ServiceController::serviceModifyAction
+
 serviceDelete:
-  path: /user/service/{id}
-  controller: App\Controller\ServiceController::deleteServiceAction
+  path: /user/service/delete/{id}
+  controller: App\Controller\ServiceController::serviceDeleteAction
 
 
 
