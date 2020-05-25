@@ -40,8 +40,8 @@ class ContactController extends AbstractController
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($contact);
                 $entityManager->flush();
-                $this->addFlash('info',"contact : ".$contact->getName()." well added");
-                return $this->redirectToRoute('index');
+                $this->get('session')->getFlashBag()->add('Message', 'Message bien envoyé');
+                return $this->redirectToRoute('contactAdd');
 
                 
                     }
