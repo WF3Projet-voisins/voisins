@@ -27,7 +27,10 @@
 
     <select class="form-control form-control-lg" id="myChoice">
       {% for service in services %}
-      <option>{{ service.name }}</option>
+      {% if service.user.city == app.user.city %} 
+      <option>{{ service.subcategory.category.name }}</option>
+      
+      {% endif %}
       {% endfor %}
     </select>
 
@@ -35,6 +38,7 @@
     <div class="container" id="cardChoice">
 
       {% for service in services %}
+    {% if service.user.city == app.user.city %} 
 
       <a href="{{ path('servicePage', {id: service.id}) }}">
         <div class="card mb-3"  name="{{ service.name }}">
@@ -64,6 +68,10 @@
           </div>
         </div>
       </a>
+      {% else %}
+      <div>
+      <p>Il n'y a pas encore de service dans votre ville. N'hésitez pas à poster votre demande ici : <a href="{{ path('serviceAdd', {id: user.id}) }}">Ajouter un service</a></p></div>
+      {% endif %}
     {% endfor %}
 
 
@@ -74,7 +82,8 @@
 
 
     </div>
-    
+  
+ 
 
    
 
