@@ -2,22 +2,24 @@
 
 namespace App\Controller;
 
-use App\Repository\UserRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Form\ContactType;
-use App\Entity\Contact;
 use DateTimeInterface;
+use App\Entity\Contact;
+use App\Form\ContactType;
+use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Form\Extension\Core\Type\TimeType;
-use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class ContactController extends AbstractController
 {
     
-    public function addContactAction(Request $request, UserRepository $userRepository)
+    public function addContactAction(TokenStorageInterface $token, Request $request, UserRepository $userRepository)
     {
-        $users = $userRepository->findAll();
+        $securityContext = $this->container->get('security.authorization_checker');
+        $user=$token->getToken()->getUser();
         $form = null;
         // 1) build the form
         $contact = new Contact();
@@ -25,8 +27,12 @@ class ContactController extends AbstractController
 
         // 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-
+        if ($form->isSubmitted() ) {
+            if($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')){
+                $contact->setUser($user);
+                $contact->setName($user->getLastname() .' '. $user->getFirstname());
+                $contact->setMail($user->getEMail());
+            }
                 $contact->setCreatedAt(new \DateTime());
 
                 $contact = $form->getData();
@@ -35,24 +41,19 @@ class ContactController extends AbstractController
                 $entityManager->persist($contact);
                 $entityManager->flush();
                 $this->addFlash('info',"contact : ".$contact->getName()." well added");
-                //return $this->redirectToRoute('user/index.html.twig');
+                return $this->redirectToRoute('index');
 
                 
-                    return $this->render('contact/index.html.twig', [
-        
-                        'controller_name' =>  $contact->getName()
-                    ]);
-
                     }
 
             
 
-        foreach($users as $user){
+        
             return $this->render(
                 'contact/index.html.twig',
                 array('form' => $form->createView(),'user' => $user)
             );
-        }
+        
 
 
 

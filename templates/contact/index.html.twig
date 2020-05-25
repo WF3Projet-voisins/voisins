@@ -20,15 +20,37 @@
 
 <div class="container d-flex align-items-center justify-content-center bg-light mb-5 bg-shadow" style="height: 70vh;">
 
-  <div class="bg-form">{{ form_start(form) }}
 
-          <div>{{ form_row(form.name, {"attr": {"class": "text-dark customRowInput"}, "label": "Nom"}) }}</div>
-          <div>{{ form_row(form.mail, {"attr": {"class": "text-dark customRowInput"}, "label": "Email"}) }}</div>
-          <div>{{ form_row(form.message, {"attr": {"class": "text-dark customRowInput"}, "label": "Message"}) }}</div>
-          <div>{{ form_row(form.envoyer, {"attr": {"class": "bg-success text-white btn btn-block"}}) }}</div>
-            
-  {{ form_end(form) }}</div>
+
+  <div class="bg-form">
+  
+{% if app.user %}
+        <form name="contact" method="POST" enctype="multipart/form-data" class="formContact">
+        {{ form_label(form.message, "Message", {"attr": {"class": "text-dark customRowInput"}}) }}
+        {{ form_widget(form.message , { 'attr': { 'class' : 'text-dark customRowInput'}}) }}
+        {{ form_widget(form.envoyer, {"attr": {"class": "bg-success text-white btn btn-block"}}) }}
+        </form>
+ 
+{% else %}
+      <form name="contact" method="POST" enctype="multipart/form-data" class="formContact">
+        {{ form_label(form.name, "Nom", {"attr": {"class": "text-dark customRowInput"}}) }}
+          {{ form_widget(form.name , { 'attr': { 'class' : 'text-dark customRowInput'}}) }}
+
+
+          {{ form_label(form.mail, "Email", {"attr": {"class": "text-dark customRowInput"}}) }}
+          {{ form_widget(form.mail , { 'attr': { 'class' : 'text-dark customRowInput'}}) }}
+
+          {{ form_label(form.message, "Message", {"attr": {"class": "text-dark customRowInput"}}) }}
+          {{ form_widget(form.message , { 'attr': { 'class' : 'text-dark customRowInput'}}) }}
+
+          {{ form_widget(form.envoyer, {"attr": {"class": "bg-success text-white btn btn-block"}}) }}
+      </form>
+
+{% endif %}         
+
+  </div>
 
 </div>
+
 {% include 'composants/footer.html.twig' %}
 {% endblock %}
