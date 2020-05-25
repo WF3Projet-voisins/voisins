@@ -75,7 +75,7 @@ getServiceByType:
  
 
 mailbox:
-    path: /user/mailbox/
+    path: /user/mailbox
     controller: App\Controller\MailboxController::index
 
 mailboxAdd:
