@@ -41,37 +41,30 @@ serviceAdd:
     
 # page qui envoi vers tous les services    
 serviceGet:
-    path: /service
+    path: /user/service
     controller: App\Controller\ServiceController::getServiceAction 
 
-
-
-
-serviceUpdate:
+servicePage:
   path: /user/service/{id}
-  controller: App\Controller\ServiceController::updateServiceAction
+  controller: App\Controller\ServiceController::getServicebyIdAction
+
+dashboardUserService:
+    path: /user/service/dashboard/{id}
+    controller: App\Controller\ServiceController::dashboardServicesAction
+
+serviceMod:
+    path: /user/service/update/{id}
+    controller: App\Controller\ServiceController::serviceModifyAction
 
 serviceDelete:
-  path: /user/service/{id}
-  controller: App\Controller\ServiceController::deleteServiceAction
+  path: /user/service/delete/{id}
+  controller: App\Controller\ServiceController::serviceDeleteAction
 
 
-
-commentaireAdd:
-    path: /user/service
-    controller: App\Controller\ServiceController::addCommentaireAction
- 
-commentaireGet:
-    path: /user/service/{id}
-    controller: App\Controller\ServiceController::getCommentaireAction
- 
-commentaireUpdate:
-    path: /user/service/{id}
-    controller: App\Controller\ServiceController::updateCommentaireAction
  
 commentaireDelete:
-    path: /user/service/{id}
-    controller: App\Controller\ServiceController::deleteCommentaireAction
+    path: /user/service/deleteComment/{id}
+    controller: App\Controller\CommentController::deleteCommentaireAction
 
 
 
@@ -121,3 +114,6 @@ contactDelete:
 chooseTypeServices:
     path: /choose/type/{id}
     controller: App\Controller\ChooseTypeServicesController::chooseTypeServicesAction
+
+
+

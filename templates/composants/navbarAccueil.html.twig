@@ -4,17 +4,17 @@
     <div class="container">
         <!-- Navbar -->
         <nav class="navbar main-nav navbar-expand-lg navbar-dark" aria-label="Main navigation">
-            <a href="/" class="navbar-brand d-inline-flex text-uppercase">Voisins <i class="fas fa-comments"></i></a>
+            <a href="/" class="navbar-brand d-inline-flex text-uppercase"> <img src="{{asset ("img/logo-monvoisin-blanc.png")}}" alt="logo" width="250px"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse text-uppercase" id="navbarContent">
+            <div class="collapse navbar-collapse" id="navbarContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <a href="/" class="nav-link active">Accueil</a>
                     </li>
-                     <li class="nav-item mr-4">
-                        <a href="{# {{ path('services') }} #}" class="nav-link">│ Voir les services en cours</a>
+                     <li class="nav-item">
+                        <a href=" {{ path('serviceGet') }} " class="nav-link">Voir les services en cours</a>
                     </li>                  
-                    <li class="nav-item ml-4">
+                    <li class="nav-item">
                         <a href="{{ path('userAdd') }}" class="nav-link">Inscription</a>
                     </li>                                              
                     <li class="nav-item">

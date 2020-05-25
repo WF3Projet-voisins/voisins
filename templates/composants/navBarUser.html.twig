@@ -1,24 +1,35 @@
+{% block stylesheets %}
+    <link rel="stylesheet" href="css/navbarUser.css">
+{% endblock %}
+
+
 <header id="top">
-    <div class="container">
+    <div class="container-fluid">
         <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top" id="main-nav">
             <div class="container">
-                <a href="#" class="navbar-brand">Logo</a>
+                <a href="{{path ("index")}}" class="navbar-brand"> <img src="{{asset ("img/logo-monvoisin-blanc.png")}}" alt="logo" width="250px"> </a>
                 <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item mr-1">
-                            <a href="#Top" class="nav-link">Utilisateur</a>
+                            <a href="{{ path ('serviceGet') }}" class="nav-link">Voir les services en cours</a>
                         </li>
-                        <li class="nav-item mr-1">
-                            <a href="#faqs" class="nav-link">FAQs</a>
-                        </li>
-                        <li class="nav-item mr-1">
-                            <a href="#contact" class="nav-link">Contact</a>
-                        </li>
-                        <li class="nav-item mr-1">
-                            <a href="#logout" class="nav-link">Se déconnecter</a>
+                        <li class="nav-item mr-1 pt-2">
+                            <div class="dropdown">
+                                <a class="dropdown-toggle text-custom" href="#"  id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  Mon profil
+                                </a>
+                              
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                  <a class="dropdown-item" href="{{ path ('userProfile', {id: user.id}) }}">mon profil</a>
+                                  <a class="dropdown-item" href="{{ path ('dashboardUserService', {id: user.id})}}">accéder à mes services</a>
+                                  <a class="dropdown-item" href="{{path ("faqs")}}">faqs</a>
+                                  <a class="dropdown-item" href="{{path ("contactAdd")}}">contact</a>
+                                  <a class="dropdown-item" href="{{path ('app_logout')}}">se déconnecter</a>
+                                </div>
+                              </div>
                         </li>
                     </ul>
                 </div>

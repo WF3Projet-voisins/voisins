@@ -2,24 +2,63 @@
 
 {% block title %}Hello ContactController!{% endblock %}
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{% block stylesheets %}
+  <link rel="stylesheet" href="css/contact.css">
+{% endblock %}
 
-<div class="container d-flex align-items-center justify-content-center" style="height: 90vh;">
+
+{% block body %}
+      {% if app.user %}
+        {% include 'composants/navBarUser.html.twig' %}
+      {% else %}
+        {% include 'composants/navbarAccueil.html.twig' %}
+      {% endif %}
+
+<div class="container pt-2 pb-2 text-dark nousContacter">
+    Nous contacter
+</div>
+{% for flashMessage in app.session.flashbag.get('Message') %}
+<div class="alert alert-success col-3 ml-4">
+  <strong>Success!</strong> {{ flashMessage }}
+</div>
+
+{% endfor %}
+
     
 
-
-{{ form_start(form) }}
-
-        {{ form_row(form.name) }}
-        {{ form_row(form.mail) }}
-        {{ form_row(form.message) }}
-       
-          
-{{ form_end(form) }}
+<div class="container d-flex align-items-center justify-content-center bg-light mb-5 bg-shadow" style="height: 70vh;">
 
 
+
+  <div class="bg-form">
+  
+{% if app.user %}
+        <form name="contact" method="POST" enctype="multipart/form-data" class="formContact">
+        {{ form_label(form.message, "Message", {"attr": {"class": "text-dark customRowInput"}}) }}
+        {{ form_widget(form.message , { 'attr': { 'class' : 'text-dark customRowInput'}}) }}
+        {{ form_widget(form.envoyer, {"attr": {"class": "bg-success text-white btn btn-block"}}) }}
+        </form>
+ 
+{% else %}
+      <form name="contact" method="POST" enctype="multipart/form-data" class="formContact">
+        {{ form_label(form.name, "Nom", {"attr": {"class": "text-dark customRowInput"}}) }}
+          {{ form_widget(form.name , { 'attr': { 'class' : 'text-dark customRowInput'}}) }}
+
+
+          {{ form_label(form.mail, "Email", {"attr": {"class": "text-dark customRowInput"}}) }}
+          {{ form_widget(form.mail , { 'attr': { 'class' : 'text-dark customRowInput'}}) }}
+
+          {{ form_label(form.message, "Message", {"attr": {"class": "text-dark customRowInput"}}) }}
+          {{ form_widget(form.message , { 'attr': { 'class' : 'text-dark customRowInput'}}) }}
+
+          {{ form_widget(form.envoyer, {"attr": {"class": "bg-success text-white btn btn-block"}}) }}
+      </form>
+
+{% endif %}         
+
+  </div>
+
+</div>
+
+{% include 'composants/footer.html.twig' %}
 {% endblock %}

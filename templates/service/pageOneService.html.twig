@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+  <link rel="stylesheet"
+    href="{{ asset('/css/pageOneService.css') }}"
+    integrity=""
+    crossorigin="anonymous" />
+{% endblock %}
+{% block body %}
+  {% include 'composants/navBarUser.html.twig' %}
+  <div class="container">
+    <div class="d-flex justify-content-center cardService">
+      <div class="mb-3" id="cardService">
+        <div class="card-body">
+          <img src="{{ service.image }}"
+            class="card-img-top"
+            style="width:400px" />
+            
+          <div>
+            <h5 class="card-title">
+              Intitulé du service : {{ service.name }}
+            </h5>
+            <p id="serviceChoice">
+              Type du service : {{ service.typeService.name }}
+            </p>
+            <p>
+              Nom : {{ service.user.firstname }} {{ service.user.lastname }}
+            </p>
+            <p>
+              Description : {{ service.description }}
+            </p>
+            <p id="serviceChoice">
+              Status du service : {{ service.status }}
+            </p>
+
+            <p>
+              Durée du service : {{ service.duration.duration }} minutes
+            </p>
+            <p>
+              Date de creation : {{ service.createdAt|date('d/m/Y \\a\\ g:ia') }}
+            </p>
+          </div>
+          <div>
+            <p>
+              Commentaires
+            </p>Espace commentaires :{% for comment in comments %}
+              <div class="container mb-2 commentUser" id="{{ comment.id }}">
+                <div class="row">
+                  <div class="col-8">
+                    <div class="card card-white post">
+                      <div class="">
+                        <div class="float-left image"></div>
+                        <div class="">
+                          <div class=""></div>
+                        </div>
+                      </div>
+                      <div class="post-description">
+                      <div class="d-flex justify-content-center "> 
+                        <p class="col-11">
+                          {{ comment.message }}
+                        </p>
+                        {% if comment.userFrom.id == app.user.id %}
+                        <button class="deleteComment" style="border: none; background-color:white" onclick="deleteComment({{ comment.id }})"> <span style="color:red">  <i class="fas fa-times col-1 mt-1"></i> </span></button>
+                        {% endif %}</div>
+                        <p class="text-muted time float-right"
+                          style="font-size:12px">
+                          écrit par <a href="#">
+                            {{ comment.userFrom.lastname }}
+                            {{ comment.userFrom.firstname }}
+                          </a> Le {{ comment.createdAt|date('d/m/Y') }} à {{ comment.createdAt|date('H:i:s') }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+
+
+            <form name="formComment" method="POST" enctype="multipart/form-data" class="formUpdate">
+             {{ form_label(formNewComment.message, null,  {'label_attr' : {'class' : ' text-golden pr-3'}}) }}
+            {{ form_widget(formNewComment.message , { 'attr': { 'class' : ' bg-light rounded shadow p-2'}}) }}
+            
+            {{ form_widget(formNewComment.save, {'attr': {'class' : ' btn btn-danger' }}) }} 
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% include 'composants/footer.html.twig' %}
+
+{% endblock %}
+{% block javascripts %}
+  <script src="{{ asset('/js/comments.js') }}"></script>
+{% endblock %}
