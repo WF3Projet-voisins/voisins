@@ -8,8 +8,8 @@
     <div class="container">
         <div class="row mt-5">            
             <div class="col-10 text-left">
-                <h6 class="mb-0"><strong>{{ user.Lastname|e }}&nbsp;{{ user.Firstname|e }}</strong></h6>
-                <strong class="text-black-50">{{ user.Email|e }}</strong>
+                <h6 class="mb-0"><strong>{{ user.lastname|e }}&nbsp;{{ user.firstname|e }}</strong></h6>
+                <strong class="text-black-50">{{ user.email|e }}</strong>
             </div>
             <div class="col-2 text-right" width="150px">
                 <img src="{{user.image}}" class="rounded-circle" width="100px" height="100px" alt="">
@@ -18,7 +18,13 @@
         <div class="row mt-0">
             <div class="col text-center">
                 <h2><i class="fas fa-envelope-open-text"></i>&nbsp;<strong>MAILBOX</strong></h2>
-                Messagerie interne 
+                Messagerie interne                 
+                {% for messageMailbox in app.flashes('messageMailbox') %}
+                    <br>
+                    <div class="alert alert-success" role="alert" width="300px">
+                        {{ messageMailbox }}
+                    </div>                
+                {% endfor %}                
             </div>        
         </div>
         <div class="row mt-2">
@@ -32,27 +38,35 @@
                 <table class="table table-hover table-bordered">
                     <thead class="thead-dark border">
                         <tr>                            
-                            <th>Date</th>
+                            <th width="120px">Date</th>
                             <th>Message</th>                        
                             <th width="160px">Action</th>
                         </tr>
                     </thead>
                     <tbody> 
                         <!-- pour la boucle d'affichage des messages -->
-                        {% for message in messages %}
+                        {% for message in messagesForMailBox %}
                             <!--- MessageriBox -->
                             <tr>
-                                <td>{{ message.createdAt is empty ? "" : message.createdAt|date("d.m.Y", "Europe/Paris") }}</td>
+                                <td class="text-center">
+                                    {{ message.createdAt is empty ? "" : message.createdAt|date("d.m.Y", "Europe/Paris") }}
+                                    <br><br>
+                                    <!-- 
+                                        <i class="fas fa-2x fa-envelope-open"></i>
+                                        <i class="fas fa-2x fa-envelope text-secondary"></i>
+                                     -->
+                                    <i class="fas fa-2x fa-envelope-open"></i>
+                                </td>
                                 <td> 
-                                    <a href="/user/mailbox/view/{{message.Id}}">
-                                        <strong>{{ message.MessageTitle|e }}</strong>
+                                    <a href="/user/mailbox/view/{{message.id}}">
+                                        <strong>{{ message.messageTitle|e }}</strong>
                                     </a>                                   
-                                    <p>{{ message.MessageBody|e }}</p>                                          
+                                    <p>{{ message.messageBody|e }}</p>                                          
                                 </td>
                                 <td>                                           
-                                    <a href="/user/mailbox/update/{{message.Id}}" class="btn btn-primary mb-1"><i class="far fa-file-alt"></i></a>    
-                                    <a href="/user/mailbox/view/{{message.Id}}" class="btn btn-warning mb-1"><i class="far fa-edit"></i></a>    
-                                    <a href="/user/mailbox/delete/{{message.Id}}" class="btn btn-danger mb-1"><i class="far fa-trash-alt"></i></a>                                
+                                    <a href="{{ path('mailboxView', {id: message.id}) }}" class="btn btn-primary mb-1"><i class="far fa-file-alt"></i></a>    
+                                    <a href="{{ path('mailboxUpdate', {id: message.id}) }}" class="btn btn-secondary mb-1"><i class="far fa-edit"></i></a>    
+                                    <a href="{{ path('mailboxDelete', {id: message.id}) }}" class="btn btn-danger mb-1"><i class="far fa-trash-alt"></i></a>                                
                                 </td>
                             </tr>                          
                             <!--- end messageriBox-->           
@@ -67,10 +81,13 @@
                 
                     </tbody>
                 </table>    
-
-            </div> 
-        </div>       
-
+            </div>         
+        </div>     
+        <div class="row">  
+            <div class="col d-flex flex-row justify-content-center align-items-center">
+                {{ knp_pagination_render(messagesForMailBox) }}
+            </div>
+        </div>
     </div>
     <br><br><br>
 

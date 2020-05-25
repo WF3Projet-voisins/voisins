@@ -82,7 +82,7 @@ getServiceByType:
  
 
 mailbox:
-    path: /user/mailbox
+    path: /user/mailbox/
     controller: App\Controller\MailboxController::index
 
 mailboxAdd:
@@ -101,8 +101,10 @@ mailboxDelete:
     path: /user/mailbox/delete/{id}
     controller: App\Controller\MailboxController::deleteMailboxAction
 
-
-
+mailboxOuiDel:
+    path: /user/mailbox/ouidel/{id}
+    controller: App\Controller\MailboxController::ouidelMailboxAction
+    
     
 contactAdd:
     path: /contact
