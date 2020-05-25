@@ -13,33 +13,49 @@
     {% include 'composants/navBarUser.html.twig' %}
 
     <div class="container" style="margin-top:100px">
-      {# the contents of this variable are displayed on the web page #}
+  <script>
+    var route = "";
+  </script>
 
-      <label>
-        Filtre par catégories
-      </label>
+     
 
-      <select class="form-control form-control-lg" id="myChoice">
-        {% for categorie in categories %}
-          <option>
-            {{ categorie.name }}
-          </option>
-        {% endfor %}
-      </select>
+    {% set break = false %}
+      {% for service in services %}
+        {% if service.user.city == app.user.city and break == false %}
+        <label>
+          Filtre par catégories
+        </label>
+        <select class="form-control form-control-lg" id="myChoice">
+          {% for categorie in categories %}
+            <option>
+              {{ categorie.name }}
+            </option>
+          {% endfor %}
+        </select>
+        {% set break = true %}
+        {% endif %}
+      {% endfor %}
+
+
 
       <div class="container" id="cardChoice">
+        {% set break = false %}
+        {% set i = 0 %}
         {% for service in services %}
+       
+      
+          {% if service.user.city != app.user.city and break == false %}
+            <div class="container d-flex justify-content-center align-items-center" style="height: 60vh;">
+              <h1>{{ message }}</h1>
+              <h3> <a  href="{{ path('serviceAdd', {id: app.user.id}) }}">Proposez un service pour votre entourage</a></h3>
+            </div>
+            {% set break = true %}
+          {% endif %}
+
           {% if service.user.city == app.user.city %}
-            <a href="{{
-              path(
-                'servicePage',
-                {
-                  id: service.id
-                }
-              )
-              }}">
+         
               <div class="card mb-3"
-                name="{{ service.subcategory.category.name }}">
+                name="{{ service.subcategory.category.name }}" id="{{i}}">
                 <img src="{{ service.image }}" class="card-img-top" alt="..." />
                 <div class="card-body">
                   <h5 class="card-title">
@@ -64,12 +80,37 @@
                     Date de creation : {{ service.createdAt|date('d/m/Y \\a\\ g:ia') }}
                   </p>
                 </div>
+                <div class="container d-flex justify-content-end">
+                  <a class="btn btn-light" href="{{ path('servicePage',{id: service.id})}}" role="button">Acceder au service</a>
+                  <a class="btn btn-light cacher" id="{{ i }}" onclick="myfunction('{{ i }}')"  role="button">Cacher ce service</a>
+                  <script>
+
+                   function myfunction(event){
+                    
+                    route =  event ;
+                    console.log(event);
+
+                    var x = document.getElementById(event);
+                      if (x.style.display === "none") {
+                       x.style.display = "block";
+                       } else {
+                        x.style.display = "none";
+                        }
+                    }
+
+                  </script>
+                </div>
+
+
               </div>
-            </a>
-      
+              
+          
+          
           {% else %}
             
           {% endif %}
+          {% set i = i + 1 %}
+     
         {% endfor %}
       </div>
     </div>
@@ -77,6 +118,7 @@
 {% endblock %}
 
 {% block javascripts %}
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="{{ asset('/js/services.js') }}"></script>
 {% endblock %}
