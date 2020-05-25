@@ -5,86 +5,74 @@
 {% endblock %}
 
 {% block stylesheets %}
-  <link rel="stylesheet" href="css/service.css">
+  <link rel="stylesheet" href="css/service.css" />
 {% endblock %}
 
 {% block body %}
-  
+  {% if app.user %}
+    {% include 'composants/navBarUser.html.twig' %}
 
-{% if app.user %}
-  {% include 'composants/navBarUser.html.twig' %}
+    <div class="container" style="margin-top:100px">
+      {# the contents of this variable are displayed on the web page #}
 
+      <label>
+        Filtre par catégories
+      </label>
 
+      <select class="form-control form-control-lg" id="myChoice">
+        {% for categorie in categories %}
+          <option>
+            {{ categorie.name }}
+          </option>
+        {% endfor %}
+      </select>
 
-  <div class="container" style="margin-top:100px">
-    {# the contents of this variable are displayed on the web page #}
-
-
-
-    <label>
-      Filtre par catégories
-    </label>
-
-
-    <select class="form-control form-control-lg" id="myChoice">
-      {% for categorie in categories %}
-        
-          <option>{{ categorie.name }}</option>
-          
-      {% endfor %}
-    </select>
-
-  
-    <div class="container" id="cardChoice">
-     
-      {% for service in services %}
+      <div class="container" id="cardChoice">
+        {% for service in services %}
+          {% if service.user.city == app.user.city %}
+            <a href="{{
+              path(
+                'servicePage',
+                {
+                  id: service.id
+                }
+              )
+              }}">
+              <div class="card mb-3"
+                name="{{ service.subcategory.category.name }}">
+                <img src="{{ service.image }}" class="card-img-top" alt="..." />
+                <div class="card-body">
+                  <h5 class="card-title">
+                    Titre du service : {{ service.name }}
+                  </h5>
+                  <p>
+                    Nom : {{ service.user.firstname }} {{ service.user.lastname }}
+                  </p>
+                  <p>
+                    Description : {{ service.description }}
+                  </p>
+                  <p>
+                    Status du service : {{ service.status }}
+                  </p>
+                  <p>
+                    Type du service : {{ service.typeService.name }}
+                  </p>
+                  <p>
+                    Durée du service proposé : {{ service.duration.duration }} minutes
+                  </p>
+                  <p>
+                    Date de creation : {{ service.createdAt|date('d/m/Y \\a\\ g:ia') }}
+                  </p>
+                </div>
+              </div>
+            </a>
       
-      <a href="{{ path('servicePage', {id: service.id}) }}">
-        <div class="card mb-3"  name="{{service.subcategory.category.name}}">
-          <img src="{{ service.image }}" class="card-img-top" alt="..." />
-          <div class="card-body" >
-            <h5 class="card-title" >
-              Titre du service : {{ service.name }}
-            </h5>
-            <p>
-              Nom : {{ service.user.firstname }} {{ service.user.lastname }}
-            </p>
-            <p>
-              Description : {{ service.description }}
-            </p>
-            <p>
-              Status du service : {{ service.status }}
-            </p>
-            <p>
-              Type du service : {{ service.typeService.name }}
-            </p>
-            <p>
-              Durée du service proposé : {{ service.duration.duration }} minutes
-            </p>
-            <p>
-              Date de creation : {{ service.createdAt|date('d/m/Y \\a\\ g:ia') }}
-            </p>
-          </div>
-        </div>
-      </a>
-    
-    {% endfor %}
-
-
-
-
-
-
-
-
+          {% else %}
+            
+          {% endif %}
+        {% endfor %}
+      </div>
     </div>
-    
-
-   
-
-  </div>
-
-
   {% endif %}
 {% endblock %}
 

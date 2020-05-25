@@ -57,7 +57,7 @@ class ServiceController extends AbstractController
 
 
 
-    public function getServiceAction(CommentRepository $commentRepository,Request $request, ServiceRepository $serviceRepository, UserRepository $userRepository, CategoryRepository $categoryRepository)
+    public function getServiceAction(UserInterface $user, CategoryRepository $categoryRepository, Request $request, ServiceRepository $serviceRepository, UserRepository $userRepository)
     {
 
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
@@ -71,13 +71,12 @@ class ServiceController extends AbstractController
 
 
 
-        foreach ($users as $user) {
+        
             return $this->render('service/pageService.html.twig', [
               
                 'controller_name' => 'ServiceController', 'services' => $services, 'categories' => $categories, 'user' => $user
             ]);
-        }
-       
+        
     }
 
 
