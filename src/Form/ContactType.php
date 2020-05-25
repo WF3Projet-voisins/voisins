@@ -24,17 +24,17 @@ class ContactType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'label_attr'=>['class'=> 'red-bg', 'style'=> 'color : black'],
-                'attr' => ['placeholder' => 'Nom']
+                'attr' => ['placeholder' => 'votre nom...']
                 ])
             ->add('mail', TextType::class, [
                 'label_attr'=>['class'=> 'red-bg', 'style'=> 'color : black'],
-                'attr' => ['placeholder' => 'Mail']
+                'attr' => ['placeholder' => 'votre adresse mail...']
                 ])
             ->add('message', TextareaType::class, [
                 'label_attr'=>['class'=> 'red-bg', 'style'=> 'color : black'],
-                'attr' => ['placeholder' => 'message']
+                'attr' => ['placeholder' => 'votre message...']
                 ])
-            ->add('save', SubmitType::class)
+            ->add('envoyer', SubmitType::class)
         ;
     }
 

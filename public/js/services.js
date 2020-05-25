@@ -16,7 +16,7 @@ $(document).ready(function(){
           var value = $('#myChoice').val();
 
 
-
+            
 
 
 
@@ -26,7 +26,7 @@ $(document).ready(function(){
           $("div[name=" + value + "]").show();
         
 
-          
+          console.log(value);
 
 
         });

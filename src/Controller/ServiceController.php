@@ -27,7 +27,6 @@ class ServiceController extends AbstractController
 {
     public function addServiceAction(Request $request, ServiceRepository $serviceRepository, CategoryRepository $categoryRepository, UserRepository $userRepository, $id)
     {
-
         /* Ajout d'un service par un user */
         $user = $userRepository->find($id);
         $service = new Service();
@@ -58,17 +57,24 @@ class ServiceController extends AbstractController
 
 
 
-    public function getServiceAction(UserInterface $user, Request $request, ServiceRepository $serviceRepository, UserRepository $userRepository)
+    public function getServiceAction(UserInterface $user, CategoryRepository $categoryRepository, Request $request, ServiceRepository $serviceRepository, UserRepository $userRepository)
     {
 
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+     
         $services = $serviceRepository->findAll();
-        
-
-        //je redirige vers la route de mon choix 
        
-            return $this->render('service/pageService.html.twig', [
+        $categories = $categoryRepository->findAll();
+        $users = $userRepository->findAll();
 
-                'controller_name' => 'ServiceController', 'services' => $services, 'user' => $user
+
+
+
+
+        
+            return $this->render('service/pageService.html.twig', [
+              
+                'controller_name' => 'ServiceController', 'services' => $services, 'categories' => $categories, 'user' => $user
             ]);
         
     }
