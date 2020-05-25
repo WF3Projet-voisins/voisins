@@ -61,22 +61,10 @@ serviceDelete:
   controller: App\Controller\ServiceController::serviceDeleteAction
 
 
-
-commentaireAdd:
-    path: /user/service
-    controller: App\Controller\ServiceController::addCommentaireAction
- 
-commentaireGet:
-    path: /user/service/{id}
-    controller: App\Controller\ServiceController::getCommentaireAction
- 
-commentaireUpdate:
-    path: /user/service/{id}
-    controller: App\Controller\ServiceController::updateCommentaireAction
  
 commentaireDelete:
-    path: /user/service/{id}
-    controller: App\Controller\ServiceController::deleteCommentaireAction
+    path: /user/service/deleteComment/{id}
+    controller: App\Controller\CommentController::deleteCommentaireAction
 
 
 

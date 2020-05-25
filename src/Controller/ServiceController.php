@@ -150,6 +150,6 @@ class ServiceController extends AbstractController
 
         $manager->remove($service);
         $manager->flush();
-        return $this->redirectToRoute('dashboardUserService', ['id' => $id]);
+        return $this->redirectToRoute('dashboardUserService', ['id' => $user->getId()]);
     }
 }

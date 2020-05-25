@@ -14,6 +14,7 @@
           <img src="{{ service.image }}"
             class="card-img-top"
             style="width:400px" />
+            
           <div>
             <h5 class="card-title">
               Intitulé du service : {{ service.name }}
@@ -42,7 +43,7 @@
             <p>
               Commentaires
             </p>Espace commentaires :{% for comment in comments %}
-              <div class="container">
+              <div class="container mb-2 commentUser" id="{{ comment.id }}">
                 <div class="row">
                   <div class="col-8">
                     <div class="card card-white post">
@@ -53,9 +54,13 @@
                         </div>
                       </div>
                       <div class="post-description">
-                        <p>
+                      <div class="d-flex justify-content-center "> 
+                        <p class="col-11">
                           {{ comment.message }}
                         </p>
+                        {% if comment.userFrom.id == app.user.id %}
+                        <button class="deleteComment" style="border: none; background-color:white" onclick="deleteComment({{ comment.id }})"> <span style="color:red">  <i class="fas fa-times col-1 mt-1"></i> </span></button>
+                        {% endif %}</div>
                         <p class="text-muted time float-right"
                           style="font-size:12px">
                           écrit par <a href="#">
@@ -84,4 +89,7 @@
   </div>
 {% include 'composants/footer.html.twig' %}
 
+{% endblock %}
+{% block javascripts %}
+  <script src="{{ asset('/js/comments.js') }}"></script>
 {% endblock %}
