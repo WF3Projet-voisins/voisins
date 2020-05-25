@@ -112,3 +112,6 @@ contactDelete:
 chooseTypeServices:
     path: /choose/type/{id}
     controller: App\Controller\ChooseTypeServicesController::chooseTypeServicesAction
+
+
+

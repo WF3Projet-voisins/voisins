@@ -67,7 +67,7 @@ class ServiceController extends AbstractController
        
         $categories = $categoryRepository->findAll();
         $users = $userRepository->findAll();
-
+        $message = "Il n'y a pas de services proposés dans votre ville!";
 
 
 
@@ -75,7 +75,7 @@ class ServiceController extends AbstractController
         
             return $this->render('service/pageService.html.twig', [
               
-                'controller_name' => 'ServiceController', 'services' => $services, 'categories' => $categories, 'user' => $user
+                'controller_name' => 'ServiceController', 'services' => $services, 'categories' => $categories, 'user' => $user, 'message' => $message
             ]);
         
     }
