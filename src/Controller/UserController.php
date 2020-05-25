@@ -129,15 +129,12 @@ class UserController extends AbstractController
 
             $manager->persist($user);
             $manager->flush();
+            $this->get('session')->getFlashBag()->add('Message', 'Informations modifiées');
             return $this->redirectToRoute('userProfile', ['id' => $id]);
         }
 
 
         return $this->render('user/profileUser.html.twig', ["user" => $user, "categories" => $categories, "subCategories" => $subCategories, "formUser" => $formUser->createView()]);
-    }
-
-    public function updateUserAction(UserRepository $userRepository, $id, Request $request)
-    {
     }
 
 

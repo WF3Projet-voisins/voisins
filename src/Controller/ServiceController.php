@@ -47,6 +47,7 @@ class ServiceController extends AbstractController
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($service);
             $manager->flush();
+            $this->get('session')->getFlashBag()->add('Message', 'Service ajouté');
             return $this->redirectToRoute('dashboardUserService',['id'=> $id]);
         }
 
@@ -100,6 +101,7 @@ class ServiceController extends AbstractController
             $manager->persist($comment);
             $manager->flush();
             return $this->redirectToRoute('servicePage', ['id'=> $service->getId()]);
+            
         }
 
 
@@ -136,6 +138,7 @@ class ServiceController extends AbstractController
 
             $manager->persist($service);
             $manager->flush();
+            $this->get('session')->getFlashBag()->add('Message', 'Service modifié');
             return $this->redirectToRoute('dashboardUserService', ['id' => $id]);
         }
 
@@ -150,6 +153,7 @@ class ServiceController extends AbstractController
 
         $manager->remove($service);
         $manager->flush();
+        $this->get('session')->getFlashBag()->add('Message', 'Service supprimé');
         return $this->redirectToRoute('dashboardUserService', ['id' => $user->getId()]);
     }
 }
