@@ -57,7 +57,7 @@ class ServiceController extends AbstractController
 
 
 
-    public function getServiceAction(CommentRepository $commentRepository,Request $request, ServiceRepository $serviceRepository, UserRepository $userRepository, CategoryRepository $categoryRepository)
+    public function getServiceAction(Request $request, ServiceRepository $serviceRepository, UserRepository $userRepository, CategoryRepository $categoryRepository)
     {
 
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
