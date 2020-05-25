@@ -14,7 +14,7 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item mr-1">
-                            <a href="{{ path('serviceGet') }}" class="nav-link">Voir les services en cours</a>
+                            <a href="{{ path ('serviceGet') }}" class="nav-link">Voir les services en cours</a>
                         </li>
                         <li class="nav-item mr-1 pt-2">
                             <div class="dropdown">
@@ -23,8 +23,8 @@
                                 </a>
                               
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                  <a class="dropdown-item" href="{{ path('userProfile', {id: user.id}) }}">mon profil</a>
-                                  <a class="dropdown-item" href="{{ path('dashboardUserService', {id: user.id})}}">accéder à mes services</a>
+                                  <a class="dropdown-item" href="{{ path ('userProfile', {id: user.id}) }}">mon profil</a>
+                                  <a class="dropdown-item" href="{{ path ('dashboardUserService', {id: user.id})}}">accéder à mes services</a>
                                   <a class="dropdown-item" href="{{path ("faqs")}}">faqs</a>
                                   <a class="dropdown-item" href="{{path ("contactAdd")}}">contact</a>
                                   <a class="dropdown-item" href="{{path ('app_logout')}}">se déconnecter</a>
