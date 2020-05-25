@@ -57,13 +57,13 @@ class ServiceController extends AbstractController
 
 
 
-    public function getServiceAction(Request $request, ServiceRepository $serviceRepository, UserRepository $userRepository)
+    public function getServiceAction(Request $request, ServiceRepository $serviceRepository, UserRepository $userRepository, CategoryRepository $categoryRepository)
     {
 
      
         $services = $serviceRepository->findAll();
         $users = $userRepository->findAll();
-
+        $categories = $categoryRepository->findAll();
 
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
@@ -71,17 +71,12 @@ class ServiceController extends AbstractController
 
         $userCity = $user->getCity();
         
-       
-
-        
-
-        
         //je redirige vers la route de mon choix 
         //foreach ($users as $userOne) {
             
             return $this->render('service/pageService.html.twig', [
               
-                'controller_name' => 'ServiceController', 'services' => $services, 'user' => $user, 'service' => $userCity
+                'controller_name' => 'ServiceController', 'services' => $services, 'user' => $user, 'service' => $userCity, 'categories' => $categories
             ]);
        // }
     }
