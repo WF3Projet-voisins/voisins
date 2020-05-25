@@ -31,7 +31,7 @@ class MailboxController extends AbstractController
         $user = $this->getUser();
                       
         // On appelle la liste de tous les messagerie       
-        $messages = $this->getDoctrine()->getRepository(Mailbox::class)->findAll();
+        $messages = $this->getDoctrine()->getRepository(Mailbox::class)->findBy(['user_for'=> $user->getId()]);
 
         $messagesForMailBox = $paginator->paginate(
             $messages,
