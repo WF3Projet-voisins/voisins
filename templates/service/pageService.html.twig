@@ -82,7 +82,8 @@
                 </div>
                 <div class="container d-flex justify-content-end">
                   <a class="btn btn-light" href="{{ path('servicePage',{id: service.id})}}" role="button">Acceder au service</a>
-                  <a class="btn btn-light cacher" id="{{ i }}" onclick="myfunction('{{ i }}')"  role="button">Cacher ce service</a>
+                  <a class="btn btn-light cacher" id="{{ i }}" onclick="myfunction('{{ i }}')"  role="button"><i class="fas fa-times"></i></a>
+                  
                   <script>
 
                    function myfunction(event){
