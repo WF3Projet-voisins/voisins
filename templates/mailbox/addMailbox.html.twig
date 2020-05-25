@@ -3,6 +3,8 @@
 {% block title %}{% endblock %}
 
 {% block body %}
+{% include 'composants/navBarUser.html.twig' %}
+<div style="margin-top:150px" class="d-flex justify-content-center mb-4"></div>
 
     <div class="container">
         <div class="row mt-5">            
@@ -15,20 +17,31 @@
             </div>
         </div>
         <div class="row mt-0">
-            <div class="col text-center">
+            <div class="col text-center text-black-50">
                 <h2><i class="fas fa-envelope-open-text"></i>&nbsp;<strong>MAILBOX</strong></h2>
                 Messagerie interne 
             </div>        
-        </div>
+        </div>          
+        <div class="row my-2 d-flex flex-row justify-content-center align-items-center">
+            <div class="col-10 p-3" style="background-color: #f2f2f2;">
+                <h3 class="text-center"><strong>Nouveau message</strong></h3>                
+                
+                {{ form_start(mailboxForm) }}
 
+                {{ form_widget(mailboxForm) }}
 
-        <hr>
-        <div class="row mt-2">
-            <div class="col text-left">
-                <a href="/user/mailbox/" class="btn btn-success mb-1"><i class="fas fa-reply"></i> Returner</a> 
-            </div>
-        </div>
+                <hr>
+                <div class="text-right">
+                    <a href="{{ path('mailbox') }}" class="btn btn-secondary mb-1">Abandonner</a>                     
+                    <button type="submit" class="btn btn-primary mb-1">Ajouter</button>
+                    <!-- <a href="/user/mailbox/" class="btn btn-primary mb-1">Ajouter</a> -->
+                </div>
+
+                {{ form_end(mailboxForm) }}
+
+            </div>        
+        </div>        
     </div>
     <br><br><br>
-
+{% include 'composants/footer.html.twig' %}
 {% endblock %}
