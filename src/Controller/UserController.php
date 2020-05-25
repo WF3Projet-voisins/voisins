@@ -136,10 +136,6 @@ class UserController extends AbstractController
         return $this->render('user/profileUser.html.twig', ["user" => $user, "categories" => $categories, "subCategories" => $subCategories, "formUser" => $formUser->createView()]);
     }
 
-    public function updateUserAction(UserRepository $userRepository, $id, Request $request)
-    {
-    }
-
 
     public function deleteUserAction()
     {
