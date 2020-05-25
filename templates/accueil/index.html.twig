@@ -5,7 +5,12 @@
 
 
 {% block body %}
-    {% include 'composants/navbarAccueil.html.twig' %}
+{% if app.user %}
+  {% include 'composants/navBarUser.html.twig' %}
+
+{% else %}
+  {% include 'composants/navbarAccueil.html.twig' %}
+{% endif %}
     <!-- Full Carousel -->
     <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
