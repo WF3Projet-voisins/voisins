@@ -2,14 +2,15 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\TypeService;
-use App\Entity\Service;
-use App\Entity\Duration;
+use App\Entity\Faq;
 use App\Entity\User;
-use App\Entity\Ranking;
-use App\Entity\Category;
-use App\Entity\SubCategory;
 use App\Entity\MailBox;
+use App\Entity\Ranking;
+use App\Entity\Service;
+use App\Entity\Category;
+use App\Entity\Duration;
+use App\Entity\SubCategory;
+use App\Entity\TypeService;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
@@ -36,6 +37,11 @@ class AppFixtures extends Fixture
             ->setImage("https://www.interdemenagement.com/wp-content/uploads/sites/5095/2017/11/carton.png");
         $manager->persist($catDemenagements);
 
+        $catAmmeublement = new Category();
+        $catAmmeublement->setName("Ammeublement")
+            ->setImage("https://www.interdemenagement.com/wp-content/uploads/sites/5095/2017/11/carton.png");
+        $manager->persist($catAmmeublement);
+
         $catCuisine = new Category();
         $catCuisine->setName("Cuisine")
             ->setImage("https://i.pinimg.com/originals/fb/71/b9/fb71b9d42001665a1f1b8df900a32b81.jpg");
@@ -51,6 +57,11 @@ class AppFixtures extends Fixture
             ->setImage("https://img2.freepng.fr/20180516/xkw/kisspng-mechanical-engineering-car-mechanics-design-engine-5afc650f09ae93.9112691115264903830397.jpg");
         $manager->persist($catMecanique);
 
+        $catAnimaux = new Category();
+        $catAnimaux->setName("Animaux")
+            ->setImage("https://img2.freepng.fr/20180516/xkw/kisspng-mechanical-engineering-car-mechanics-design-engine-5afc650f09ae93.9112691115264903830397.jpg");
+        $manager->persist($catAnimaux);
+
 
         // séparation entre category et subcategory
 
@@ -59,6 +70,12 @@ class AppFixtures extends Fixture
             ->setImage("https://www.debouchage-general.be/wp-content/uploads/2016/11/wc-bouch%C3%A9.png")
             ->setCategory($catPlomberie);
         $manager->persist($subCatPlomberie);
+
+        $subCatPetSitter = new SubCategory();
+        $subCatPetSitter->setName("PetSitter")
+            ->setImage("https://www.debouchage-general.be/wp-content/uploads/2016/11/wc-bouch%C3%A9.png")
+            ->setCategory($catAnimaux);
+        $manager->persist($subCatPetSitter);
 
         $subCatDemenagements = new SubCategory();
         $subCatDemenagements->setName("Aide aux déménagements")
@@ -79,12 +96,17 @@ class AppFixtures extends Fixture
         $manager->persist($subCatJardinage);
 
         $subCatMecanique = new SubCategory();
-        $subCatMecanique->setName("Changer pneu")
+        $subCatMecanique->setName("Changer des pneus")
             ->setImage("https://www.go-pneus-occasion.fr/userfiles/10186/pneus-occasions-le-muy-01-reparation.png")
             ->setCategory($catMecanique);
         $manager->persist($subCatMecanique);
-        // $product = new Product();
-        // $manager->persist($product);
+
+        $subcatMontageMeuble = new SubCategory();
+        $subcatMontageMeuble->setName("Aide au montage de meuble")
+            ->setImage("https://www.go-pneus-occasion.fr/userfiles/10186/pneus-occasions-le-muy-01-reparation.png")
+            ->setCategory($catAmmeublement);
+        $manager->persist($subcatMontageMeuble);
+        
 
         // séparation entre subcategory et Ranking
         $rankNewbie = new Ranking();
@@ -133,128 +155,197 @@ class AppFixtures extends Fixture
 
                     $manager->persist($user);
 
+                    $user1 = new User();
+                    $user1->setEmail('philippe.sanogo@gmail.com')
+                           ->setRoles(['ROLE_USER'])
+                           ->setPassword($this->passwordEncoder->encodePassword($user1, 'root'))
+                           ->setLastname('SANOGO')
+                           ->setFirstname('Phillipe')
+                           ->setCity('Strasbourg')
+                           ->setPostalCode('67000')
+                           ->setImage('https://cours.wf3.fr/app/avatars/users/2806/2806-sanogo-phillipe.jpeg')
+                           ->setTimeGauge('0')
+                           ->setTotalTimeServiceGiven('0')
+                            ->setRanking($rankNewbie);
+                    
+                           
+                    $manager->persist($user1);
+            
+                    $user2 = new User();
+                    $user2->setEmail('Vladimir.Popo@gmail.com')
+                           ->setRoles(['ROLE_USER'])
+                           ->setPassword($this->passwordEncoder->encodePassword($user2, 'root'))
+                           ->setLastname('Popovic')
+                           ->setFirstname('Vladimir')
+                           ->setCity('Strasbourg')
+                           ->setPostalCode('67000')
+                           ->setImage('https://cours.wf3.fr/app/avatars/users/2796/2796-scheffer-eric.jpeg')
+                           ->setTimeGauge('0')
+                           ->setTotalTimeServiceGiven('0')
+                            ->setRanking($rankNewbie);
+                    
+                           
+                    $manager->persist($user2);
+            
+                    $user3 = new User();
+                    $user3->setEmail('vazvieirafrederic@outlook.fr')
+                           ->setRoles(['ROLE_USER'])
+                           ->setPassword($this->passwordEncoder->encodePassword($user3, 'root'))
+                           ->setLastname('VAZ VIEIRA')
+                           ->setFirstname('Frédéric')
+                           ->setCity('Molsheim')
+                           ->setPostalCode('67000')
+                           ->setImage('https://cours.wf3.fr/img/profil-male.png')
+                           ->setTimeGauge('0')
+                           ->setTotalTimeServiceGiven('0')
+                            ->setRanking($rankNewbie);
+                        
+                           
+                    $manager->persist($user3);
+            
+                    $user4 = new User();
+                    $user4->setEmail('sam@outlook.fr')
+                           ->setRoles(['ROLE_USER'])
+                           ->setPassword($this->passwordEncoder->encodePassword($user4, 'root'))
+                           ->setLastname('DUBOIS')
+                           ->setFirstname('Samantha')
+                           ->setCity('Schiltigheim')
+                           ->setPostalCode('67000')
+                           ->setImage('https://cours.wf3.fr/img/profil-female.png')
+                           ->setTimeGauge('0')
+                           ->setTotalTimeServiceGiven('0')
+                            ->setRanking($rankNewbie);
+
+                           
+                    $manager->persist($user4);
         
             // séparation entre Duration et Typeservices
 
-                $typeService = new TypeService();
-                $typeService->setName('blabla');
-                $manager->persist($typeService);
+                $typeServiceBesoin = new TypeService();
+                $typeServiceBesoin->setName('Besoin d\'un service');
+                $manager->persist($typeServiceBesoin);
+
+                $typeServiceRendre = new TypeService();
+                $typeServiceRendre->setName('Rendre service');
+                $manager->persist($typeServiceRendre);
             
 
                 // séparation entre Typeservices et services
 
             
                 $service = new Service();
-                $service->setName('Maçon')
-               ->setDescription('Construit tout ce que vous voulez')
+                $service->setName('Changer les pneus de ma voiture')
+               ->setDescription('Bonjour, j\'aurai besoin d\'aide afin de changer les roues de ma voiture. Je suis très bon en cuisine, je peux vous préparer le plat que vous souhaitez.')
                ->setCreatedAt(new \DateTime())
-               ->setStatus('Ouvrier')
+               ->setStatus('En cours')
                ->setImage('https://cdn.pixabay.com/photo/2017/06/07/10/47/elephant-2380009_960_720.jpg')
                 ->setDuration($duration_60)
-                ->setUser($user)
-                ->setTypeService($typeService)
-                ->setSubCategory($subCatPlomberie);
-        
-               
-            
+                ->setUser($user4)
+                ->setTypeService($typeServiceBesoin)
+                ->setSubCategory($subCatMecanique);        
                 $manager->persist($service);
 
                 $service = new Service();
-                $service->setName('Developpeur')
-               ->setDescription('Construit tout ce que vous voulez')
+                $service->setName('Montage d\'un meuble')
+               ->setDescription('Bonjour, je viens de recevoir un vaisselier. Vivant seul et sans outillage, y aurait-il une âme charitable pour m\'aider? Etant étudiant en droit, je peux apporter du soutien scolaire ou vous apporter de l\'aide si vous avez la moindre question ')
                ->setCreatedAt(new \DateTime())
-               ->setStatus('Ouvrier')
+               ->setStatus('En cours')
+               ->setImage('https://cdn.pixabay.com/photo/2017/06/07/10/47/elephant-2380009_960_720.jpg')
+                ->setDuration($duration_90)
+                ->setUser($user)
+                ->setTypeService($typeServiceBesoin)
+                ->setSubCategory($subcatMontageMeuble);          
+                $manager->persist($service);
+
+                $service = new Service();
+                $service->setName('Garder vos animaux')
+               ->setDescription("Bonjour, je viens d'arriver dans la région et je ne connais pas grand monde. J'adore les animaux et vivant en appartement, je ne peux pas en avoir. Je suis donc disponible pour garder vos adorables petites bêtes et pouvoir rencontrer de nouvelles personnes")
+               ->setCreatedAt(new \DateTime())
+               ->setStatus('En cours')
                ->setImage('https://cdn.pixabay.com/photo/2017/06/07/10/47/elephant-2380009_960_720.jpg')
                 ->setDuration($duration_60)
-                ->setUser($user)
-                ->setTypeService($typeService)
-                ->setSubCategory($subCatPlomberie);
-        
-               
-            
+                ->setUser($user3)
+                ->setTypeService($typeServiceRendre)
+                ->setSubCategory($subCatPetSitter);          
                 $manager->persist($service);
 
 
-                $user1 = new User();
-                $user1->setEmail('philippe.sanogo@gmail.com')
-                       ->setRoles(['ROLE_USER'])
-                       ->setPassword($this->passwordEncoder->encodePassword($user1, 'user1'))
-                       ->setLastname('SANOGO')
-                       ->setFirstname('Phillipe')
-                       ->setCity('Strasbourg')
-                       ->setPostalCode('67000')
-                       ->setImage('https://cours.wf3.fr/app/avatars/users/2806/2806-sanogo-phillipe.jpeg')
-                       ->setTimeGauge('0')
-                       ->setTotalTimeServiceGiven('0');
-                       
-                $manager->persist($user1);
-        
-                $user2 = new User();
-                $user2->setEmail('eric.scheffer.pro@gmail.com')
-                       ->setRoles(['ROLE_USER'])
-                       ->setPassword($this->passwordEncoder->encodePassword($user2, 'user2'))
-                       ->setLastname('SCHEFFER')
-                       ->setFirstname('Eric')
-                       ->setCity('Strasbourg')
-                       ->setPostalCode('67000')
-                       ->setImage('https://cours.wf3.fr/app/avatars/users/2796/2796-scheffer-eric.jpeg')
-                       ->setTimeGauge('0')
-                       ->setTotalTimeServiceGiven('0');
-                       
-                $manager->persist($user2);
-        
-                $user3 = new User();
-                $user3->setEmail('vazvieirafrederic@outlook.fr')
-                       ->setRoles(['ROLE_USER'])
-                       ->setPassword($this->passwordEncoder->encodePassword($user3, 'user3'))
-                       ->setLastname('VAZ VIEIRA')
-                       ->setFirstname('Frédéric')
-                       ->setCity('Strasbourg')
-                       ->setPostalCode('67000')
-                       ->setImage('https://cours.wf3.fr/img/profil-male.png')
-                       ->setTimeGauge('0')
-                       ->setTotalTimeServiceGiven('0');
-                       
-                $manager->persist($user3);
-        
-                $user4 = new User();
-                $user4->setEmail('sam@outlook.fr')
-                       ->setRoles(['ROLE_USER'])
-                       ->setPassword($this->passwordEncoder->encodePassword($user4, 'user4'))
-                       ->setLastname('DUBOIS')
-                       ->setFirstname('Samantha')
-                       ->setCity('Strasbourg')
-                       ->setPostalCode('67000')
-                       ->setImage('https://cours.wf3.fr/img/profil-female.png')
-                       ->setTimeGauge('0')
-                       ->setTotalTimeServiceGiven('0');
-                       
-                $manager->persist($user4);
+                
                 
                 //  le premier enregistrement de la table de base de données
                 $message = new Mailbox();        
                 $message->setUserFrom($user1)
                         ->setUserFor($user2)
-                        ->setMessageTitle('Title 1')
-                        ->setMessageBody('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s')
+                        ->setMessageTitle('Hello')
+                        ->setMessageBody('Bonjour Vladimir ! Comment vas tu ? ')
                         ->setCreatedAt(new \DateTime());
                 $manager->persist($message);
         
                 $message = new Mailbox();        
                 $message->setUserFrom($user2)
                         ->setUserFor($user1)
-                        ->setMessageTitle('Title 2')
-                        ->setMessageBody('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s')
+                        ->setMessageTitle('Alo')
+                        ->setMessageBody('Bonjour Monsieur SanLogo ! Attendez attendez ! Je ne parle pas bien français')
                         ->setCreatedAt(new \DateTime());
                 $manager->persist($message);
         
                 $message = new Mailbox();        
                 $message->setUserFrom($user1)
                         ->setUserFor($user2)
-                        ->setMessageTitle('Title 3')
-                        ->setMessageBody('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s')
+                        ->setMessageTitle('Hello')
+                        ->setMessageBody('Ahahah Sacré Vladimir !')
                         ->setCreatedAt(new \DateTime());
                 $manager->persist($message);
+
+                $faq1 = new Faq();        
+                $faq1->setQuestion(" Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, officia ? ")
+                        ->setAnswer(" Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste debitis perspiciatis animi harum totam ex ullam molestias porro ea libero! ");                        
+                $manager->persist($faq1);
+
+                $faq2 = new Faq();        
+                $faq2->setQuestion(" Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, officia ? ")
+                        ->setAnswer(" Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste debitis perspiciatis animi harum totam ex ullam molestias porro ea libero! ");                        
+                $manager->persist($faq2);
+
+                $faq3 = new Faq();        
+                $faq3->setQuestion(" Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, officia ? ")
+                        ->setAnswer(" Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste debitis perspiciatis animi harum totam ex ullam molestias porro ea libero! ");                        
+                $manager->persist($faq3);
+
+                $faq4 = new Faq();        
+                $faq4->setQuestion(" Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, officia ? ")
+                        ->setAnswer(" Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste debitis perspiciatis animi harum totam ex ullam molestias porro ea libero! ");                        
+                $manager->persist($faq4);
+
+                $faq5 = new Faq();        
+                $faq5->setQuestion(" Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, officia ? ")
+                        ->setAnswer(" Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste debitis perspiciatis animi harum totam ex ullam molestias porro ea libero! ");                        
+                $manager->persist($faq5);
+
+                $faq6 = new Faq();        
+                $faq6->setQuestion(" Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, officia ? ")
+                        ->setAnswer(" Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste debitis perspiciatis animi harum totam ex ullam molestias porro ea libero! ");                        
+                $manager->persist($faq6);
+
+                $faq7 = new Faq();        
+                $faq7->setQuestion(" Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, officia ? ")
+                        ->setAnswer(" Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste debitis perspiciatis animi harum totam ex ullam molestias porro ea libero! ");                        
+                $manager->persist($faq7);
+
+                $faq8 = new Faq();        
+                $faq8->setQuestion(" Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, officia ? ")
+                        ->setAnswer(" Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste debitis perspiciatis animi harum totam ex ullam molestias porro ea libero! ");                        
+                $manager->persist($faq8);
+
+                $faq9 = new Faq();        
+                $faq9->setQuestion(" Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, officia ? ")
+                        ->setAnswer(" Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste debitis perspiciatis animi harum totam ex ullam molestias porro ea libero! ");                        
+                $manager->persist($faq9);
+                
+                $faq10 = new Faq();        
+                $faq10->setQuestion(" Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, officia ? ")
+                        ->setAnswer(" Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste debitis perspiciatis animi harum totam ex ullam molestias porro ea libero! ");                        
+                $manager->persist($faq10);
 
         $manager->flush();
     }
