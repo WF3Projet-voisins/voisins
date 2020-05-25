@@ -13,20 +13,26 @@
 
 {% if app.user %}
   {% include 'composants/navBarUser.html.twig' %}
-
-
-  {% if app.user.city is defined  and app.user.city == serviceUser.user.city%}
-    Services proposés à {{serviceUser.user.city}}
-  {% endif %} 
-
 {% else %}
   {% include 'composants/navbarAccueil.html.twig' %}
-  {{dump(user)}}
 {% endif %}
 
 
   <div class="container" style="margin-top:100px">
     {# the contents of this variable are displayed on the web page #}
+
+    {% if app.user.city is defined %}
+        {{dump(app.user.city)}}
+        {{dump(service)}}
+
+
+        
+
+
+
+
+    {% endif %} 
+
     <label>
       Filtre par nom de service
     </label>
