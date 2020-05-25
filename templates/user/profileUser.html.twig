@@ -19,8 +19,8 @@
       </h1>
     </div>
     <div class="blockMessagerieRanking">
-      <p class="col-2">
-       Messagerie
+      <p class="col-2"><a href="{{path('mailbox')}}">
+       Messagerie</a>
       </p>
       <div class="col-8">
         {% for flashMessage in app.session.flashbag.get('Message') %}
