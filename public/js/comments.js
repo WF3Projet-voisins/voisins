@@ -3,7 +3,6 @@ function deleteComment(id) {
     url: '/user/service/deleteComment/' + id,
     method: 'GET',
   }).done(function () {
-    console.log('supprimé')
     $("#"+id).hide()
   })
 }
