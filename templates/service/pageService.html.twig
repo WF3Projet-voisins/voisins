@@ -13,9 +13,7 @@
 
 {% if app.user %}
   {% include 'composants/navBarUser.html.twig' %}
-{% else %}
-  {% include 'composants/navbarAccueil.html.twig' %}
-{% endif %}
+
 
 
   <div class="container" style="margin-top:100px">
@@ -27,22 +25,22 @@
       Filtre par catégories
     </label>
 
-    
+
     <select class="form-control form-control-lg" id="myChoice">
       {% for categorie in categories %}
         
           <option>{{ categorie.name }}</option>
-
+          
       {% endfor %}
     </select>
 
   
     <div class="container" id="cardChoice">
-
-      {% for service in services %}
      
+      {% for service in services %}
+      
       <a href="{{ path('servicePage', {id: service.id}) }}">
-        <div class="card mb-3"  name="">
+        <div class="card mb-3"  name="{{service.subcategory.category.name}}">
           <img src="{{ service.image }}" class="card-img-top" alt="..." />
           <div class="card-body" >
             <h5 class="card-title" >
@@ -69,7 +67,7 @@
           </div>
         </div>
       </a>
-     
+    
     {% endfor %}
 
 
@@ -87,7 +85,7 @@
   </div>
 
 
-
+  {% endif %}
 {% endblock %}
 
 {% block javascripts %}
