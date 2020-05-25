@@ -9,10 +9,13 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item mr-1">
-                            <a href="{{ path('serviceGet') }}" class="nav-link">Services en cours</a>
+                            <a href="{{ path('serviceGet') }}" class="nav-link">Voir les services en cours</a>
                         </li>
                         <li class="nav-item mr-1">
                             <a href="{{ path('userProfile', {id: user.id}) }}" class="nav-link">Mon profil</a>
+                        </li>
+                        <li class="nav-item mr-1">
+                            <a href="{{ path('dashboardUserService', {id: user.id})}}" class="nav-link">Accèder à mes services</a>
                         </li>
                         <li class="nav-item mr-1">
                             <a href=" {{path ("faqs")}} " class="nav-link">FAQs</a>
