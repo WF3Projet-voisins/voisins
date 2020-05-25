@@ -129,6 +129,7 @@ class UserController extends AbstractController
 
             $manager->persist($user);
             $manager->flush();
+            $this->get('session')->getFlashBag()->add('Message', 'Informations modifiées');
             return $this->redirectToRoute('userProfile', ['id' => $id]);
         }
 

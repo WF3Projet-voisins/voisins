@@ -23,6 +23,12 @@
        Messagerie
       </p>
       <div class="col-8">
+        {% for flashMessage in app.session.flashbag.get('Message') %}
+<div class="alert alert-success col-3 ml-4">
+  <strong>Success!</strong> {{ flashMessage }}
+</div>
+
+{% endfor %}
         <div>
         Mes informations : Nom : {{ user.lastname }}
         Prénom : {{ user.firstname }}

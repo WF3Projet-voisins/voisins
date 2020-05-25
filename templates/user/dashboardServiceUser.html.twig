@@ -11,7 +11,13 @@
   <div style="margin-top:150px" class="d-flex justify-content-center mb-4"><a href=" {{
     path('serviceAdd',{id: user.id})}} " class="btn btn-danger">Ajouter un service</a>
     </div>
-  
+  {% for flashMessage in app.session.flashbag.get('Message') %}
+<div class="alert alert-success col-3 ml-4">
+  <strong>Success!</strong> {{ flashMessage }}
+</div>
+
+{% endfor %}
+
   <table class="table">
     <thead class="thead-dark">
       <tr>
