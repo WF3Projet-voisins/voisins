@@ -32,11 +32,24 @@
                 {{ form_widget(mailboxForm) }}
 
                 <hr>
-                <div class="text-right">
-                    <a href="{{ path('mailbox') }}" class="btn btn-secondary mb-1">Abandonner</a>
-                    <button type="submit" class="btn btn-primary mb-1">Modifier</button>
-                    <!-- <a href="/user/mailbox/" class="btn btn-primary mb-1">Ajouter</a> -->
-                </div>
+                {% if mailbox.userFrom.id == app.user.id %}
+
+                    <div class="text-right">
+                        <a href="{{ path('mailbox') }}" class="btn btn-secondary mb-1">Abandonner</a>
+                        <button type="submit" class="btn btn-primary mb-1">Modifier</button>                
+                    </div>
+
+                {% else %}
+
+                    <div class="text-center">
+                        <h5><strong>Vous n'avez pas créé ce message et n'êtes pas autorisé à le modifier !</strong></h5>               
+                    </div>
+                    <br>
+                    <div class="text-center">
+                        <a href="{{ path('mailbox') }}" class="btn btn-secondary mb-1">Returner</a> 
+                    </div>
+
+                {% endif %}
 
                 {{ form_end(mailboxForm) }}
 

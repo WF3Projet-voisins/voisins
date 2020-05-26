@@ -2,7 +2,7 @@
     <div class="container my-0 py-4">
         <div class="row d-flex flex-row justify-content-between align-items-start">       
             <div class="col-3">
-                <h5> Nous contacter </h5>
+                <h5>Infos légales</h5>
                 <p>
                     67 Route des Romains, <br>
                     Le Mathis,<br> 
@@ -12,13 +12,13 @@
                     
                 </p>
             </div>
-            <div class="col-3">
-                <h5>A propos</h5>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+            <div class="col-3">                
+                <h5 class="text-black"><a href="{{ path('index')}}" class="text-dark text-decoration-none">Formation</a></h5>
+                <img src="{{asset ("img/formation.jpg")}}" alt="">
             </div>                    
             <div class="col-3">
-                <a href="{{ path('apropos')}}">Qui sommes-nous </a>
-                <p>Venez découvrir notre équipe.</p>
+                <h5><a href="{{ path('apropos')}}" class="text-dark text-decoration-none">Qui sommes-nous</a></h5>
+                <a href="{{ path('apropos')}}" class="text-dark text-decoration-none"><img src="{{asset ("img/groupe-voisins.jpg")}}" alt=""></a>
             </div>
             <div class="col-3">
                 <h5>Reseaux sociaux</h5>

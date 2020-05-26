@@ -1,29 +1,13 @@
+function hideService(id){
 
-var route = "";
-
-
-function myfunction(event){
  
-  route =  event ;
- 
- 
-  var x = document.getElementById(event);
+  var x = document.getElementById(id);
     if (x.style.display === "none") {
      x.style.display = "block";
      } else {
       x.style.display = "none";
       }
   }
- 
-
-
-
-
-var message = document.getElementById('message');
-var messageDiv = document.getElementsByClassName('message');
-
-
-
 
 
 $(document).ready(function(){

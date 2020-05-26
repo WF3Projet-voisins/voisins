@@ -47,6 +47,11 @@ class Mailbox
         return $this->id;
     }
 
+    public function __toString()
+    {
+        return (string)$this->getId();
+    }
+
     public function getUserFrom(): ?User
     {
         return $this->user_from;
