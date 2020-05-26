@@ -63,35 +63,18 @@ class ServiceController extends AbstractController
     {
 
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        /* "Select * from services where user.id IN (Select * from users where user.city = MON_USER_COURRANT_CITY)" */
      
-        $services = $serviceRepository->findAll();
-       
+        
         $categories = $categoryRepository->findAll();
-        $users = $userRepository->findAll();
-
-        $message = "";
-        $link ="";
-        
-
-        $isUserServiceGlobal = false;
-
-        foreach($services as $service){
-
-            $isUserServiceGlobal = $this->getIsUserTownHasServices($service, $this->getUser());
-        
-
-        }
-       
-        
-        if ($isUserServiceGlobal){
-            $message =  "Il n'y a pas de services dans votre ville!";
-            $link =      "Proposez un service pour votre entourage";
-
-        }
-        
+        $users = $userRepository->findBy(['city' => $user->getCity()]);
+        $services = $serviceRepository->findBy(['user'=> $users]);
+        dump($users);
+        dump($services);
             return $this->render('service/pageService.html.twig', [
               
-                'controller_name' => 'ServiceController', 'services' => $services, 'categories' => $categories, 'user' => $user, 'message' => $message, 'link' => $link, 'messageAffichage' => $isUserServiceGlobal
+                'controller_name' => 'ServiceController', 'services' => $services, 'categories' => $categories, 'user' => $user
             ]);
         
     }
@@ -173,12 +156,4 @@ class ServiceController extends AbstractController
         return $this->redirectToRoute('dashboardUserService', ['id' => $user->getId()]);
     }
 
-    private function getIsUserTownHasServices(Service $service, UserInterface $user): bool {
-        $isUserTown = true;
-        if($service->getUser()->getCity() === $user->getCity()){
-            
-            $isUserTown = false;
-        }
-        return $isUserTown;
-    }
 }

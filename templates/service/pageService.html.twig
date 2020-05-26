@@ -14,11 +14,7 @@
     {% include 'composants/navBarUser.html.twig' %}
 
     <div class="container" style="margin-top:100px">
-  
 
-    {% set break = false %}
-      {% for service in services %}
-        {% if service.user.city == app.user.city and break == false %}
               <label>
                 Filtre par catégories
               </label>
@@ -29,28 +25,14 @@
                       </option>
                     {% endfor %}
               </select>
-        {% set break = true %}
-      {% endif %}
-    {% endfor %}
-
       <div class="container" id="cardChoice">
-
-        {% if messageAffichage == true %}
-        <div class="container d-flex justify-content-center align-items-center" id="message" style="height: 60vh;">
-         <h1>{{message}}</h1>
-         <h3> <a  href='{{ path('serviceAdd', {id: app.user.id}) }}'>{{link}}</a></h3>
-        </div>
-      {% endif %}
-       
-        {% set i = 0 %}
+      {% if services|length > 0 %}
         {% for service in services %}    
+  
+          
 
-
-         
-
-          {% if app.user.city == service.user.city and messageAffichage == false %}
               <div class="card mb-3 "
-                name="{{ service.subcategory.category.name }}" id="{{i}}">
+                name="{{ service.subcategory.category.name }}" id="">
                 <img src="{{ service.image }}" class="card-img-top" alt="..." />
                 <div class="card-body message">
                   <h5 class="card-title">
@@ -77,24 +59,24 @@
                 </div>
                 <div class="container d-flex justify-content-end">
                   <a class="btn btn-light" href="{{ path('servicePage',{id: service.id})}}" role="button">Acceder au service</a>
-                  <a class="btn btn-light cacher" id="{{ i }}" onclick="myfunction('{{ i }}')"  role="button"><i class="fas fa-times"></i></a>
+                  <a class="btn btn-light cacher" id="{{ service.id }}" onclick="myfunction('{{ service.id }}')"  role="button"><i class="fas fa-times"></i></a>
                
                 </div>
-
-
               </div>
-              
-          
-          
-          {% else %}
-            
-          {% endif %}
-          {% set i = i + 1 %}
-     
         {% endfor %}
+
+      {% elseif services|length == 0  %}
+        <div class="container d-flex justify-content-center align-items-center" id="message" style="height: 60vh;">
+        <h1>Il n'y a pas de service actuellement</h1>
+        <h3> <a  href='{{ path('serviceAdd', {id: app.user.id}) }}'>Ajouter un service</a></h3>
+        </div>
+      {% endif %}
+
+
+
       </div>
     </div>
-  {% endif %}
+{% endif %}
    {% include 'composants/footer.html.twig' %}
 {% endblock %}
 
