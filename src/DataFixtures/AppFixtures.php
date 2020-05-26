@@ -42,6 +42,11 @@ class AppFixtures extends Fixture
             ->setImage("https://www.interdemenagement.com/wp-content/uploads/sites/5095/2017/11/carton.png");
         $manager->persist($catAmmeublement);
 
+        $catAide = new Category();
+        $catAide->setName("Aides diverses")
+            ->setImage("https://www.interdemenagement.com/wp-content/uploads/sites/5095/2017/11/carton.png");
+        $manager->persist($catAide);
+
         $catCuisine = new Category();
         $catCuisine->setName("Cuisine")
             ->setImage("https://i.pinimg.com/originals/fb/71/b9/fb71b9d42001665a1f1b8df900a32b81.jpg");
@@ -70,6 +75,12 @@ class AppFixtures extends Fixture
             ->setImage("https://www.debouchage-general.be/wp-content/uploads/2016/11/wc-bouch%C3%A9.png")
             ->setCategory($catPlomberie);
         $manager->persist($subCatPlomberie);
+
+        $subCatAide = new SubCategory();
+        $subCatAide->setName("Aides diverses")
+            ->setImage("https://www.debouchage-general.be/wp-content/uploads/2016/11/wc-bouch%C3%A9.png")
+            ->setCategory($catAide);
+        $manager->persist($subCatAide);
 
         $subCatPetSitter = new SubCategory();
         $subCatPetSitter->setName("PetSitter")

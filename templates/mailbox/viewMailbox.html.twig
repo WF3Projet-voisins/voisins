@@ -3,35 +3,49 @@
 {% block title %}{% endblock %}
 
 {% block body %}
+{% include 'composants/navBarUser.html.twig' %}
+<div style="margin-top:150px" class="d-flex justify-content-center mb-4"></div>
 
     <div class="container">
         <div class="row mt-5">            
             <div class="col-10 text-left">
                 <h6 class="mb-0"><strong>{{ user.Lastname|e }}&nbsp;{{ user.Firstname|e }}</strong></h6>
                 <strong class="text-black-50">{{ user.Email|e }}</strong>
+                <br>{{ app.user.email }}
             </div>
             <div class="col-2 text-right" width="150px">
                 <img src="{{user.image}}" class="rounded-circle" width="100px" height="100px" alt="">
             </div>
         </div>
         <div class="row mt-0">
-            <div class="col text-center">
+            <div class="col text-center text-black-50">
                 <h2><i class="fas fa-envelope-open-text"></i>&nbsp;<strong>MAILBOX</strong></h2>
                 Messagerie interne 
             </div>        
+        </div> 
+
+        <div class="row my-2 d-flex flex-row justify-content-center align-items-center">
+            <div class="col-10 p-3" style="background-color: #f2f2f2;">                
+                Message a été créé <br>
+                <strong>le</strong> {{ mailbox.createdAt is empty ? "" : mailbox.createdAt|date("d.m.Y", "Europe/Paris") }}<br>
+                <strong>du</strong> {{ mbuserfrom.email }}<br> 
+                <strong>pour</strong> {{ mbuserfor.email }}
+                <br><br>
+                <strong>Titre</strong>:<br> 
+                <h3 class="text-center"><strong>{{ mailbox.messageTitle }}</strong></h3>
+                <br><br>
+                <strong>Message</strong>:<br><br>
+                {{ mailbox.messageBody }}
+                <br>                
+                <hr>
+                <div class="text-right">
+                    <a href="{{ path('mailbox') }}" class="btn btn-secondary mb-1"><i class="fas fa-reply"></i> Retourner</a>                                     
+                </div>
+            </div>        
         </div>
 
-
-
-
-        <hr>
-        <div class="row mt-2">
-            <div class="col text-left">
-                <a href="/user/mailbox/" class="btn btn-success mb-1"><i class="fas fa-reply"></i> Returner</a> 
-            </div>
-        </div>
     </div>
 
     <br><br><br>
-
+{% include 'composants/footer.html.twig' %}
 {% endblock %}

@@ -6,6 +6,7 @@
 
 {% block stylesheets %}
   <link rel="stylesheet" href="css/service.css" />
+  <link rel="stylesheet" href="/css/navbarUser.css" />
 {% endblock %}
 
 {% block body %}
@@ -13,13 +14,9 @@
     {% include 'composants/navBarUser.html.twig' %}
 
     <div class="container" style="margin-top:100px">
-  
-    <div class="container d-flex col-8 justify-content-around">
-    {% set break = false %}
-      {% for service in services %}
-        {% if service.user.city == app.user.city and break == false %}
-              <label class="col-6 d-flex">
-                <h3 class="col-12">Filtre par catégories :</h3>
+
+              <label>
+                Filtre par catégories
               </label>
               <select class="col-6 form-control form-control-lg" id="myChoice">
                     {% for categorie in categories %}
@@ -28,78 +25,59 @@
                       </option>
                     {% endfor %}
               </select>
-        {% set break = true %}
-      {% endif %}
-    {% endfor %}
-    </div>
+      <div class="container" id="cardChoice">
+      {% if services|length > 0 %}
+        {% for service in services %}    
+  
+          
 
-      <div class="container m-5" id="cardChoice">
+              <div class="card mb-3 "
+                name="{{ service.subcategory.category.name }}" id="">
+                <img src="{{ service.image }}" class="card-img-top" alt="..." />
+                <div class="card-body message">
+                  <h5 class="card-title">
+                    Titre du service : {{ service.name }}
+                  </h5>
+                  <p>
+                    Nom : {{ service.user.firstname }} {{ service.user.lastname }}
+                  </p>
+                  <p>
+                    Description : {{ service.description }}
+                  </p>
+                  <p>
+                    Status du service : {{ service.status }}
+                  </p>
+                  <p>
+                    Type du service : {{ service.typeService.name }}
+                  </p>
+                  <p>
+                    Durée du service proposé : {{ service.duration.duration }} minutes
+                  </p>
+                  <p>
+                    Date de creation : {{ service.createdAt|date('d/m/Y \\a\\ g:ia') }}
+                  </p>
+                </div>
+                <div class="container d-flex justify-content-end">
+                  <a class="btn btn-light" href="{{ path('servicePage',{id: service.id})}}" role="button">Acceder au service</a>
+                  <a class="btn btn-light cacher" id="{{ service.id }}" onclick="myfunction('{{ service.id }}')"  role="button"><i class="fas fa-times"></i></a>
+               
+                </div>
+              </div>
+        {% endfor %}
 
-        {% if messageAffichage == true %}
-        <div class="container col-12 d-flex justify-content-center align-items-center" id="message" style="height: 60vh;">
-          <h1>{{message}}</h1>
-          <h3> <a  href='{{ path('serviceAdd', {id: app.user.id}) }}'>{{link}}</a></h3>
+      {% elseif services|length == 0  %}
+        <div class="container d-flex justify-content-center align-items-center" id="message" style="height: 60vh;">
+        <h1>Il n'y a pas de service actuellement</h1>
+        <h3> <a  href='{{ path('serviceAdd', {id: app.user.id}) }}'>Ajouter un service</a></h3>
         </div>
-        {% endif %}
+      {% endif %}
+
+
+
       </div>
-      <div class="container d-flex justify-content-around">
-        
-          {% set i = 0 %}
-            {% for service in services %}    
-              {% if app.user.city == service.user.city and messageAffichage == false %}
-                
-                  <div class="card mb-3 col-5"
-                    name="{{ service.subcategory.category.name }}" id="{{i}}">
-                    <img src="{{ service.image }}" class="p-3 card-img-top" alt="..." />
-                    <div class="card-body message" id="carteBody">
-                      <div class="mb-4 d-flex justify-content-center">
-                        <a class="btn btn-light" href="{{ path('servicePage',{id: service.id})}}" role="button">Acceder au service</a>
-                      </div>
-                      
-                      <h5 class="card-title">
-                        Titre du service : {{ service.name }}
-                      </h5>
-                      <p>
-                        Nom : {{ service.user.firstname }} {{ service.user.lastname }}
-                      </p>
-                      <p>
-                        Description : {{ service.description }}
-                      </p>
-                      <p>
-                        Status du service : {{ service.status }}
-                      </p>
-                      <p>
-                        Type du service : {{ service.typeService.name }}
-                      </p>
-                      <p>
-                        Durée du service proposé : {{ service.duration.duration }} minutes
-                      </p>
-                      <p>
-                        Date de creation : {{ service.createdAt|date('d/m/Y \\a\\ g:ia') }}
-                      </p>
-                    </div>
-                    <div class="container d-flex justify-content-end">
-                      
-                      <a class="mb-4 btn btn-light cacher" id="{{ i }}" onclick="myfunction('{{ i }}')"  role="button"><i class="fas fa-times"></i></a>
-                  
-                    </div>
-
-
-                  </div>
-                  
-              
-              
-              {% else %}
-                
-              {% endif %}
-              {% set i = i + 1 %}
-        
-        
-              {% endfor %}
-        </div>      
-     
     </div>
-  {% endif %}
+{% endif %}
+   {% include 'composants/footer.html.twig' %}
 {% endblock %}
 
 {% block javascripts %}
