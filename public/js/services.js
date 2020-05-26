@@ -2,7 +2,7 @@ function hideService(id){
 
  
   var x = document.getElementById(id);
-  console.log(x);
+ 
     if (x.style.display === "none") {
      x.style.display = "block";
      } else {
@@ -11,20 +11,45 @@ function hideService(id){
   }
 
 
-$(document).ready(function(){
 
+
+
+
+$(document).ready(function(){
+ 
 
       $( "select" ).change(function() {
         $( "select option:selected" ).each(function() {
           var value = $('#myChoice').val();
           $('.card').hide();
+          $("#passerMessage").empty();
        
-
+         
           $("div[name=" + value + "]").show();
 
-          
+          //console.log("pasCoucou");
+
+          if (!$("div[name=" + value + "]").show('.card')[0]){
+            $("#passerMessage").empty();
+           
+           let passerMessage = document.getElementById('passerMessage');
+            let newP = document.createElement('p');
+            let newTexte = document.createTextNode("Pas de services pour cette catégorie!");
+
+             
+              passerMessage.prepend(newP);
+              passerMessage.append(newTexte);
+            
+              $('#passerMessage').show();
+            console.log(passerMessage);
+          }
+    
         });
       })
+
+
+
+
 })
     
 
