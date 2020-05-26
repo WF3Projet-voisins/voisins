@@ -12,8 +12,121 @@
 {% block body %}
 {% include 'composants/navBarUser.html.twig' %}
 
-  <div class="container-fluid userProfileDiv">
-    <div class="">
+  <div class="container userProfileDiv">
+    <div class="row mb-4">
+
+      <h2 class="textCustom">
+        Bienvenue {{ user.firstname }}
+      </h2>
+
+      <div class="col text-right">
+          <a href="{{ path('dashboardUserService', {id: user.id}) }} " class="btn btn-warning">Accéder au dashboard des services</a>
+      </div>
+    </div>
+
+    
+    <div class="row">
+      
+      <div class="col-6 userImage textCustom">
+
+        
+
+        <img src="{{ user.image }}" alt="" style="width:300px" class="rounded" />    
+
+        <p class="textCustom mt-2"> 
+          Rank {{ user.ranking.name }}
+        </p>
+
+        <p class="mt-4"> <a href="{{path('mailbox')}}" class="linkCustom">
+        Messagerie</a> </p>
+      </div>
+      <div class="col-6">
+
+      <h3>Mes informations</h3>  <br>
+      Nom : {{ user.lastname }} <br>
+      Prénom : {{ user.firstname }} <br>
+      mail : {{ user.email }} <br>
+      Ville : {{ user.city }} <br>
+      Code Postal : {{ user.postalCode }} <br>
+    
+      <button type="button" id="formUpdateUser" class="btn btn-info mt-3">
+        Changer mes informations
+      </button>
+
+
+      <form name="user" method="POST" enctype="multipart/form-data" class="formUpdate">
+      
+          {{ form_label(formUser.lastname, null,  {'label_attr' : {'class' : ' text-golden pr-3'}}) }}
+          {{ form_widget(formUser.lastname , { 'attr': { 'class' : ' bg-light rounded shadow p-2'}}) }}
+
+          {{ form_label(formUser.firstname, null,  {'label_attr' : {'class' : ' w-2/8 text-golden pr-3'}}) }}
+          {{ form_widget(formUser.firstname , { 'attr': { 'class' : '  w-full bg-light rounded shadow'}}) }}
+
+          {{ form_label(formUser.city, null,  {'label_attr' : {'class' : ' text-golden pr-3'}}) }}
+          {{ form_widget(formUser.city , { 'attr': { 'class' : ' bg-light rounded shadow p-2'}}) }}
+
+          {{ form_label(formUser.postalCode, null,  {'label_attr' : {'class' : ' text-golden pr-3'}}) }}
+          {{ form_widget(formUser.postalCode , { 'attr': { 'class' : '  bg-light rounded shadow p-2'}}) }}
+
+          {{ form_label(formUser.email, null,  {'label_attr' : {'class' : ' text-golden pr-3'}}) }}
+          {{ form_widget(formUser.email , { 'attr': { 'class' : '  bg-light rounded shadow p-2'}}) }}
+
+          {{ form_label(formUser.image, "Changer mon image",  {'label_attr' : {'class' : ' text-golden pr-3'}}) }}
+          {{ form_widget(formUser.image , { 'attr': { 'class' : ' hidden image-input' }}) }}
+
+
+
+          {{ form_widget(formUser.save, {'attr': {'class' : ' btn btn-success mt-2' }}) }} 
+      </form>
+
+
+    
+      </div>
+
+      <!-- <div class="blockMessagerieRanking">
+      <div class="row mt-4">
+      <div class="col-6"> -->
+
+      
+
+      {#<div> 
+        <p>Mes heures de services données : </p>
+        <p>{{user.totalTimeServiceGiven}} heure(s)</p>
+        <p>Mon temps disponible à utiliser :</p>
+        <p>{{user.timeGauge}} heure(s)</p>
+      </div>#}
+
+      </div>
+    
+
+        
+
+        {#<div> 
+        <p>Mes heures de services données : </p>
+        <p>{{user.totalTimeServiceGiven}} heure(s)</p>
+        <p>Mon temps disponible à utiliser :</p>
+        <p>{{user.timeGauge}} heure(s)</p>
+
+        </div>#}
+      
+      </div>
+      </div>
+        {# <div class="container">
+        <div class="gauge-a"></div>
+        <div class="gauge-b"></div>
+        <div class="gauge-c"></div>
+        <div class="gauge-data">
+        <h1 id="percent">
+        {{ user.timeGauge }} heures
+        </h1>
+        </div> #}
+  
+
+  </div>
+
+</div>
+
+    {#<div class="">
       <h1>
         Bienvenue {{ user.firstname }}
       </h1>
@@ -80,7 +193,7 @@
       </div>
   
      
-       {# <div class="container">
+        <div class="container">
         <div class="gauge-a"></div>
         <div class="gauge-b"></div>
         <div class="gauge-c"></div>
@@ -88,7 +201,7 @@
           <h1 id="percent">
             {{ user.timeGauge }} heures
           </h1>
-        </div> #}
+        </div> 
       
 
     </div>
@@ -105,7 +218,7 @@
           
     </div>
 
-  </div>
+  </div>#}
     {% include 'composants/footer.html.twig' %}
 
 {% endblock %}
