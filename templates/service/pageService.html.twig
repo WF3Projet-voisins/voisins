@@ -27,12 +27,15 @@
                         </option>
                       {% endfor %}
                 </select>
+
+                <div class="m-3 d-flex justify-content-center" id="passerMessage">
+       
+                </div>
+
             </div>
              
       <div class="container shadow col-8" id="cardChoice" >
-        <div id="passerMessage">
-       
-        </div>
+        
 
       {% if services|length > 0 %}
         {% for service in services %}    
