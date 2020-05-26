@@ -4,45 +4,52 @@
     href="{{ asset('/css/pageOneService.css') }}"
     integrity=""
     crossorigin="anonymous" />
+    <link rel="stylesheet" href="/css/navbarUser.css">
 {% endblock %}
 {% block body %}
   {% include 'composants/navBarUser.html.twig' %}
   <div class="container">
     <div class="d-flex justify-content-center cardService">
       <div class="mb-3" id="cardService">
-        <div class="card-body">
+        <div class="card-body border customCardBody rounded">
           <img src="{{ service.image }}"
-            class="card-img-top"
-            style="width:400px" />
+            class="card-img-top rounded"
+            style="width:450px" />
             
           <div>
-            <h5 class="card-title">
+            <h3 class="card-title mt-4
+            ">
               Intitulé du service : {{ service.name }}
-            </h5>
-            <p id="serviceChoice">
-              Type du service : {{ service.typeService.name }}
-            </p>
-            <p>
-              Nom : {{ service.user.firstname }} {{ service.user.lastname }}
-            </p>
-            <p>
-              Description : {{ service.description }}
-            </p>
-            <p id="serviceChoice">
-              Status du service : {{ service.status }}
-            </p>
+            </h3>
 
-            <p>
-              Durée du service : {{ service.duration.duration }} minutes
-            </p>
-            <p>
-              Date de creation : {{ service.createdAt|date('d/m/Y \\a\\ g:ia') }}
-            </p>
+            
+              <p id="serviceChoice">
+                Type du service : {{ service.typeService.name }}
+              </p>
+              <p>
+                Nom : {{ service.user.firstname }} {{ service.user.lastname }}
+              </p>
+              {#<p>
+                Description : {{ service.description }}
+              </p>#}
+              <p id="serviceChoice">
+                Status du service : {{ service.status }}
+              </p>
+
+              <p>
+                Durée du service : {{ service.duration.duration }} minutes
+              </p>
+              <p>
+                Date de creation : {{ service.createdAt|date('d/m/Y \\a\\ g:ia') }}
+              </p>
+         
           </div>
           <div>
             <p>
               Commentaires
-            </p>Espace commentaires :{% for comment in comments %}
+            </p>
+            Espace commentaires :
+            {% for comment in comments %}
               <div class="container mb-2 commentUser" id="{{ comment.id }}">
                 <div class="row">
                   <div class="col-8">
@@ -80,7 +87,7 @@
              {{ form_label(formNewComment.message, null,  {'label_attr' : {'class' : ' text-golden pr-3'}}) }}
             {{ form_widget(formNewComment.message , { 'attr': { 'class' : ' bg-light rounded shadow p-2'}}) }}
             
-            {{ form_widget(formNewComment.save, {'attr': {'class' : ' btn btn-danger' }}) }} 
+            {{ form_widget(formNewComment.save, {'attr': {'class' : ' btn btn-success mt-4' }}) }} 
             </form>
           </div>
         </div>
