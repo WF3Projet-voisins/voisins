@@ -17,33 +17,27 @@
     var route = "";
   </script>
 
-     
-
     {% set break = false %}
       {% for service in services %}
         {% if service.user.city == app.user.city and break == false %}
-        <label>
-          Filtre par catégories
-        </label>
-        <select class="form-control form-control-lg" id="myChoice">
-          {% for categorie in categories %}
-            <option>
-              {{ categorie.name }}
-            </option>
-          {% endfor %}
-        </select>
+              <label>
+                Filtre par catégories
+              </label>
+              <select class="form-control form-control-lg" id="myChoice">
+                    {% for categorie in categories %}
+                      <option >
+                        <p class="option">{{ categorie.name }}</p>
+                      </option>
+                    {% endfor %}
+              </select>
         {% set break = true %}
-        {% endif %}
-      {% endfor %}
-
-
+      {% endif %}
+    {% endfor %}
 
       <div class="container" id="cardChoice">
         {% set break = false %}
         {% set i = 0 %}
-        {% for service in services %}
-       
-      
+        {% for service in services %}      
           {% if service.user.city != app.user.city and break == false %}
             <div class="container d-flex justify-content-center align-items-center" style="height: 60vh;">
               <h1>{{ message }}</h1>
@@ -53,7 +47,6 @@
           {% endif %}
 
           {% if service.user.city == app.user.city %}
-         
               <div class="card mb-3"
                 name="{{ service.subcategory.category.name }}" id="{{i}}">
                 <img src="{{ service.image }}" class="card-img-top" alt="..." />

@@ -3,14 +3,7 @@
 
 
 
-
-
-
 $(document).ready(function(){
-
-
-
-
 
 
       $( "select" ).change(function() {
@@ -20,7 +13,6 @@ $(document).ready(function(){
           $("div[name=" + value + "]").show();
         });
       })
-
 
 
 })
