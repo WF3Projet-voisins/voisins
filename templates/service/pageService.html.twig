@@ -32,7 +32,7 @@
           
 
               <div class="card mb-3 "
-                name="{{ service.subcategory.category.name }}" id="">
+                name="{{ service.subcategory.category.name }}" id="{{ service.id }}">
                 <img src="{{ service.image }}" class="card-img-top" alt="..." />
                 <div class="card-body message">
                   <h5 class="card-title">
@@ -59,7 +59,7 @@
                 </div>
                 <div class="container d-flex justify-content-end">
                   <a class="btn btn-light" href="{{ path('servicePage',{id: service.id})}}" role="button">Acceder au service</a>
-                  <a class="btn btn-light cacher" id="{{ service.id }}" onclick="myfunction('{{ service.id }}')"  role="button"><i class="fas fa-times"></i></a>
+                  <a class="btn btn-light cacher"  onclick="hideService('{{ service.id }}')"  role="button"><i class="fas fa-times"></i></a>
                
                 </div>
               </div>
