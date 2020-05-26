@@ -70,8 +70,6 @@ class ServiceController extends AbstractController
         $categories = $categoryRepository->findAll();
         $users = $userRepository->findBy(['city' => $user->getCity()]);
         $services = $serviceRepository->findBy(['user'=> $users]);
-        dump($users);
-        dump($services);
             return $this->render('service/pageService.html.twig', [
               
                 'controller_name' => 'ServiceController', 'services' => $services, 'categories' => $categories, 'user' => $user
