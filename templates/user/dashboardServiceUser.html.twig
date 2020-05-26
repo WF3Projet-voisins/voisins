@@ -26,8 +26,8 @@
       <strong>Success!</strong> {{ flashMessage }}
     </div>
   {% endfor %}
-  <div class="dashboardBody">
-    <table class="table table-sm">
+  <div class="dashboardBody ">
+    <table class="table table-sm ">
       <thead class="thead-dark">
         <tr>
           <th scope="col">
@@ -53,6 +53,9 @@
           </th>
           <th scope="col">
             Image
+          </th>
+          <th scope="col">
+            Accèder à la page du service
           </th>
           <th scope="col"></th>
           <th scope="col"></th>
@@ -86,7 +89,18 @@
               <img src="{{ serviceUser.image }}" alt="" style="width:150px" />
             </td>
             <td>
-              <a class="btn btn-warning" href="{{
+              <a class="btn btn-light" href="{{path('servicePage',{
+                  id: serviceUser.id
+                }
+              )
+              }}"
+              role="button">
+              Acceder au service
+            </a>
+            </td>   
+            <td>
+              <a class="btn btn-warning"
+                href="{{
                 path(
                   'serviceMod',
                   {
@@ -98,7 +112,8 @@
               </a>
             </td>
             <td>
-              <a class="btn btn-danger" href=" {{
+              <a class="btn btn-danger"
+                href=" {{
                 path(
                   'serviceDelete',
                   {
