@@ -13,7 +13,9 @@
   {% if app.user %}
     {% include 'composants/navBarUser.html.twig' %}
 
-    <div class="container" style="margin-top:100px;" >
+    <div class="container" style="min-height:60vh; margin-top:100px;" >
+
+
             <div class="m-3 d-flex justify-content-around">
               <label class="col-4 d-flex justify-content-center">
                 <h3>Filtre par catégories :</h3>
@@ -33,12 +35,15 @@
       <div class="container" id="cardChoice">
       {% if services|length > 0 %}
         {% for service in services %}    
-  
-          
-
               <div class="card mb-3 "
                 name="{{ service.subcategory.category.name }}" id="{{ service.id }}">
-                <img src="{{ service.image }}" class="card-img-top" alt="..." />
+                  <div class="m-3 d-flex justify-content-end">
+                    <a class="btn btn-light cacher"  onclick="hideService('{{ service.id }}')"  role="button"><i class="fas fa-times"></i></a>
+                  </div>
+                  <div class="d-flex justify-content-center">
+                    <img src="{{ service.image }}" class="col-8 mb-5 card-img-top" alt="..." />
+                  </div>
+                
                 <div class="card-body message">
                   <h5 class="card-title">
                     Titre du service : {{ service.name }}
@@ -62,9 +67,9 @@
                     Date de creation : {{ service.createdAt|date('d/m/Y \\a\\ g:ia') }}
                   </p>
                 </div>
-                <div class="container d-flex justify-content-end">
+                <div class="container m-2 d-flex justify-content-center">
                   <a class="btn btn-light" href="{{ path('servicePage',{id: service.id})}}" role="button">Acceder au service</a>
-                  <a class="btn btn-light cacher"  onclick="hideService('{{ service.id }}')"  role="button"><i class="fas fa-times"></i></a>
+                
                
                 </div>
               </div>
