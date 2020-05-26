@@ -94,8 +94,10 @@ mailboxDelete:
     path: /user/mailbox/delete/{id}
     controller: App\Controller\MailboxController::deleteMailboxAction
 
-
-
+mailboxOuiDel:
+    path: /user/mailbox/ouidel/{id}
+    controller: App\Controller\MailboxController::ouidelMailboxAction
+    
     
 contactAdd:
     path: /contact

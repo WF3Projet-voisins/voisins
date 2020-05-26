@@ -1,64 +1,72 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Hello ContactController!{% endblock %}
-
+{% block title %}Nous contacter{% endblock %}
 {% block stylesheets %}
-  <link rel="stylesheet" href="css/contact.css">
+  <link rel="stylesheet"
+    href="{{ asset('/css/contact.css') }}"
+    integrity=""
+    crossorigin="anonymous" />
+  <link rel="stylesheet" href="/css/navbarUser.css" />
 {% endblock %}
 
-
 {% block body %}
-      {% if app.user %}
-        {% include 'composants/navBarUser.html.twig' %}
-      {% else %}
-        {% include 'composants/navbarAccueil.html.twig' %}
-      {% endif %}
+  {% if app.user %}
+    {% include 'composants/navBarUser.html.twig' %}
+  {% else %}
+    {% include 'composants/navbarAccueil.html.twig' %}
+  {% endif %}
 
-<div class="container pt-2 pb-2 text-dark nousContacter">
-    Nous contacter
-</div>
-{% for flashMessage in app.session.flashbag.get('Message') %}
-<div class="alert alert-success col-3 ml-4">
-  <strong>Success!</strong> {{ flashMessage }}
-</div>
-
-{% endfor %}
-
-    
-
-<div class="container d-flex align-items-center justify-content-center bg-light mb-5 bg-shadow" style="height: 70vh;">
-
-
-
-  <div class="bg-form">
+<div style="margin-top:150px" class="">
+  <div class="container d-flex">
+      <h1 class="h1Contact">Formulaire de contact</h1>
   
-{% if app.user %}
+      {% for flashMessage in app.session.flashbag.get('Message') %}
+      <div class="messageFlashSuccess alert alert-success col-3 ml-4 mb-1">
+        <strong>Success!</strong> {{ flashMessage }}
+      </div>
+      {% endfor %}
+  </div>
+  <div class="container d-flex align-items-center justify-content-center bg-light mb-5 bg-shadow" style="height: 40vh;">
+    <div class="bg-form">
+  
+      {% if app.user %}
         <form name="contact" method="POST" enctype="multipart/form-data" class="formContact">
-        {{ form_label(form.message, "Message", {"attr": {"class": "text-dark customRowInput"}}) }}
+        <div class="mt-4">
+        {{ form_label(form.message, "Votre message", {"attr": {"class": "text-dark customRowInput"}}) }}
         {{ form_widget(form.message , { 'attr': { 'class' : 'text-dark customRowInput'}}) }}
+        </div>
+        <div class="mt-4">
         {{ form_widget(form.envoyer, {"attr": {"class": "bg-success text-white btn btn-block"}}) }}
+        </div>
         </form>
  
-{% else %}
-      <form name="contact" method="POST" enctype="multipart/form-data" class="formContact">
+      {% else %}
+        <form name="contact" method="POST" enctype="multipart/form-data" class="formContact">
+        <div class="mt-4">
         {{ form_label(form.name, "Nom", {"attr": {"class": "text-dark customRowInput"}}) }}
-          {{ form_widget(form.name , { 'attr': { 'class' : 'text-dark customRowInput'}}) }}
+        {{ form_widget(form.name , { 'attr': { 'class' : 'text-dark customRowInput'}}) }}
+        </div>
+        
 
+        <div class="mt-4">
+        {{ form_label(form.mail, "Email", {"attr": {"class": "text-dark customRowInput"}}) }}
+        {{ form_widget(form.mail , { 'attr': { 'class' : 'text-dark customRowInput'}}) }}
+        </div>
 
-          {{ form_label(form.mail, "Email", {"attr": {"class": "text-dark customRowInput"}}) }}
-          {{ form_widget(form.mail , { 'attr': { 'class' : 'text-dark customRowInput'}}) }}
+        <div class="mt-4">
+        {{ form_label(form.message, "Message", {"attr": {"class": "text-dark customRowInput"}}) }}
+        {{ form_widget(form.message , { 'attr': { 'class' : 'text-dark customRowInput'}}) }}
+        </div>
+        <div class="mt-4">
+        {{ form_widget(form.envoyer, {"attr": {"class": "bg-success text-white btn btn-block"}}) }}
+        </div>
+        </form>
 
-          {{ form_label(form.message, "Message", {"attr": {"class": "text-dark customRowInput"}}) }}
-          {{ form_widget(form.message , { 'attr': { 'class' : 'text-dark customRowInput'}}) }}
+      {% endif %}   
 
-          {{ form_widget(form.envoyer, {"attr": {"class": "bg-success text-white btn btn-block"}}) }}
-      </form>
-
-{% endif %}         
+      
+    </div>
 
   </div>
-
 </div>
-
 {% include 'composants/footer.html.twig' %}
 {% endblock %}
