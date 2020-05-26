@@ -4,40 +4,54 @@
     href="{{ asset('/css/pageOneService.css') }}"
     integrity=""
     crossorigin="anonymous" />
+  <link rel="stylesheet" href="/css/navbarUser.css" />
 {% endblock %}
 {% block body %}
   {% include 'composants/navBarUser.html.twig' %}
 <div style="margin-top:150px" class="d-flex justify-content-center mb-4">
-
+<div class="jumbotron-fluid">
+    <div class="container">
+        <h1 class="h1Dashboard col-12">Formulaire de modification de service</h1>
+    </div>
+</div>
+<div class="container"> 
+<div class="col-10"> 
     <form name="serviceMod" method="POST" enctype="multipart/form-data" class="formUpdate">
-        
-            {{ form_label(formService.name, "Nom du service",  {'label_attr' : {'class' : ' text-golden pr-3'}}) }}
+        <div class="mt-4">
+            {{ form_label(formService.name, "Nom du service") }}
             {{ form_widget(formService.name , { 'attr': { 'class' : ' bg-light rounded shadow p-2'}}) }}
+        </div>
+        <div class="mt-4">
+            {{ form_label(formService.description, "Description du service") }}
+            {{ form_widget(formService.description , { 'attr': { 'class' : ' bg-light rounded shadow p-2'}}) }}
+        </div>
+        <div class="mt-4">
+            {{ form_label(formService.image, "Image") }}
+            {{ form_widget(formService.image , { 'attr': { 'class' : ' bg-light rounded shadow p-2' }}) }}
+        </div>
+        <div class="mt-4">    
+            {{ form_label(formService.duration, "Durée du service") }}
+            {{ form_widget(formService.duration , { 'attr': { 'class' : ' bg-light rounded shadow p-2' }}) }}
+        </div>
+        <div class="mt-4">
+            {{ form_label(formService.status, "Status du service") }}
+            {{ form_widget(formService.status , { 'attr': { 'class' : ' bg-light rounded shadow p-2' }}) }}
+        </div>
+        <div class="mt-4">
+            {{ form_label(formService.sub_category, "Sous catégorie du service") }}
+            {{ form_widget(formService.sub_category , { 'attr': { 'class' : ' bg-light rounded shadow p-2' }}) }}
+        </div>
+        <div class="mt-4">
+            {{ form_label(formService.type_service, "Type du service") }}
+            {{ form_widget(formService.type_service , { 'attr': { 'class' : ' bg-light rounded shadow p-2' }}) }}
+        </div>
 
-            {{ form_label(formService.description, "Description du service",  {'label_attr' : {'class' : ' w-2/8 text-golden pr-3'}}) }}
-            {{ form_widget(formService.description , { 'attr': { 'class' : '  w-full bg-light rounded shadow'}}) }}
-
-
-            {{ form_label(formService.image, "Changer mon image",  {'label_attr' : {'class' : ' text-golden pr-3'}}) }}
-            {{ form_widget(formService.image , { 'attr': { 'class' : ' hidden image-input' }}) }}
-            
-            {{ form_label(formService.duration, "Durée du service",  {'label_attr' : {'class' : ' text-golden pr-3'}}) }}
-            {{ form_widget(formService.duration , { 'attr': { 'class' : ' hidden image-input' }}) }}
-
-            {{ form_label(formService.status, "Status du service",  {'label_attr' : {'class' : ' text-golden pr-3'}}) }}
-            {{ form_widget(formService.status , { 'attr': { 'class' : ' hidden image-input' }}) }}
-
-            {{ form_label(formService.sub_category, "Sous catégorie du service",  {'label_attr' : {'class' : ' text-golden pr-3'}}) }}
-            {{ form_widget(formService.sub_category , { 'attr': { 'class' : ' hidden image-input' }}) }}
-
-            {{ form_label(formService.type_service, "Type du service",  {'label_attr' : {'class' : ' text-golden pr-3'}}) }}
-            {{ form_widget(formService.type_service , { 'attr': { 'class' : ' hidden image-input' }}) }}
-
-
-
-            {{ form_widget(formService.save, {'attr': {'class' : ' btn btn-danger' }}) }} 
+        <div class="mt-4">
+            {{ form_widget(formService.save, {'attr': {'class' : ' btn btn-success' }}) }} 
+        </div>
           </form>
-
+</div>
+</div>
 </div>
 
   {% include 'composants/footer.html.twig' %}
