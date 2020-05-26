@@ -59,11 +59,16 @@
                                     <i class="fas fa-2x fa-envelope-open"></i>
                                 </td>
                                 <td> 
-                                    <a href="/user/mailbox/view/{{message.id}}">
+                                    <a href="{{ path('mailboxView', {id: message.id}) }}">
                                         <strong>{{ message.messageTitle|e }}</strong>
-                                    </a>                                   
-                                    <p>{{ message.messageBody|e }}</p>                                          
-                                    <small>message de {{ message.userfrom }} pour {{ message.userfor }}</small> 
+                                    </a>                  
+                                    {% if message.messageBody|length < 120 %}
+                                        <p>{{ message.messageBody|e }}</p>
+                                    {% else %}
+                                        <p>{{ message.messageBody|e [:120] }} (<a href="{{ path('mailboxView', {id: message.id}) }}" class="text-decoration-none">voir les détails</a>) ...</p>
+                                    {% endif %}  
+                                    <br>
+                                    <small class="text-black-50">message de <strong>{{ message.userFrom }}</strong> pour <strong>{{ message.userFor }}</strong></small>
                                 </td>
                                 <td>                                           
                                     <a href="{{ path('mailboxView', {id: message.id}) }}" class="btn btn-primary mb-1"><i class="far fa-file-alt"></i></a>    
