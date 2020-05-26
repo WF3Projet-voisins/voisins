@@ -13,27 +13,33 @@
   {% if app.user %}
     {% include 'composants/navBarUser.html.twig' %}
 
-    <div class="container" style="margin-top:100px">
-
-              <label>
-                Filtre par catégories
+    <div class="container" style="margin-top:100px;" >
+            <div class="m-3 d-flex justify-content-around">
+              <label class="col-4 d-flex justify-content-center">
+                <h3>Filtre par catégories :</h3>
               </label>
-              <select class="col-6 form-control form-control-lg" id="myChoice">
+              <select class="col-4 d-flex justify-content-center form-control form-control-lg" id="myChoice">
                     {% for categorie in categories %}
                       <option >
                         <p class="option">{{ categorie.name }}</p>
                       </option>
                     {% endfor %}
               </select>
+            </div>
+             
+
+
+
       <div class="container" id="cardChoice">
       {% if services|length > 0 %}
         {% for service in services %}    
   
-          
-
-              <div class="card mb-3 "
+              <div class="card mb-3"
                 name="{{ service.subcategory.category.name }}" id="">
-                <img src="{{ service.image }}" class="card-img-top" alt="..." />
+                <div class="m-5 d-flex justify-content-center">
+                  <img src="{{ service.image }}" class="col-8 card-img-top" alt="..." />
+                </div>
+                
                 <div class="card-body message">
                   <h5 class="card-title">
                     Titre du service : {{ service.name }}
