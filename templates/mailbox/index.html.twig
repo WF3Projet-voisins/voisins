@@ -63,6 +63,7 @@
                                         <strong>{{ message.messageTitle|e }}</strong>
                                     </a>                                   
                                     <p>{{ message.messageBody|e }}</p>                                          
+                                    <small>message de {{ message.userfrom }} pour {{ message.userfor }}</small> 
                                 </td>
                                 <td>                                           
                                     <a href="{{ path('mailboxView', {id: message.id}) }}" class="btn btn-primary mb-1"><i class="far fa-file-alt"></i></a>    

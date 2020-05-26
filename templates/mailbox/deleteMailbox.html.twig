@@ -11,7 +11,7 @@
             <div class="col-10 text-left">
                 <h6 class="mb-0"><strong>{{ user.Lastname|e }}&nbsp;{{ user.Firstname|e }}</strong></h6>
                 <strong class="text-black-50">{{ user.Email|e }}</strong>
-                <br>{{ app.user.email }}
+                <!-- <br>{{ app.user.email }} -->
             </div>
             <div class="col-2 text-right" width="150px">
                 <img src="{{user.image}}" class="rounded-circle" width="100px" height="100px" alt="">
@@ -37,16 +37,34 @@
                 <strong>Message</strong>:<br><br>
                 {{ mailbox.messageBody }}
                 <br>                
-                <hr>                
-                <div class="text-center">
-                    <h5><strong>Voulez-vous vraiment supprimer ces données?</strong></h5>               
-                </div>
-                <br>
-                <div class="text-center">
-                    <a href="{{ path('mailbox') }}" class="btn btn-secondary mb-1">Abandonner</a> 
-                    <a href="{{ path('mailboxOuiDel', {id: mailbox.id}) }}" class="btn btn-danger mb-1">Supprimer</a> 
-                    <!-- <button type="submit" class="btn btn-danger mb-1">Supprimer</button> -->
-                </div>
+                <hr>          
+                
+                {% if mailbox.userFrom.id == app.user.id %}
+                
+                    <div class="text-center">
+                        <h5><strong>Voulez-vous vraiment supprimer ces données?</strong></h5>               
+                    </div>
+                    <br>
+                    <div class="text-center">
+                        <a href="{{ path('mailbox') }}" class="btn btn-secondary mb-1">Abandonner</a> 
+                        <a href="{{ path('mailboxOuiDel', {id: mailbox.id}) }}" class="btn btn-danger mb-1">Supprimer</a> 
+                        <!-- <button type="submit" class="btn btn-danger mb-1">Supprimer</button> -->
+                    </div>
+
+                {% else %}
+
+                    <div class="text-center">
+                        <h5><strong>Vous n'avez pas créé ce message et n'êtes pas autorisé à le supprimer !</strong></h5>               
+                    </div>
+                    <br>
+                    <div class="text-center">
+                        <a href="{{ path('mailbox') }}" class="btn btn-secondary mb-1">Returner</a> 
+                    </div>
+
+                {% endif %}
+
+
+
             </div>        
         </div>
 
