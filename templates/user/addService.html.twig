@@ -1,33 +1,52 @@
 {% extends 'base.html.twig' %}
 {% block stylesheets %}
+  <link rel="stylesheet"
+    href="{{ asset('/css/pageOneService.css') }}"
+    integrity=""
+    crossorigin="anonymous" />
+  <link rel="stylesheet" href="/css/navbarUser.css" />
 {% endblock %}
 {% block body %}
 {% include 'composants/navBarUser.html.twig' %}
 
 <div style="margin-top:150px" class="d-flex justify-content-center mb-4">
-<h1 class="mr-4">Page ajout service</h1> 
-<div> 
-<form name="user" method="POST" enctype="multipart/form-data">
-            {{ form_label(formService.type_service, 'Quel est le type de service') }}
-            {{ form_widget(formService.type_service , { 'attr': { 'class' : ' bg-light rounded shadow p-2'}}) }}
-        
-            {{ form_label(formService.name, 'Nom du service',  {'label_attr' : {'class' : ' text-golden pr-3'}}) }}
-            {{ form_widget(formService.name , { 'attr': { 'class' : ' bg-light rounded shadow p-2'}}) }}
-
-            {{ form_label(formService.description, 'Description du service',  {'label_attr' : {'class' : ' w-2/8 text-golden pr-3'}}) }}
-            {{ form_widget(formService.description , { 'attr': { 'class' : '  w-full bg-light rounded shadow'}}) }}
-
-            {{ form_label(formService.duration, 'Durée du service en minutes',  {'label_attr' : {'class' : ' text-golden pr-3'}}) }}
-            {{ form_widget(formService.duration , { 'attr': { 'class' : '  bg-light rounded shadow p-2'}}) }}
-
-            {{ form_label(formService.sub_category, 'Dans quelle rubrique s\'inscrit mon service :') }}
-            {{ form_widget(formService.sub_category , { 'attr': { 'class' : ' bg-light rounded shadow p-2'}}) }}
-
-            {{ form_label(formService.image, "Ajouter une image",  {'label_attr' : {'class' : ' text-golden pr-3'}}) }}
-            {{ form_widget(formService.image , { 'attr': { 'class' : ' hidden image-input' }}) }}
-            
-            {{ form_widget(formService.save, {'attr': {'class' : ' btn btn-success' }}) }} 
-          </form>
+<div class="jumbotron-fluid">
+    <div class="container">
+        <h1 class="h1Dashboard col-12">Formulaire d'ajout de service</h1>
+    </div>
+</div>
+<div class="container"> 
+<div class="col-10"> 
+  <form name="user" method="POST" enctype="multipart/form-data">
+  <div class="mt-4">
+    {{ form_label(formService.type_service, 'Quel est le type de service') }}
+    {{ form_widget(formService.type_service , { 'attr': { 'class' : ' bg-light rounded shadow p-2'}}) }}
+  </div>
+  <div class="mt-4">
+    {{ form_label(formService.name, 'Nom du service' )}}
+    {{ form_widget(formService.name , { 'attr': { 'class' : ' bg-light rounded shadow p-2'}}) }}
+  </div>
+  <div class="mt-4">
+    {{ form_label(formService.description, 'Description du service' )}}
+    {{ form_widget(formService.description , { 'attr': { 'class' : ' bg-light rounded shadow p-2'}}) }}
+  </div>
+  <div class="mt-4">
+    {{ form_label(formService.duration, 'Durée du service en minutes' )}}
+    {{ form_widget(formService.duration , { 'attr': { 'class' : ' bg-light rounded shadow p-2'}}) }}
+  </div>
+  <div class="mt-4">
+    {{ form_label(formService.sub_category, 'Dans quelle rubrique s\'inscrit mon service :') }}
+    {{ form_widget(formService.sub_category , { 'attr': { 'class' : ' bg-light rounded shadow p-2'}}) }}
+  </div>
+  <div class="mt-4">
+    {{ form_label(formService.image, "Ajouter une image") }}
+    {{ form_widget(formService.image , { 'attr': { 'class' : ' bg-light rounded shadow p-2' }}) }}
+  </div>
+  <div class="mt-4">           
+    {{ form_widget(formService.save, {'attr': {'class' : ' btn btn-success' }}) }} 
+  </div>
+  </form>
+  </div>
 </div>
  </div>
 {% include 'composants/footer.html.twig' %}
