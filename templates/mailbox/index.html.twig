@@ -72,7 +72,7 @@
                                         <p>{{ message.messageBody|e [:120] }} (<a href="{{ path('mailboxView', {id: message.id}) }}" class="text-decoration-none">voir les détails</a>) ...</p>
                                     {% endif %}  
                                     <br>
-                                    <small class="text-black-50">message de <strong>{{ message.userFrom }}</strong> pour <strong>{{ message.userFor }}</strong></small>
+                                    <small class="text-black-50">message de <strong>{{ message.userFrom.lastname }} {{ message.userFrom.firstname }}</strong> pour <strong>{{ message.userFor.lastname }} {{ message.userFor.firstname }}</strong></small>
                                 </td>
                                 <td>                                           
                                     <a href="{{ path('mailboxView', {id: message.id}) }}" class="btn btn-primary mb-1"><i class="far fa-file-alt"></i></a>    
