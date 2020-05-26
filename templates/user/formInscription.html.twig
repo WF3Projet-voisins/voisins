@@ -16,12 +16,22 @@
   {% include 'composants/navbarAccueil.html.twig' %}
 
 
-<div class="container-fluid d-flex justify-content-around">
-        <div class="container col-3">
- <h1>Bienvenue sur la page d'inscription</h1>
-        </div>
+<!-- <div class="container-fluid d-flex justify-content-around"> -->
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1>Bienvenue !</h1>
+        <p>Merci d'utiliser ce formulaire d'inscription pour vous créer un compte utilisateur sur le site Monvoisin.fr</p>
+    </div>
+</div>
+<div class="container">
+        <!-- <div class="row mt-4">
+            <div class="col">
+                <h1>Bienvenue sur la page d'inscription</h1>
+            </div>
+        </div> -->
 
-        <div class="container col-6 d-flex flex-column justify-content-center" style="height: 90vh;">
+    <div class="row">
+        <div class="col-6 d-flex flex-column justify-content-center" >
           
             <form name="form" method="POST" enctype="multipart/form-data">
                 
@@ -62,7 +72,7 @@
                             </div>
                         
                             <div class="mt-4">
-                                {{ form_widget(form.save, {'attr': {'class' : ' btn btn-danger' }}) }} 
+                                {{ form_widget(form.save, {'attr': {'class' : ' btn btn-success btn-block mb-4' }}) }} 
                             </div>   
             </form>
             {% for message in app.flashes('danger') %}
@@ -74,7 +84,7 @@
         </div>
     
     
-        <div class="container col-3 d-flex align-items-center justify-content-center" style="height: 90vh;">
+        <div class="col-6 d-flex align-items-center justify-content-center">
        
        
            
@@ -86,15 +96,18 @@
             
              
         </div>
-    
-    
-    
-    
-    
-    
+    </div>
 </div>
+    
+    
+    
+    
+    
+    
+<!-- </div> -->
    
 {% endif %}
+{% include 'composants/footer.html.twig' %}
 
 {% endblock %}
 
