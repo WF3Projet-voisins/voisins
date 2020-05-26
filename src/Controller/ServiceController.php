@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Entity\Comment;
 
 use App\Entity\Service;
+use App\Entity\User;
 use App\Form\CommentType;
 use App\Form\ServiceType;
 use App\Service\FormsManager;
@@ -67,15 +68,30 @@ class ServiceController extends AbstractController
        
         $categories = $categoryRepository->findAll();
         $users = $userRepository->findAll();
-        $message = "Il n'y a pas de services proposés dans votre ville!";
 
+        $message = "";
+        $link ="";
+        
 
+        $isUserServiceGlobal = false;
 
+        foreach($services as $service){
 
+            $isUserServiceGlobal = $this->getIsUserTownHasServices($service, $this->getUser());
+        
+
+        }
+       
+        
+        if ($isUserServiceGlobal){
+            $message =  "Il n'y a pas de services dans votre ville!";
+            $link =      "Proposez un service pour votre entourage";
+
+        }
         
             return $this->render('service/pageService.html.twig', [
               
-                'controller_name' => 'ServiceController', 'services' => $services, 'categories' => $categories, 'user' => $user, 'message' => $message
+                'controller_name' => 'ServiceController', 'services' => $services, 'categories' => $categories, 'user' => $user, 'message' => $message, 'link' => $link, 'messageAffichage' => $isUserServiceGlobal
             ]);
         
     }
@@ -155,5 +171,14 @@ class ServiceController extends AbstractController
         $manager->flush();
         $this->get('session')->getFlashBag()->add('Message', 'Service supprimé');
         return $this->redirectToRoute('dashboardUserService', ['id' => $user->getId()]);
+    }
+
+    private function getIsUserTownHasServices(Service $service, UserInterface $user): bool {
+        $isUserTown = true;
+        if($service->getUser()->getCity() === $user->getCity()){
+            
+            $isUserTown = false;
+        }
+        return $isUserTown;
     }
 }

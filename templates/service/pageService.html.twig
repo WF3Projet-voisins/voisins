@@ -13,9 +13,7 @@
     {% include 'composants/navBarUser.html.twig' %}
 
     <div class="container" style="margin-top:100px">
-  <script>
-    var route = "";
-  </script>
+  
 
     {% set break = false %}
       {% for service in services %}
@@ -35,22 +33,25 @@
     {% endfor %}
 
       <div class="container" id="cardChoice">
-        {% set break = false %}
-        {% set i = 0 %}
-        {% for service in services %}      
-          {% if service.user.city != app.user.city and break == false %}
-            <div class="container d-flex justify-content-center align-items-center" style="height: 60vh;">
-              <h1>{{ message }}</h1>
-              <h3> <a  href="{{ path('serviceAdd', {id: app.user.id}) }}">Proposez un service pour votre entourage</a></h3>
-            </div>
-            {% set break = true %}
-          {% endif %}
 
-          {% if service.user.city == app.user.city %}
-              <div class="card mb-3"
+        {% if messageAffichage == true %}
+        <div class="container d-flex justify-content-center align-items-center" id="message" style="height: 60vh;">
+         <h1>{{message}}</h1>
+         <h3> <a  href='{{ path('serviceAdd', {id: app.user.id}) }}'>{{link}}</a></h3>
+        </div>
+      {% endif %}
+       
+        {% set i = 0 %}
+        {% for service in services %}    
+
+
+         
+
+          {% if app.user.city == service.user.city and messageAffichage == false %}
+              <div class="card mb-3 "
                 name="{{ service.subcategory.category.name }}" id="{{i}}">
                 <img src="{{ service.image }}" class="card-img-top" alt="..." />
-                <div class="card-body">
+                <div class="card-body message">
                   <h5 class="card-title">
                     Titre du service : {{ service.name }}
                   </h5>
@@ -76,23 +77,7 @@
                 <div class="container d-flex justify-content-end">
                   <a class="btn btn-light" href="{{ path('servicePage',{id: service.id})}}" role="button">Acceder au service</a>
                   <a class="btn btn-light cacher" id="{{ i }}" onclick="myfunction('{{ i }}')"  role="button"><i class="fas fa-times"></i></a>
-                  
-                  <script>
-
-                   function myfunction(event){
-                    
-                    route =  event ;
-                    console.log(event);
-
-                    var x = document.getElementById(event);
-                      if (x.style.display === "none") {
-                       x.style.display = "block";
-                       } else {
-                        x.style.display = "none";
-                        }
-                    }
-
-                  </script>
+               
                 </div>
 
 
@@ -112,6 +97,8 @@
 {% endblock %}
 
 {% block javascripts %}
+   
+
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="{{ asset('/js/services.js') }}"></script>
