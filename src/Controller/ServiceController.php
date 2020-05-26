@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Entity\Comment;
 
 use App\Entity\Service;
+use App\Entity\User;
 use App\Form\CommentType;
 use App\Form\ServiceType;
 use App\Service\FormsManager;
@@ -62,20 +63,18 @@ class ServiceController extends AbstractController
     {
 
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        /* "Select * from services where user.id IN (Select * from users where user.city = MON_USER_COURRANT_CITY)" */
      
-        $services = $serviceRepository->findAll();
-       
-        $categories = $categoryRepository->findAll();
-        $users = $userRepository->findAll();
-        $message = "Il n'y a pas de services proposés dans votre ville!";
-
-
-
-
         
+        $categories = $categoryRepository->findAll();
+        $users = $userRepository->findBy(['city' => $user->getCity()]);
+        $services = $serviceRepository->findBy(['user'=> $users]);
+        dump($users);
+        dump($services);
             return $this->render('service/pageService.html.twig', [
               
-                'controller_name' => 'ServiceController', 'services' => $services, 'categories' => $categories, 'user' => $user, 'message' => $message
+                'controller_name' => 'ServiceController', 'services' => $services, 'categories' => $categories, 'user' => $user
             ]);
         
     }
@@ -156,4 +155,5 @@ class ServiceController extends AbstractController
         $this->get('session')->getFlashBag()->add('Message', 'Service supprimé');
         return $this->redirectToRoute('dashboardUserService', ['id' => $user->getId()]);
     }
+
 }
