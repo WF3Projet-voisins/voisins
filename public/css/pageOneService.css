@@ -8,3 +8,9 @@
     text-align: center;
 }
 
+.dashboardBody{
+    height: 450px;
+    width: 90%;
+    margin-left: 5%;
+    text-align: center;
+}
