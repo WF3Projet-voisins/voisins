@@ -2,6 +2,7 @@ function hideService(id){
 
  
   var x = document.getElementById(id);
+  console.log(x);
     if (x.style.display === "none") {
      x.style.display = "block";
      } else {

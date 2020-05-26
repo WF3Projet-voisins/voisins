@@ -12,43 +12,46 @@
     <div class="d-flex justify-content-center cardService">
       <div class="mb-3" id="cardService">
         <div class="card-body border customCardBody rounded">
-          <img src="{{ service.image }}"
-            class="card-img-top rounded"
+        <div class="d-flex">
+         <div> 
+        <p class="mr-4 ml-4 mt-2 textShadow"> {{ service.typeService.name }} </p>
+        </div>
+        <img src="{{ service.image }}"
+            class="card-img-top rounded col-8"
             style="width:450px" />
-            
-          <div>
+        </div>   
+        <div>
             <h3 class="card-title mt-4
             ">
-              Intitulé du service : {{ service.name }}
+              {{ service.name }}
             </h3>
-
-            
-              <p id="serviceChoice">
-                Type du service : {{ service.typeService.name }}
+              
+              <p class="descriptionService">
+                {{ service.description }}
               </p>
-              <p>
-                Nom : {{ service.user.firstname }} {{ service.user.lastname }}
-              </p>
-              {#<p>
-                Description : {{ service.description }}
-              </p>#}
-              <p id="serviceChoice">
-                Status du service : {{ service.status }}
-              </p>
-
-              <p>
+              <div class="d-flex justify-content-between"> 
+              <p class="fontStyle">
                 Durée du service : {{ service.duration.duration }} minutes
               </p>
-              <p>
-                Date de creation : {{ service.createdAt|date('d/m/Y \\a\\ g:ia') }}
+              <p class="fontStyle" >
+                Status du service : {{ service.status }}
+              </p>
+              </div>
+              
+              <p class="createdBy">
+                Service créé par <span class="fontStyle">{{ service.user.firstname }} {{ service.user.lastname }} </span>le {{ service.createdAt|date('d/m/Y \\à\\ g:ia') }}
               </p>
          
           </div>
-          <div>
-            <p>
-              Commentaires
-            </p>
-            Espace commentaires :
+          
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container mb-4">
+
+           <p style="font-size:1.5em">Espace commentaires : </p> 
             {% for comment in comments %}
               <div class="container mb-2 commentUser" id="{{ comment.id }}">
                 <div class="row">
@@ -89,11 +92,7 @@
             
             {{ form_widget(formNewComment.save, {'attr': {'class' : ' btn btn-success mt-4' }}) }} 
             </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+</div>
 {% include 'composants/footer.html.twig' %}
 
 {% endblock %}
