@@ -34,12 +34,12 @@
 
             </div>
              
-      <div class="container shadow col-8" id="cardChoice" >
+      <div class="container col-8" id="cardChoice" >
         
 
       {% if services|length > 0 %}
         {% for service in services %}    
-              <div class="card mb-3"
+              <div class="card mb-3 shadow"
                 name="{{ service.subcategory.category.name }}" id="{{ service.id }}">
                
                   <div class="m-3 d-flex justify-content-between">
