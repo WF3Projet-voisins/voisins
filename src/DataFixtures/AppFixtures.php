@@ -43,7 +43,7 @@ class AppFixtures extends Fixture
         $manager->persist($catAmmeublement);
 
         $catAide = new Category();
-        $catAide->setName("Aides diverses")
+        $catAide->setName("Aides")
             ->setImage("https://www.interdemenagement.com/wp-content/uploads/sites/5095/2017/11/carton.png");
         $manager->persist($catAide);
 
