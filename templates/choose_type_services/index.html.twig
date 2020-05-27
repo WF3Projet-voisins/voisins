@@ -1,12 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Page choisir{% endblock %}
+{% block title %}Choix du service | Monvoisin.fr{% endblock %}
 
 {% block stylesheets %}
 
 <!-- import de la feuille de style -->
   <link rel="stylesheet"
     href="{{ asset('/css/chooseTypeServices.css') }}" />
+
+    <!-- import de la feuille css navbarUser -->
+        <link rel="stylesheet" href="/css/navbarUser.css">
 
 {% endblock %}
 {% block body %}
@@ -46,7 +49,7 @@
             <button type="button" class="btn btn-danger btn-lg btn-block"> <a href="{{ path('serviceAdd', {id: user.id}) }}" class="text-white">J'ai besoin d'un service</a> </button>
         </div>
         <div class="col-md-6">
-            <button type="button" class="btn btn-warning btn-lg btn-block"> <a href="#" class="text-white">Je rend service</a> </button>
+            <button type="button" class="btn btn-warning btn-lg btn-block"> <a href="{{ path ('serviceGet') }}" class="text-white">Je rend service</a> </button>
         </div>
     </div>
 </div>

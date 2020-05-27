@@ -20,12 +20,12 @@
       <h1 class="h1Contact">Formulaire de contact</h1>
   
       {% for flashMessage in app.session.flashbag.get('Message') %}
-      <div class="messageFlashSuccess alert alert-success col-3 ml-4 mb-1">
+      <div class="messageFlashSuccess alert alert-success col-3 ml-4">
         <strong>Success!</strong> {{ flashMessage }}
       </div>
       {% endfor %}
   </div>
-  <div class="container d-flex align-items-center justify-content-center bg-light mb-5 bg-shadow" style="height: 40vh;">
+  <div class="container d-flex align-items-center justify-content-center bg-light mb-5 pb-4 bg-shadow" style="height: 40vh;">
     <div class="bg-form">
   
       {% if app.user %}
@@ -67,6 +67,7 @@
     </div>
 
   </div>
+  <div style="height:45px"></div>
 </div>
 {% include 'composants/footer.html.twig' %}
 {% endblock %}

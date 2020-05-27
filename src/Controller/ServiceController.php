@@ -26,7 +26,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ServiceController extends AbstractController
 {
-    public function addServiceAction(Request $request, ServiceRepository $serviceRepository, CategoryRepository $categoryRepository, UserRepository $userRepository, $id)
+    public function addServiceAction(Request $request, SubCategoryRepository $subCategoryRepository,  ServiceRepository $serviceRepository, CategoryRepository $categoryRepository, UserRepository $userRepository, $id)
     {
         /* Ajout d'un service par un user */
         $user = $userRepository->find($id);
@@ -34,12 +34,19 @@ class ServiceController extends AbstractController
         $formService = $this->createForm(ServiceType::class, $service);
         $formService->handleRequest($request);
 
+
         if ($formService->isSubmitted()) {
             $service = $formService->getData();
             $file = $formService->get('image')->getData();
+            $subCat = $subCategoryRepository->findOneBy(['id'=> $service->getSubCategory()]);
+
             if ($file) {
                 $newFileName = FormsManager::handleFileUpload($file, $this->getParameter('uploads'));
                 $service->setImage($newFileName);
+            } else {
+                if( $service->getSubCategory() == $subCat  )
+                $subCatImage = $subCat->getImage();
+                $service->setImage($subCatImage);
             }
             $service->setCreatedAt(new \DateTime());
             $service->setStatus('En cours');
@@ -49,7 +56,7 @@ class ServiceController extends AbstractController
             $manager->persist($service);
             $manager->flush();
             $this->get('session')->getFlashBag()->add('Message', 'Service ajouté');
-            return $this->redirectToRoute('dashboardUserService',['id'=> $id]);
+            return $this->redirectToRoute('serviceGet',['id'=> $id]);
         }
 
 
@@ -69,9 +76,7 @@ class ServiceController extends AbstractController
         
         $categories = $categoryRepository->findAll();
         $users = $userRepository->findBy(['city' => $user->getCity()]);
-        $services = $serviceRepository->findBy(['user'=> $users]);
-        dump($users);
-        dump($services);
+        $services = $serviceRepository->findBy(['user'=> $users], ['created_at'=>'DESC']);
             return $this->render('service/pageService.html.twig', [
               
                 'controller_name' => 'ServiceController', 'services' => $services, 'categories' => $categories, 'user' => $user

@@ -1,4 +1,7 @@
 {% extends 'base.html.twig' %}
+
+{% block title %}Dashboard | Monvoisin.fr{% endblock %}
+
 {% block stylesheets %}
   <link rel="stylesheet"
     href="{{ asset('/css/pageOneService.css') }}"
@@ -30,7 +33,7 @@
         </div>
 
         <div class="row">
-            <div class="col">           
+            <div class="col" style='height:314px'>           
                 <table class="table thead-dark table-hover table-bordered table-responsive">
                     <thead class="thead-dark border">
                         <tr>                            
@@ -59,7 +62,7 @@
                                     <small>Categorie: <strong>{{ serviceUser.subcategory.category.name }}</strong> , Sous-categorie: <strong>{{ serviceUser.subcategory.name }}</strong> </small>
                                 </td>                        
                                 <td>
-                                  <strong>{{ serviceUser.status }}</strong><br>                                  
+                                                                   
                                   {{ serviceUser.duration.duration }} minutes                                
                                 </td>                                                        
                                 <td>                                               
