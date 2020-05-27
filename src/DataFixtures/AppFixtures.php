@@ -78,13 +78,13 @@ class AppFixtures extends Fixture
 
         $subCatAide = new SubCategory();
         $subCatAide->setName("Aides diverses")
-            ->setImage("https://www.debouchage-general.be/wp-content/uploads/2016/11/wc-bouch%C3%A9.png")
+            ->setImage("https://img2.freepng.fr/20180413/gdq/kisspng-self-help-group-logo-business-service-management-organization-5ad0374e576187.0743330515235950863579.jpg")
             ->setCategory($catAide);
         $manager->persist($subCatAide);
 
         $subCatPetSitter = new SubCategory();
         $subCatPetSitter->setName("PetSitter")
-            ->setImage("https://www.debouchage-general.be/wp-content/uploads/2016/11/wc-bouch%C3%A9.png")
+            ->setImage("https://lupetsitting.fr/wp-content/uploads/2020/01/logo-noir.png")
             ->setCategory($catAnimaux);
         $manager->persist($subCatPetSitter);
 
@@ -96,25 +96,25 @@ class AppFixtures extends Fixture
 
         $subCatCuisine = new SubCategory();
         $subCatCuisine->setName("Péparer un gâteau")
-            ->setImage("https://i.pinimg.com/originals/08/08/71/080871450381cccdcd41ad770889a8ec.png")
+            ->setImage("https://dbdzm869oupei.cloudfront.net/img/sticker/preview/449.png")
             ->setCategory($catCuisine);
         $manager->persist($subCatCuisine);
 
         $subCatJardinage = new SubCategory();
         $subCatJardinage->setName("Tonte de pelouse")
-            ->setImage("https://static.cms.yp.ca/ecms/media/2/3056012_xl-1442438524-600x360.jpg")
+            ->setImage("https://img2.freepng.fr/20180402/tew/kisspng-lawn-mowers-garden-clip-art-lawn-5ac1afedb24859.1260441815226429257303.jpg")
             ->setCategory($catJardinage);
         $manager->persist($subCatJardinage);
 
         $subCatMecanique = new SubCategory();
         $subCatMecanique->setName("Changer des pneus")
-            ->setImage("https://www.go-pneus-occasion.fr/userfiles/10186/pneus-occasions-le-muy-01-reparation.png")
+            ->setImage("https://emploimitis.com/wp-content/uploads/2020/02/emploi-mitis-icons-mecanicien.png")
             ->setCategory($catMecanique);
         $manager->persist($subCatMecanique);
 
         $subcatMontageMeuble = new SubCategory();
         $subcatMontageMeuble->setName("Aide au montage de meuble")
-            ->setImage("https://www.go-pneus-occasion.fr/userfiles/10186/pneus-occasions-le-muy-01-reparation.png")
+            ->setImage("https://www.pinclipart.com/picdir/middle/2-23586_mining-vector-hammer-hammers-clipart-png-download.png")
             ->setCategory($catAmmeublement);
         $manager->persist($subcatMontageMeuble);
         
