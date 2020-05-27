@@ -8,126 +8,85 @@
 {% endblock %}
 {% block body %}
   {% include 'composants/navBarUser.html.twig' %}
-  <div style="margin-top:150px" class="d-flex justify-content-center mb-4">
-    <a href=" {{
-      path(
-        'serviceAdd',
-        {
-          id: user.id
-        }
-      )
-      }} "
-      class="btn btn-info">
-      Ajouter un service
-    </a>
-  </div>
-  {% for flashMessage in app.session.flashbag.get('Message') %}
-    <div class="alert alert-success col-3 ml-4">
-      <strong>Success!</strong> {{ flashMessage }}
+
+<div style="margin-top:150px" class="d-flex justify-content-center mb-4"></div>
+    <div class="container">
+        
+        <div class="row mt-0">
+            <div class="col text-center">
+                <h2><strong>MES SERVICES EN COURS</strong></h2>
+                                            
+                {% for flashMessage in app.session.flashbag.get('Message') %}
+                  <div class="alert alert-success col-3 ml-4">
+                    <strong>Success!</strong> {{ flashMessage }}
+                  </div>
+                {% endfor %}              
+            </div>                    
+        </div>
+        <div class="row mt-2">
+            <div class="col text-right">                
+                <a href="{{path('serviceAdd',{id: user.id})}}" class="btn btn-success mb-1"><i class="far fa-file" ></i> Ajouter un service</a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">           
+                <table class="table table-hover table-bordered">
+                    <thead class="thead-dark border">
+                        <tr>                            
+                            <th width="120px">Date</th>
+                            <th>Image</th>                        
+                            <th>Service</th>                        
+                            <th width="120px">Durée</th>                        
+                            <th width="160px">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody> 
+                        <!-- pour la boucle d'affichage des messages -->
+                        {% for serviceUser in servicesUser %}                        
+                            <!--- MessageriBox -->
+                            <tr>
+                                <td class="text-center">
+                                    {{ serviceUser.createdAt is empty ? "" : serviceUser.createdAt|date('d.m.Y', "Europe/Paris") }}                                    
+                                    <br><br>
+                                </td>
+                                <td><img src="{{ serviceUser.image }}" alt="" style="width:150px" /></td>                        
+                                <td>
+                                    <strong>{{ serviceUser.name }}</strong>
+                                    <br>Description:
+                                    {{ serviceUser.description }}
+                                    <br><br>
+                                    <small>Categorie: <strong>{{ serviceUser.subcategory.category.name }}</strong> , Sous-categorie: <strong>{{ serviceUser.subcategory.name }}</strong> </small>
+                                </td>                        
+                                <td>
+                                  <strong>{{ serviceUser.status }}</strong><br>                                  
+                                  {{ serviceUser.duration.duration }} minutes                                
+                                </td>                                                        
+                                <td>                                               
+                                    <a href="{{path('servicePage',{id: serviceUser.id})}}" class="btn btn-primary mb-1" role="button"><i class="far fa-file" ></i></a>                                
+                                    <a href="{{ path('serviceMod', { id: serviceUser.id }) }}" class="btn btn-secondary mb-1"><i class="far fa-edit"></i></a>    
+                                    <a href="{{ path('serviceDelete',{ id: serviceUser.id }) }}" class="btn btn-danger mb-1"><i class="far fa-trash-alt"></i></a>                                
+                                </td>
+                            </tr>                          
+                            <!--- end messageriBox-->           
+
+                        {% else %}
+                            <tr>
+                                <td></td>
+                                <td></td>                        
+                                <td><em>actuellement aucune donnée à afficher</em></td>                        
+                                <td></td>                        
+                                <td></td>
+                            </tr>
+                        {% endfor %}              
+                
+                    </tbody>
+                </table>    
+            </div>         
+        </div>     
+        
     </div>
-  {% endfor %}
-  <div class="dashboardBody ">
-    <table class="table table-sm ">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">
-            Service créé le
-          </th>
-          <th scope="col">
-            Nom
-          </th>
-          <th scope="col">
-            Description
-          </th>
-          <th scope="col">
-            Durée
-          </th>
-          <th scope="col">
-            Catégorie
-          </th>
-          <th scope="col">
-            Sous-Catégorie
-          </th>
-          <th scope="col">
-            Status
-          </th>
-          <th scope="col">
-            Image
-          </th>
-          <th scope="col">
-            Accèder à la page du service
-          </th>
-          <th scope="col"></th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for serviceUser in servicesUser %}
-          <tr>
-            <td>
-              {{ serviceUser.createdAt|date('d/m/Y') }}
-            </td>
-            <td>
-              {{ serviceUser.name }}
-            </td>
-            <td>
-              {{ serviceUser.description }}
-            </td>
-            <td>
-              {{ serviceUser.duration.duration }} minutes
-            </td>
-            <td>
-              {{ serviceUser.subcategory.category.name }}
-            </td>
-            <td>
-              {{ serviceUser.subcategory.name }}
-            </td>
-            <td>
-              {{ serviceUser.status }}
-            </td>
-            <td>
-              <img src="{{ serviceUser.image }}" alt="" style="width:150px" />
-            </td>
-            <td>
-              <a class="btn btn-light" href="{{path('servicePage',{
-                  id: serviceUser.id
-                }
-              )
-              }}"
-              role="button">
-              Acceder au service
-            </a>
-            </td>   
-            <td>
-              <a class="btn btn-warning"
-                href="{{
-                path(
-                  'serviceMod',
-                  {
-                    id: serviceUser.id
-                  }
-                )
-                }}">
-                Modifier le service
-              </a>
-            </td>
-            <td>
-              <a class="btn btn-danger"
-                href=" {{
-                path(
-                  'serviceDelete',
-                  {
-                    id: serviceUser.id
-                  }
-                )
-                }}">
-                Supprimer le service
-              </a>
-            </td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
+    <br><br><br>
+
   {% include 'composants/footer.html.twig' %}
 {% endblock %}
