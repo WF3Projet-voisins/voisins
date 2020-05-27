@@ -280,6 +280,18 @@ class AppFixtures extends Fixture
                 ->setSubCategory($subCatPetSitter);          
                 $manager->persist($service);
 
+                $service = new Service();
+                $service->setName('Mes toilettes sont bouchées')
+               ->setDescription('Bonjour, j\'aurai besoin d\'aide afin de changer les roues de ma voiture. Je suis très bon en cuisine, je peux vous préparer le plat que vous souhaitez.')
+               ->setCreatedAt(new \DateTime())
+               ->setStatus('En cours')
+               ->setImage('https://img2.freepng.fr/20180516/phw/kisspng-plumber-computer-icons-plumbing-home-repair-5afbc737082559.6111383415264499750334.jpg')
+                ->setDuration($duration_60)
+                ->setUser($user4)
+                ->setTypeService($typeServiceBesoin)
+                ->setSubCategory($subCatAide);        
+                $manager->persist($service);
+
 
                 
                 
