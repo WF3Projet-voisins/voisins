@@ -78,13 +78,13 @@ class AppFixtures extends Fixture
 
         $subCatAide = new SubCategory();
         $subCatAide->setName("Aides diverses")
-            ->setImage("https://www.debouchage-general.be/wp-content/uploads/2016/11/wc-bouch%C3%A9.png")
+            ->setImage("https://img2.freepng.fr/20180413/gdq/kisspng-self-help-group-logo-business-service-management-organization-5ad0374e576187.0743330515235950863579.jpg")
             ->setCategory($catAide);
         $manager->persist($subCatAide);
 
         $subCatPetSitter = new SubCategory();
         $subCatPetSitter->setName("PetSitter")
-            ->setImage("https://www.debouchage-general.be/wp-content/uploads/2016/11/wc-bouch%C3%A9.png")
+            ->setImage("https://lupetsitting.fr/wp-content/uploads/2020/01/logo-noir.png")
             ->setCategory($catAnimaux);
         $manager->persist($subCatPetSitter);
 
@@ -96,25 +96,25 @@ class AppFixtures extends Fixture
 
         $subCatCuisine = new SubCategory();
         $subCatCuisine->setName("Péparer un gâteau")
-            ->setImage("https://i.pinimg.com/originals/08/08/71/080871450381cccdcd41ad770889a8ec.png")
+            ->setImage("https://dbdzm869oupei.cloudfront.net/img/sticker/preview/449.png")
             ->setCategory($catCuisine);
         $manager->persist($subCatCuisine);
 
         $subCatJardinage = new SubCategory();
         $subCatJardinage->setName("Tonte de pelouse")
-            ->setImage("https://static.cms.yp.ca/ecms/media/2/3056012_xl-1442438524-600x360.jpg")
+            ->setImage("https://img2.freepng.fr/20180402/tew/kisspng-lawn-mowers-garden-clip-art-lawn-5ac1afedb24859.1260441815226429257303.jpg")
             ->setCategory($catJardinage);
         $manager->persist($subCatJardinage);
 
         $subCatMecanique = new SubCategory();
         $subCatMecanique->setName("Changer des pneus")
-            ->setImage("https://www.go-pneus-occasion.fr/userfiles/10186/pneus-occasions-le-muy-01-reparation.png")
+            ->setImage("https://emploimitis.com/wp-content/uploads/2020/02/emploi-mitis-icons-mecanicien.png")
             ->setCategory($catMecanique);
         $manager->persist($subCatMecanique);
 
         $subcatMontageMeuble = new SubCategory();
         $subcatMontageMeuble->setName("Aide au montage de meuble")
-            ->setImage("https://www.go-pneus-occasion.fr/userfiles/10186/pneus-occasions-le-muy-01-reparation.png")
+            ->setImage("https://www.pinclipart.com/picdir/middle/2-23586_mining-vector-hammer-hammers-clipart-png-download.png")
             ->setCategory($catAmmeublement);
         $manager->persist($subcatMontageMeuble);
         
@@ -249,7 +249,7 @@ class AppFixtures extends Fixture
                ->setDescription('Bonjour, j\'aurai besoin d\'aide afin de changer les roues de ma voiture. Je suis très bon en cuisine, je peux vous préparer le plat que vous souhaitez.')
                ->setCreatedAt(new \DateTime())
                ->setStatus('En cours')
-               ->setImage('https://cdn.pixabay.com/photo/2017/06/07/10/47/elephant-2380009_960_720.jpg')
+               ->setImage('https://www.reparexpert.ma/wp-content/uploads/2015/12/2-Changer-une-roue-comme-un-pro.jpg')
                 ->setDuration($duration_60)
                 ->setUser($user4)
                 ->setTypeService($typeServiceBesoin)
@@ -261,7 +261,7 @@ class AppFixtures extends Fixture
                ->setDescription('Bonjour, je viens de recevoir un vaisselier. Vivant seul et sans outillage, y aurait-il une âme charitable pour m\'aider? Etant étudiant en droit, je peux apporter du soutien scolaire ou vous apporter de l\'aide si vous avez la moindre question ')
                ->setCreatedAt(new \DateTime())
                ->setStatus('En cours')
-               ->setImage('https://cdn.pixabay.com/photo/2017/06/07/10/47/elephant-2380009_960_720.jpg')
+               ->setImage('https://blog.izi-by-edf.fr/2016/02/montage-meuble-ikea-500x350.jpg')
                 ->setDuration($duration_90)
                 ->setUser($user)
                 ->setTypeService($typeServiceBesoin)
@@ -278,6 +278,18 @@ class AppFixtures extends Fixture
                 ->setUser($user3)
                 ->setTypeService($typeServiceRendre)
                 ->setSubCategory($subCatPetSitter);          
+                $manager->persist($service);
+
+                $service = new Service();
+                $service->setName('Mes toilettes sont bouchées')
+               ->setDescription('Bonjour, j\'aurai besoin d\'aide afin de changer les roues de ma voiture. Je suis très bon en cuisine, je peux vous préparer le plat que vous souhaitez.')
+               ->setCreatedAt(new \DateTime())
+               ->setStatus('En cours')
+               ->setImage('https://img2.freepng.fr/20180516/phw/kisspng-plumber-computer-icons-plumbing-home-repair-5afbc737082559.6111383415264499750334.jpg')
+                ->setDuration($duration_60)
+                ->setUser($user4)
+                ->setTypeService($typeServiceBesoin)
+                ->setSubCategory($subCatAide);        
                 $manager->persist($service);
 
 
