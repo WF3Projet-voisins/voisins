@@ -44,9 +44,10 @@ class ServiceController extends AbstractController
                 $newFileName = FormsManager::handleFileUpload($file, $this->getParameter('uploads'));
                 $service->setImage($newFileName);
             } else {
-                if( $service->getSubCategory() == $subCat  )
+                if($service->getSubCategory() == $subCat){
                 $subCatImage = $subCat->getImage();
                 $service->setImage($subCatImage);
+                }
             }
             $service->setCreatedAt(new \DateTime());
             $service->setStatus('En cours');
