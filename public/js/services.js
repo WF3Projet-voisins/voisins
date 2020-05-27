@@ -27,7 +27,7 @@ $(document).ready(function(){
          
           $("div[name=" + value + "]").show();
 
-          //console.log("pasCoucou");
+       
 
           if (!$("div[name=" + value + "]").show('.card')[0]){
             $("#passerMessage").empty();
@@ -41,7 +41,7 @@ $(document).ready(function(){
               passerMessage.append(newTexte);
             
               $('#passerMessage').show();
-            console.log(passerMessage);
+          
           }
     
         });
