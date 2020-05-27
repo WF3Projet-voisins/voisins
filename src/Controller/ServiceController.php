@@ -39,7 +39,6 @@ class ServiceController extends AbstractController
             $service = $formService->getData();
             $file = $formService->get('image')->getData();
             $subCat = $subCategoryRepository->findOneBy(['id'=> $service->getSubCategory()]);
-            dump($subCat->getId());
 
             if ($file) {
                 $newFileName = FormsManager::handleFileUpload($file, $this->getParameter('uploads'));
