@@ -49,7 +49,7 @@ class ServiceController extends AbstractController
             $manager->persist($service);
             $manager->flush();
             $this->get('session')->getFlashBag()->add('Message', 'Service ajouté');
-            return $this->redirectToRoute('dashboardUserService',['id'=> $id]);
+            return $this->redirectToRoute('serviceGet',['id'=> $id]);
         }
 
 
