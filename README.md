@@ -7,7 +7,7 @@
 ## Comment commencer mon dev
 - Se positionner sur develop `git checkout develop`
 - Se mettre à jour `git pull`
-- Créer ma nouvelle branche pour mon développement `git checkout -b feature/maFeature` (bien respecter la convention de nommage, une feature commence toujorus pas "feature/" puis le nom de la feature en camelCase) 
+- Créer ma nouvelle branche pour mon développement `git checkout -b feature/maFeature` (bien respecter la convention de nommage, une feature commence toujours par "feature/" puis le nom de la feature en camelCase) 
 - Faire un `git push` pour envoyer ma branche sur le serveur github
 
 ## J'ai fini mon dev
